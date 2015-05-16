@@ -1,0 +1,149 @@
+/**
+ * BIG CMS admin theme css file
+ */
+body{
+	background-color: #e5e5e5;
+}
+
+/*
+ *****************************************************************
+ * Template structure
+ *****************************************************************
+ */
+#sidebar-toggler {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: 1500;
+}
+#sidebar-toggler #toggler-text{
+    color: #C2C2C2;
+    font-size: 10px;
+    display: none;
+}
+#sidebar-toggler:hover #toggler-text{
+    display: inline;
+}
+#sidebar-wrapper {
+    background: #EEE;
+}
+#sidebar-wrapper .menu {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#sidebar-wrapper .list-group-item {
+    padding: 4px 8px;
+}
+#sidebar-wrapper .list-group-item.active a {
+    color: #FFF;
+}
+#sidebar-wrapper .nav>li>a:hover {
+    background-color: transparent;
+}
+#sidebar-wrapper .nav li:hover {
+    background-color: #EEE;
+}
+#sidebar-wrapper .nav .active:hover {
+    background-color: #337ab7;
+}
+
+#page-content-wrapper {
+    padding: 0;
+    padding-left: 20px;
+}
+
+/*
+ *****************************************************************
+ * Toolbar component
+ *****************************************************************
+ */
+.toolbar {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/*
+ *****************************************************************
+ * Global views styles
+ *****************************************************************
+ */
+#page-content-wrapper .content-wrapper {
+    background-color: #FFF;
+    padding: 10px;
+}
+#page-content-wrapper .content-wrapper h1 {
+    background-color: #337ab7;
+    color: #FFF;
+    padding: 10px;
+    margin: -10px -10px 25px -10px;
+}
+
+/*
+ *****************************************************************
+ * Blocks index page (list of created blocks)
+ * see: http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+ *****************************************************************
+ */
+.square {
+    position: relative;
+    width: 100%;
+}
+.square:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #eaeaea;
+    border: 1px dashed #CCCCCC;
+    padding: 10px;
+}
+.content a{
+    text-align: center;
+    padding-top: 40%;
+    height: 10%;
+    display: block;
+}
+
+/*
+ *****************************************************************
+ * TemplateEditor widget
+ *****************************************************************
+ */
+ul.connected{
+    padding: 0;
+}
+ul.connected li{
+    list-style-type: none;
+    margin-top: 5px;
+}
+li.sortable-placeholder {
+    border: 1px dashed #CCC;
+    background: none;
+    min-width: 100px;
+    min-height: 35px;
+}
+
+/*
+ *****************************************************************
+ * Footer
+ *****************************************************************
+ */
+#footer-wrapper{
+    border-top: 1px solid #FFF;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+#footer-wrapper p{
+    font-size: 11px;
+    color: #B5B5B5;
+}

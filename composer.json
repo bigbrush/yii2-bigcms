@@ -1,0 +1,22 @@
+{
+    "name": "bigbrush/yii2-bigcms",
+    "type": "yii2-extension",
+    "description": "CMS for Yii 2",
+    "keywords": ["yii2", "cms"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "BIG Brush Agency ApS",
+            "email": "mj@bigbrush-agency.com"
+        }
+    ],
+    "require": {
+        "bigbrush/yii2-big": "dev-master"
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
