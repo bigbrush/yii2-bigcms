@@ -53,6 +53,9 @@ $config = [
         'session' => [
             'name' => 'BACKENDID',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
 ];

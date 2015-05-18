@@ -41,6 +41,9 @@ $config = [
         'session' => [
             'name' => 'FRONTENDID',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
 ];
