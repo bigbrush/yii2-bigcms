@@ -29,7 +29,6 @@ $toolbar->addButton(ButtonDropDown::widget([
     'label' => $toolbar->createIcon('square') . ' ' . 'New block',
     'options' => ['class' => 'btn btn-default'],
     'encodeLabel' => false,
-    'split' => true,
     'dropdown' => [
         'items' => $dropdown,
     ],
@@ -49,10 +48,10 @@ foreach ($chunks as $blocks) : ?>
     <div class="col-md-3" style="margin-bottom:30px;">
         <div class="square">
 	        <div class="content">
-                <?php $form = ActiveForm::begin('', 'delete') ?>
-                <?= $form->hiddenInput($block->model) ?>
-                <?= Html::button('<i class="fa fa-file"></i>') ?>
-                <?= ActiveForm::end() ?>
+                <?= Html::beginForm(['delete', 'id' => $block['id']]) ?>
+                <?= Html::hiddenInput('block_id', $block['id']) ?>
+                <?= Html::submitButton('<i class="fa fa-trash"></i>') ?>
+                <?= Html::endForm() ?>
                 <?= Html::a($block['title'], ['edit', 'id' => $block['id']]) ?>
 	        </div>
         </div>

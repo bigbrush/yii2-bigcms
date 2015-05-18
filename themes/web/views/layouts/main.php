@@ -7,6 +7,7 @@
 
 use yii\helpers\Html;
 use app\themes\web\assets\ThemeAsset;
+use cms\widgets\Alert;
 
 ThemeAsset::register($this);
 ?>
@@ -24,6 +25,7 @@ ThemeAsset::register($this);
 <?php $this->beginBody() ?>
 <big:include position="main menu" />
 <div class="container">
+    <?= Alert::widget() ?>
 	<?= $content ?>
 </div>
 <footer>

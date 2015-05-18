@@ -7,7 +7,10 @@
 
 namespace cms\blocks\contact;
 
+use Yii;
+use yii\helpers\Url;
 use cms\blocks\contact\components\ModelBehavior;
+use cms\blocks\contact\models\ContactForm;
 
 /**
  * Block
@@ -21,7 +24,7 @@ class Block extends \bigbrush\big\core\Block
      */
     public function init()
     {
-        $this->model->attachBehavior('menuBlockBehavior', ['class' => ModelBehavior::className(), 'owner' => $this->model]);
+        $this->model->attachBehavior('contactBehavior', ['class' => ModelBehavior::className(), 'owner' => $this->model]);
     }
 
     /**
@@ -31,9 +34,20 @@ class Block extends \bigbrush\big\core\Block
      */
     public function run()
     {
-    	return $this->render('index', [
-    	    'model' => $this->model,
-    	]);
+        $contactModel = new ContactForm();
+        $mailer = Yii::$app->mailer;
+        if ($contactModel->load(Yii::$app->getRequest()->post()) && $contactModel->validate()) {
+            Yii::$app->getSession()->setFlash('success', $this->model->successMessage);
+            if (!empty($this->model->redirectTo)) {
+                Yii::$app->controller->redirect($this->model->redirectTo);
+            } else {
+                Yii::$app->controller->refresh();
+            }
+        }
+        return $this->render('index', [
+            'model' => $this->model,
+            'contactModel' => $contactModel,
+        ]);
     }
 
     /**
