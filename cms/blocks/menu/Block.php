@@ -67,10 +67,12 @@ class Block extends \bigbrush\big\core\Block
     public function createDropDownMenu(&$menus)
     {
         $items = [];
+        $active = Yii::$app->big->menuManager->getActive();
         while (list($id, $menu) = each($menus)) {
             $items[$id] = [
                 'label' => $menu->title,
                 'url' => $menu->getUrl(),
+                'active' => $menu->id == $active->id,
             ];
             if ($menu->rgt - $menu->lft != 1) {
                 $items[$id]['items'] = $this->createDropDownMenu($menus);
