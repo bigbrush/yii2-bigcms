@@ -22,6 +22,8 @@ $config = [
         'big' => [
             'class' => 'bigbrush\big\core\Big',
             'blockManager' => ['classPath' => 'cms\blocks'],
+            'urlManager' => ['enableUrlRule' => false],
+            'menuManager' => ['autoLoad' => false],
             'scope' => 'backend',
             'enableDynamicContent' => false,
             'webTheme' => '@app/themes/web/views/layouts/column2.php',
@@ -55,6 +57,7 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => true, // used for testing
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],

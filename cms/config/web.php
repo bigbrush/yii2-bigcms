@@ -43,6 +43,7 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => true, // used for testing
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],
