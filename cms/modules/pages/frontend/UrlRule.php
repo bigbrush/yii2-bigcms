@@ -7,8 +7,10 @@
 
 namespace cms\modules\pages\frontend;
 
+use Yii;
 use yii\base\Object;
 use yii\web\UrlRuleInterface;
+use cms\modules\pages\components\Route;
 
 /**
  * UrlRule
@@ -35,7 +37,15 @@ class UrlRule extends Object implements UrlRuleInterface
     public function createUrl($manager, $route, $params)
     {
         if ($route === 'pages/page/show') {
-            return $this->id.'/'.$params['id'].':'.$params['alias'];
+            $category = Yii::$app->big->categoryManager->getCategory($params['catid']);
+            $menuManager = Yii::$app->big->menuManager;
+            $search = Route::raw($category, Route::TYPE_CATEGORY);
+            if ($menu = $menuManager->search('route', $search)) {
+                $prepend = $menu->alias . '/';
+            } else {
+                $prepend = $this->id . '/';
+            }
+            return $prepend . $params['id'] . ':' . $params['alias'];
         }
         return false;
     }
@@ -51,10 +61,22 @@ class UrlRule extends Object implements UrlRuleInterface
     public function parseRequest($manager, $request)
     {
         $pathInfo = $request->getPathInfo();
-        if (strpos($pathInfo, $this->id) === 0 && strpos($pathInfo, ':') !== false) {
-            $pathInfo = substr($pathInfo, 5); // remove "page/"
-            list($id, $alias) = explode(':', $pathInfo);
-            return ['pages/page/show', ['id' => $id]];
+        if (strpos($pathInfo, '/') !== false) {
+            $segments = explode('/', $pathInfo);
+            $id = false;
+            // a page without a menu
+            if ($segments[0] === $this->id) {
+                list($id, $alias) = explode(':', $segments[1]);
+            } else {
+                // a page with a category as menu
+                $menu = Yii::$app->big->menuManager->search('alias', $segments[0], true);
+                if ($menu && strpos($menu->route, 'pages/category/pages') === 0) {
+                    list($id, $alias) = explode(':', $segments[1]);
+                }
+            }
+            if ($id) {
+                return ['pages/page/show', ['id' => $id]];
+            }
         }
         return false;
     }

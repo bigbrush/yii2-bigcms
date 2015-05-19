@@ -6,11 +6,12 @@
  */
 
 use yii\helpers\Html;
+use cms\modules\pages\components\Route;
 ?>
 <div class="row">
     <?php foreach ($pages as $page) : ?>
     <div class="col-md-12">
-        <?= Html::a(Html::encode($page['title']), ['/pages/page/show', 'id' => $page['id'], 'alias' => $page['alias']]) ?>
+        <?= Html::a(Html::encode($page->title), Route::page($page, '/')) ?>
     </div>
     <?php endforeach; ?>
 </div>
