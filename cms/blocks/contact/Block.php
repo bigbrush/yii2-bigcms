@@ -8,7 +8,6 @@
 namespace cms\blocks\contact;
 
 use Yii;
-use yii\helpers\Url;
 use cms\blocks\contact\components\ModelBehavior;
 use cms\blocks\contact\models\ContactForm;
 
@@ -35,14 +34,24 @@ class Block extends \bigbrush\big\core\Block
     public function run()
     {
         $contactModel = new ContactForm();
-        $mailer = Yii::$app->mailer;
         if ($contactModel->load(Yii::$app->getRequest()->post()) && $contactModel->validate()) {
-            Yii::$app->getSession()->setFlash('success', $this->model->successMessage);
-            if (!empty($this->model->redirectTo)) {
-                Yii::$app->controller->redirect($this->model->redirectTo);
+            $result = Yii::$app->mailer->compose()
+                ->setFrom('from@domain.com')
+                ->setTo('mj@philowebstudio.dk')
+                ->setSubject('Message subject')
+                ->setTextBody('Plain text content')
+                ->setHtmlBody('<b>HTML content</b>')
+                ->send();
+            if ($result) {
+                Yii::$app->getSession()->setFlash('success', $this->model->successMessage);
+                if (!empty($this->model->redirectTo)) {
+                    $url = Yii::$app->big->urlManager->parseInternalUrl($this->model->redirectTo);
+                    Yii::$app->controller->redirect($url);
+                }
             } else {
-                Yii::$app->controller->refresh();
+                Yii::$app->getSession()->setFlash('error', 'Email not sent - please try again.');
             }
+            Yii::$app->controller->refresh();
         }
         return $this->render('index', [
             'model' => $this->model,

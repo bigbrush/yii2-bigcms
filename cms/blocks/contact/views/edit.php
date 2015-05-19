@@ -36,7 +36,7 @@ $this->registerJs('$("#btn-select-content").click(function(e){
                             <?= $form->field($model, 'showMessage')->widget(RadioButtonGroup::className()) ?>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Message after a successfull form submission</strong></p>
+                            <p><strong>Message after a successful form submission</strong></p>
                             <?= $form->field($model, 'successMessage')->textArea()->label(false) ?>
                             <p><strong>Where to go after form is submitted.</strong></p>
                             <?= $form->field($model, 'redirectTo', [
@@ -76,6 +76,7 @@ Modal::begin([
 ]); ?>
 
 <?= BigSearch::widget([
+    'dynamicUrls' => true,
     'linkClickCallback' => 'function(e){
         e.preventDefault();
         var route = $(this).data("route");
