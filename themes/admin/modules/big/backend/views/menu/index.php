@@ -42,6 +42,13 @@ $this->registerJs('
 
         e.preventDefault();
     });
+
+    $(".delete-form .btn").click(function(e){
+        if (confirm("Are you sure to delete this menu item?")) {
+            return true;
+        }
+        return false;
+    });
 ');
 
 Yii::$app->toolbar->add()->add('Edit menus', ['menus'], 'bars');
@@ -57,7 +64,6 @@ $this->title = Yii::$app->id . ' | Menu items';
         <?= ButtonDropDown::widget([
             'label' => 'Select menu',
             'options' => ['class' => 'btn btn-default', 'style' => 'margin-bottom: 10px;'],
-            'split' => true,
             'dropdown' => [
                 'items' => $dropdown,
             ],

@@ -13,6 +13,12 @@ $this->registerJs('
         $("#field-direction").val(self.data("direction"));
         $("#field-id").val(self.data("pid"));
     });
+    $(".delete-form .btn").click(function(e){
+        if (confirm("Are you sure to delete this category?")) {
+            return true;
+        }
+        return false;
+    });
 ');
 
 Yii::$app->toolbar->add()->add('Pages', ['page/index'], 'file');

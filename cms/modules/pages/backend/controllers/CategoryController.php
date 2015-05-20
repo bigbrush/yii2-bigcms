@@ -42,7 +42,6 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $manager = Yii::$app->big->categoryManager;
-        $manager->getCategories('kurt-russel');
         $dataProvider = new ArrayDataProvider([
             'allModels' => $manager->getCategories(),
         ]);
@@ -78,5 +77,30 @@ class CategoryController extends Controller
             'model' => $model,
             'parents' => $parents,
         ]);
+    }
+
+    /**
+     * Deletes a category after a form submission.
+     *
+     * @param int $id an id of a page to delete. Must match id in posted form.
+     * @throws InvalidCallException if provided id does not match id in posted form.
+     */
+    public function actionDelete($id)
+    {
+        $categoryId = Yii::$app->getRequest()->post('id');
+        if ($categoryId != $id) {
+            throw new InvalidCallException("Invalid form submitted. Category with id: '$id' not deleted.");
+        }
+        $model = Yii::$app->big->categoryManager->getModel($id);
+        if ($model) {
+            if ($model->delete()) {
+                Yii::$app->getSession()->setFlash('success', 'Category deleted.');
+            } else {
+                Yii::$app->getSession()->setFlash('info', 'Category not deleted, please try again.');
+            }
+        } else {
+            Yii::$app->getSession()->setFlash('error', 'Category with id "' . $id . '" not found.');
+        }
+        return $this->redirect(['index']);
     }
 }

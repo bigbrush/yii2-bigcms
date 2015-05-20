@@ -49,5 +49,17 @@ use yii\bootstrap\ButtonGroup;
                 ]);
             },
         ],
+        [
+            'header' => 'Delete',
+            'format' => 'raw',
+            'options' => ['width' => '1%'],
+            'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
+            'value' => function($data) {
+                return Html::beginForm(['delete', 'id' => $data->id], 'post', ['class' => 'delete-form'])
+                    . Html::submitButton('<i class="fa fa-trash"></i>', ['class' => 'btn btn-default btn-xs'])
+                    . Html::hiddenInput('id', $data->id)
+                    . Html::endForm();
+            },
+        ],
     ],
 ]); ?>

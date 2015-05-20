@@ -8,6 +8,7 @@
 namespace cms\modules\pages\backend\controllers;
 
 use Yii;
+use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\View;
@@ -63,5 +64,30 @@ class PageController extends Controller
             'templates' => $templates,
             'categories' => $categories,
         ]);
+    }
+
+    /**
+     * Deletes a page after a form submission.
+     *
+     * @param int $id an id of a page to delete. Must match id in posted form.
+     * @throws InvalidCallException if provided id does not match id in posted form.
+     */
+    public function actionDelete($id)
+    {
+        $pageId = Yii::$app->getRequest()->post('id');
+        if ($pageId != $id) {
+            throw new InvalidCallException("Invalid form submitted. Page with id: '$id' not deleted.");
+        }
+        $model = Page::findOne($id);
+        if ($model) {
+            if ($model->delete()) {
+                Yii::$app->getSession()->setFlash('success', 'Page deleted.');
+            } else {
+                Yii::$app->getSession()->setFlash('info', 'Page not deleted, please try again.');
+            }
+        } else {
+            Yii::$app->getSession()->setFlash('error', 'Page with id "' . $id . '" not found.');
+        }
+        return $this->redirect(['index']);
     }
 }
