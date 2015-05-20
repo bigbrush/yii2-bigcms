@@ -7,6 +7,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+
+$this->title = Yii::$app->id . ' | Menus';
 ?>
 <div class="row">
     <div class="col-md-12">

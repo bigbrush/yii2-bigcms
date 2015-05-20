@@ -9,15 +9,14 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use bigbrush\big\widgets\templateeditor\TemplateEditor;
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model bigbrush\big\models\PageTemplate */
+$action = $model->id ? 'Edit' : 'Create';
+$this->title = Yii::$app->id . ' | ' . $action . ' template';
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <?php Yii::$app->toolbar->save()->back(); ?>
 <div class="row">
     <div class="col-md-12">
-        <h1>Edit template</h1>
+        <h1><?= $action ?> template</h1>
         <?= $form->field($model, 'title') ?>
         <?= $form->field($model, 'is_default')->dropDownList(['No', 'Yes']) ?>
     </div>

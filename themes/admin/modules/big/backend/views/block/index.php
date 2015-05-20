@@ -33,6 +33,8 @@ $toolbar->addButton(ButtonDropDown::widget([
         'items' => $dropdown,
     ],
 ]));
+
+$this->title = Yii::$app->id . ' | Blocks';
 ?>
 <div class="row">
     <div class="col-md-12">

@@ -9,11 +9,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use bigbrush\big\widgets\editor\Editor;
 
-$this->title = 'Pages | edit';
-
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\common\models\Page */
+$action = $model->id ? 'Edit' : 'Create';
+$this->title = Yii::$app->id . ' | ' . $action . ' category';
 ?>
 <?php
 $form = ActiveForm::begin();
@@ -21,7 +18,7 @@ $form = ActiveForm::begin();
 Yii::$app->toolbar->save()->back();
 ?>
 
-    <h1>Edit category</h1>
+    <h1><?= $action ?> category</h1>
     
     <div class="row">
         <div class="col-md-9">

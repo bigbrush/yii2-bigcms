@@ -45,6 +45,8 @@ $this->registerJs('
 ');
 
 Yii::$app->toolbar->add()->add('Edit menus', ['menus'], 'bars');
+
+$this->title = Yii::$app->id . ' | Menu items';
 ?>
 
 <div class="row">

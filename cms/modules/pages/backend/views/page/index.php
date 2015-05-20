@@ -10,7 +10,7 @@ use yii\grid\GridView;
 
 Yii::$app->toolbar->add()->add('Categories', ['category/index'], 'bars');
 
-/* @var $this yii\web\View */
+$this->title = Yii::$app->id . ' | Pages';
 ?>
 <div class="row">
     <div class="col-md-12">

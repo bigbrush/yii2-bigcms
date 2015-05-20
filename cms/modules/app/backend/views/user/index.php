@@ -10,6 +10,8 @@ use yii\grid\GridView;
 
 $options = $model->getStateOptions();
 Yii::$app->toolbar->add();
+
+$this->title = Yii::$app->id . ' | Users';
 ?>
 <div class="row">
     <div class="col-md-12">

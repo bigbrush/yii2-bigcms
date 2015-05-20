@@ -11,6 +11,8 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\big\core\User */
+
+$this->title = Yii::$app->id . ' | Login';
 ?>
 <div class="row">
     <div class="col-md-12">

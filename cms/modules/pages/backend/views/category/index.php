@@ -17,11 +17,11 @@ $this->registerJs('
 
 Yii::$app->toolbar->add()->add('Pages', ['page/index'], 'file');
 
-/* @var $this yii\web\View */
+$this->title = Yii::$app->id . ' | Page categories';
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1>Categories</h1>
+        <h1>Page categories</h1>
         <?= Html::beginForm(['move']) ?>
             <?= $this->render('_grid', ['dataProvider' => $dataProvider]) ?>
             <?= Html::hiddenInput('direction', '', ['id' => 'field-direction']) ?>

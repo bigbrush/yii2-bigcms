@@ -9,8 +9,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
+$this->title = Yii::$app->id . ' | Templates';
 ?>
 <div class="row">
     <div class="col-md-12">

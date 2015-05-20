@@ -19,7 +19,7 @@ $this->registerJs('$("#btn-select-content").click(function(e){
     <div class="col-md-12">
         <?php $form = ActiveForm::begin(); ?>
             <?php Yii::$app->toolbar->save()->back(); ?>
-            <h1>Edit block</h1>
+            <h1><?= $model->id ? 'Edit' : 'Create' ?> block</h1>
 
             <div class="row">
                 <div class="col-md-9">

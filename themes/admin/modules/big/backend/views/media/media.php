@@ -5,11 +5,13 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-$this->title = Yii::$app->id . ' | Welcome';
+use bigbrush\big\widgets\filemanager\FileManager;
+
+$this->title = Yii::$app->id . ' | Media manager';
 ?>
 <div class="row">
     <div class="col-md-12">
-    	<h1>Welcome to Big!</h1>
-    	<p>What to do on the frontpage??</p>
+    	<h1>Media manager</h1>
+        <?= FileManager::widget() ?>
     </div>
 </div>
