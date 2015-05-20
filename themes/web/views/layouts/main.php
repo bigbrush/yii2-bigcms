@@ -23,14 +23,22 @@ ThemeAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+<?php if (Yii::$app->big->isPositionActive('main menu')) : ?>
 <big:include position="main menu" />
+<?php endif; ?>
+
 <div class="container">
     <?= Alert::widget() ?>
 	<?= $content ?>
 </div>
+
+<?php if (Yii::$app->big->isPositionActive('footer')) : ?>
 <footer>
     <big:include position="footer" />
 </footer>
+<?php endif; ?>
+
 <?php $this->endBody() ?>
 </body>
 </html>
