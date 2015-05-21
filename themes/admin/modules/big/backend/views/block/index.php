@@ -10,11 +10,11 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\ButtonDropDown;
 
 $this->registerJs('
-    $("#submitBtn").click(function(){
-        if ($("#dropDownList").val() == "") {
-            alert("Please select a block");
-            return false;
+    $(".delete-form .btn").click(function(e){
+        if (confirm("Are you sure to delete this block?")) {
+            return true;
         }
+        return false;
     });
 ');
 
@@ -50,9 +50,9 @@ foreach ($chunks as $blocks) : ?>
     <div class="col-md-3" style="margin-bottom:30px;">
         <div class="square">
 	        <div class="content">
-                <?= Html::beginForm(['delete', 'id' => $block['id']]) ?>
+                <?= Html::beginForm(['delete', 'id' => $block['id']], 'post', ['class' => 'delete-form']) ?>
                 <?= Html::hiddenInput('block_id', $block['id']) ?>
-                <?= Html::submitButton('<i class="fa fa-trash"></i>') ?>
+                <?= Html::submitButton('<i class="fa fa-trash"></i>', ['class' => 'btn btn-default btn-sm']) ?>
                 <?= Html::endForm() ?>
                 <?= Html::a($block['title'], ['edit', 'id' => $block['id']]) ?>
 	        </div>
