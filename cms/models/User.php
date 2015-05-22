@@ -30,7 +30,7 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATE_DELETED = 100;
+    const STATE_TRASHED = 100;
     const STATE_ACTIVE = 1;
     const STATE_INACTIVE = 2;
 
@@ -65,7 +65,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             // multiple
-            [['username', 'email'], 'required'],
+            [['name', 'username', 'email'], 'required'],
             [['username', 'email'], 'filter', 'filter' => 'trim'],
             
             // username
@@ -110,7 +110,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             self::STATE_ACTIVE => 'Active',
             self::STATE_INACTIVE => 'Inactive',
-            self::STATE_DELETED => 'Deleted',
+            self::STATE_TRASHED => 'Trashed',
         ];
     }
 
