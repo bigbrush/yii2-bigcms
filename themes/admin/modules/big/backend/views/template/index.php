@@ -18,12 +18,20 @@ $this->title = Yii::$app->id . ' | Templates';
         <?php echo GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
-                'id',
                 [
                     'header' => 'Title',
                     'format' => 'raw',
                     'value' => function($data) {
                         return Html::a($data->title, ['edit', 'id' => $data->id]);
+                    },
+                ],
+                [
+                    'header' => 'Default',
+                    'format' => 'raw',
+                    'options' => ['width' => '1%'],
+                    'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
+                    'value' => function($data) {
+                        return ($data->is_default) ? '<i class="fa fa-star"></i>' : '';
                     },
                 ],
             ],

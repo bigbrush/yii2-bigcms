@@ -27,7 +27,6 @@ $this->title = Yii::$app->id . ' | Pages';
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
-                'id',
                 [
                     'header' => 'Title',
                     'format' => 'raw',

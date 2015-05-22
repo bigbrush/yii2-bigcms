@@ -7,10 +7,13 @@
 
 namespace cms\modules\pages\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
+use yii\behaviors\BlameableBehavior;
 use bigbrush\big\models\Template;
+use cms\models\User;
 
 /**
  * Page
@@ -23,6 +26,8 @@ use bigbrush\big\models\Template;
  * @property integer $state
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $created_by
+ * @property integer $updated_by
  * @property string $meta_title
  * @property string $meta_description
  * @property string $meta_keywords
@@ -50,7 +55,52 @@ class Page extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Returns the "created_at" property as a formatted date.
+     *
+     * @return string a formatted date.
+     */
+    public function getCreatedAtText()
+    {
+        return Yii::$app->getFormatter()->asDateTime($this->created_at);
+    }
+
+    /**
+     * Returns the "created_at" property as a formatted date.
+     *
+     * @return string a formatted date.
+     */
+    public function getUpdatedAtText()
+    {
+        return Yii::$app->getFormatter()->asDateTime($this->updated_at);
+    }
+
+    /**
+     * Returns the author of this page.
+     *
+     * @return ActiveQueryInterface the relational query object.
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * Returns the editor of this page.
+     *
+     * @return ActiveQueryInterface the relational query object.
+     */
+    public function getEditor()
+    {
+        if ($this->updated_by == $this->created_by) {
+            return $this->getAuthor();
+        }
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+    }
+
+    /**
+     * Returns the template of this page.
+     *
+     * @return ActiveQueryInterface the relational query object.
      */
     public function getTemplate()
     {
@@ -79,6 +129,7 @@ class Page extends ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className(),
             [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',

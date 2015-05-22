@@ -5,49 +5,55 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use bigbrush\big\widgets\editor\Editor;
+use yii\bootstrap\Tabs;
 
 $action = $model->id ? 'Edit' : 'Create';
 $this->title = Yii::$app->id . ' | ' . $action . ' page';
 ?>
+
 <?php
 $form = ActiveForm::begin();
 
-Yii::$app->toolbar->save()->back();
-?>
+Yii::$app->toolbar->save()->saveStay()->back();
 
+$items = [
+    [
+        'label' => 'Page',
+        'content' => $this->render('_tab_page', [
+            'model' => $model,
+            'form' => $form,
+            'categories' => $categories,
+            'templates' => $templates
+        ]),
+    ],
+    [
+        'label' => 'Seo',
+        'content' => $this->render('_tab_seo', [
+            'model' => $model,
+            'form' => $form
+        ]),
+    ],
+];
+if ($model->getIsNewRecord() === false) {
+    $items[] = [
+    'label' => 'Info',
+    'content' => $this->render('_tab_meta', [
+        'model' => $model,
+        'form' => $form
+    ]),
+];
+}
+?>
     <h1><?= $action ?> page</h1>
     
     <div class="row">
-        <div class="col-md-9">
-        
-            <div class="row">
-                <div class="col-md-12">
-                    <?= $form->field($model, 'title') ?>
-                    <?= $form->field($model, 'category_id')->dropDownList($categories) ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'template_id')->dropDownList($templates) ?>
-                </div>
-                <div class="col-md-6">
-                    <?= $form->field($model, 'state')->dropDownList($model->getStateOptions()) ?>
-                </div>
-            </div>
-
-            <?= $form->field($model, 'content')->widget(Editor::className()) ?>
+        <div class="col-md-12">
+            <?= Tabs::widget([
+                'options' => ['style' => 'margin-bottom: 15px;'],
+                'items' => $items,
+            ]) ?>
         </div>
-        <div class="col-md-3">
-            <h3>Page SEO</h3>
-            <?= $form->field($model, 'meta_title') ?>
-            <?= $form->field($model, 'meta_description')->textArea() ?>
-            <?= $form->field($model, 'alias') ?>
-            <?= $form->field($model, 'meta_keywords') ?>
-        </div>
-    </div>
-    
+    </div>    
 
 <?php $form = ActiveForm::end(); ?>

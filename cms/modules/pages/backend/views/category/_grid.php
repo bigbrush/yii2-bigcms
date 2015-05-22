@@ -14,10 +14,6 @@ use yii\bootstrap\ButtonGroup;
     'dataProvider' => $dataProvider,
     'columns' => [
         [
-            'class' => yii\grid\CheckboxColumn::className(),
-            'options' => ['width' => '1%'],
-        ],
-        [
             'header' => 'Title',
             'format' => 'raw',
             'value' => function($data) {

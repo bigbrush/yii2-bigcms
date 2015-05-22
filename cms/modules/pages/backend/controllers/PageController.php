@@ -13,6 +13,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\View;
 use yii\helpers\ArrayHelper;
+use cms\components\Toolbar;
 use cms\modules\pages\models\Page;
 
 /**
@@ -51,11 +52,16 @@ class PageController extends Controller
             $categories[$category->id] = str_repeat('- ', $category->depth - 1) . $category->title;
         }
         if ($id) {
-            $model = Page::find()->where(['id' => $id])->with('template')->one();
+            $model = Page::find()->where(['id' => $id])->with(['template', 'author', 'editor'])->one();
         }
-        if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
+        $request = Yii::$app->getRequest();
+        if ($model->load($request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', 'Page saved');
-            return $this->redirect(['index']);
+            if ($request->post(Toolbar::POST_SAVE_STAY)) {
+                return $this->refresh();
+            } else {
+                return $this->redirect(['index']);
+            }
         }
         $templates = Yii::$app->big->template->find()->select(['id', 'title'])->all();
         $templates = ['- Use default template -'] + ArrayHelper::map($templates, 'id', 'title');
