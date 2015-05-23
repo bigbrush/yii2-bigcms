@@ -24,8 +24,8 @@ ThemeAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<?php if (Yii::$app->big->isPositionActive('main menu')) : ?>
-<big:include position="main menu" />
+<?php if (Yii::$app->big->isPositionActive('mainmenu')) : ?>
+<big:include position="mainmenu" />
 <?php endif; ?>
 
 <div class="container">

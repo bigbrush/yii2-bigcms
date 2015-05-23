@@ -10,7 +10,6 @@ $config = [
     'basePath' => dirname(dirname(__DIR__)),
     'defaultRoute' => 'big/frontpage/index',
     'language' => 'da',
-    'on big.search' => ['cms\modules\pages\components\PageFinder', 'onSearch'],
     'bootstrap' => [
         'big',
     ],
@@ -24,9 +23,12 @@ $config = [
             'blockManager' => ['classPath' => 'cms\blocks'],
             'urlManager' => ['enableUrlRule' => false],
             'menuManager' => ['autoLoad' => false],
-            'scope' => 'backend',
-            'enableDynamicContent' => false,
-            'webTheme' => '@app/themes/web/views/layouts/column2.php',
+            'parser' => false,
+            'scope' => \bigbrush\big\core\Big::SCOPE_BACKEND,
+            'frontendTheme' => '@app/themes/web',
+            'searchHandlers' => [
+                ['cms\modules\pages\components\PageFinder', 'onSearch'],
+            ],
         ],
         'toolbar' => [
             'class' => 'cms\components\Toolbar',

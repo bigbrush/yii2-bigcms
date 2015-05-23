@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "434453594f143312fc531bc031f43c4d",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-big.git",
-                "reference": "4dffe558a107760b2523f63dd038e3034bc2fa29"
+                "reference": "212f653c366d9010fc2980899bc9b825d7809571"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/4dffe558a107760b2523f63dd038e3034bc2fa29",
-                "reference": "4dffe558a107760b2523f63dd038e3034bc2fa29",
+                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/212f653c366d9010fc2980899bc9b825d7809571",
+                "reference": "212f653c366d9010fc2980899bc9b825d7809571",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-05-20 13:36:01"
+            "time": "2015-05-22 20:14:19"
         },
         {
             "name": "bower-asset/bootstrap",
