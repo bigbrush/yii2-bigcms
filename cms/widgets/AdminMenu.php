@@ -58,8 +58,8 @@ class AdminMenu extends Nav
             ['label' => 'Menus', 'url' => ['/big/menu/index'], 'icon' => 'bars'],
             ['label' => 'Media', 'url' => ['/big/media/show'], 'icon' => 'picture-o'],
             ['label' => 'Templates', 'url' => ['/big/template/index'], 'icon' => 'simplybuilt'],
-            ['label' => 'Users', 'url' => ['/app/user/index'], 'icon' => 'users'],
-            ['label' => 'Logout', 'url' => ['/app/frontpage/logout'], 'icon' => 'circle-o-notch'],
+            ['label' => 'Users', 'url' => ['/big/user/index'], 'icon' => 'users'],
+            ['label' => 'Logout', 'url' => ['/big/frontpage/logout'], 'icon' => 'circle-o-notch'],
         ];
         $items = [];
         foreach ($itemsConfig as $item) {   

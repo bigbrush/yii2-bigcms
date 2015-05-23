@@ -15,7 +15,7 @@ $this->title = Yii::$app->id . ' | ' . $action . ' user';
 <div class="row">
     <div class="col-md-12">
         <?php $form = ActiveForm::begin(); ?>
-            <?php Yii::$app->toolbar->save()->back(); ?>
+            <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
             <h1><?= $action ?> user</h1>
             <?= $form->field($model, 'username') ?>
             <?= $form->field($model, 'password')->passwordInput() ?>

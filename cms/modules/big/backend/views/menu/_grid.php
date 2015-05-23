@@ -14,10 +14,6 @@ use yii\bootstrap\ButtonGroup;
     'dataProvider' => $dataProvider,
     'columns' => [
         [
-            'class' => yii\grid\CheckboxColumn::className(),
-            'options' => ['width' => '1%'],
-        ],
-        [
             'header' => 'Title',
             'format' => 'raw',
             'value' => function($data) {
@@ -30,7 +26,7 @@ use yii\bootstrap\ButtonGroup;
             'options' => ['width' => '1%'],
             'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
             'value' => function($data) {
-                return ($data->is_default) ? '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>' : '';
+                return ($data->is_default) ? '<i class="fa fa-star"></i>' : '';
             },
         ],
         [
@@ -64,8 +60,8 @@ use yii\bootstrap\ButtonGroup;
             'options' => ['width' => '1%'],
             'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
             'value' => function($data) {
-                return Html::beginForm(['delete', 'id' => $data->id])
-                    . Html::submitButton('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['class' => 'btn btn-default btn-xs'])
+                return Html::beginForm(['delete', 'id' => $data->id], 'post', ['class' => 'delete-form'])
+                    . Html::submitButton('<i class="fa fa-trash"></i>', ['class' => 'btn btn-default btn-xs'])
                     . Html::hiddenInput('id', $data->id)
                     . Html::endForm();
             },

@@ -13,15 +13,20 @@ use bigbrush\big\widgets\bigsearch\BigSearch;
 $this->registerJs('$("#btn-select-content").click(function(e){
     e.preventDefault();
 });');
+
+$action = $model->id ? 'Edit' : 'Create';
+$this->title = Yii::$app->id . ' | ' . $action . ' menu item';
 ?>
-<div class="row">
-    <div class="col-md-12">
-        <?php $form = ActiveForm::begin(); ?>
-            <p>
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Back', ['index'], ['class' => 'btn btn-danger']); ?>
-            </p>
-            <h1>Edit menu item</h1>
+<?php $form = ActiveForm::begin(); ?>
+    <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
+    <div class="row">
+        <div class="col-md-12">
+            <h1><?= $action ?> menu item</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
             <?= $form->field($model, 'title') ?>
             <?= $form->field($model, 'route', [
                 'template' => '
@@ -40,7 +45,7 @@ $this->registerJs('$("#btn-select-content").click(function(e){
                     '
             ]); ?>
             <div class="row">
-                <div class="col-md-6">
+                    <div class="col-md-6">
                     <?= $form->field($model, 'menu_id')->dropDownList($menus) ?>
                 </div>
                 <div class="col-md-6">
@@ -57,25 +62,19 @@ $this->registerJs('$("#btn-select-content").click(function(e){
                     <?= $form->field($model, 'is_default')->dropDownList($model->getIsDefaultOptions()) ?>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'meta_title') ?>
-                </div>
-                <div class="col-md-6">
-                    <?= $form->field($model, 'alias') ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'meta_description')->textArea() ?>
-                </div>
-                <div class="col-md-6">
-                    <?= $form->field($model, 'meta_keywords') ?>
-                </div>
-            </div>
-        <?php ActiveForm::end(); ?>
+        </div>
+
+
+        <div class="col-md-3">
+            <h3>Menu SEO</h3>
+            <?= $form->field($model, 'meta_title') ?>
+            <?= $form->field($model, 'meta_description')->textArea() ?>
+            <?= $form->field($model, 'alias') ?>
+            <?= $form->field($model, 'meta_keywords') ?>
+        </div>
     </div>
-</div>
+
+<?php ActiveForm::end(); ?>
 
 <?php
 Modal::begin([

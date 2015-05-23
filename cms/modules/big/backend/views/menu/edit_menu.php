@@ -7,15 +7,15 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+$action = $model->id ? 'Edit' : 'Create';
+$this->title = Yii::$app->id . ' | ' . $action . ' menu';
 ?>
 <div class="row">
     <div class="col-md-12">
         <?php $form = ActiveForm::begin(); ?>
-            <p>
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Back', ['menus'], ['class' => 'btn btn-danger']); ?>
-            </p>
-            <h1>Edit menu</h1>
+            <?php Yii::$app->toolbar->save()->saveStay()->back('Back', ['menus']); ?>
+            <h1><?= $action ?> menu</h1>
             <?= $form->field($model, 'title') ?>
         <?php ActiveForm::end(); ?>
     </div>

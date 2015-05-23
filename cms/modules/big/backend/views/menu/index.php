@@ -42,22 +42,32 @@ $this->registerJs('
 
         e.preventDefault();
     });
+
+    $(".delete-form .btn").click(function(e){
+        if (confirm("Are you sure to delete this menu item?")) {
+            return true;
+        }
+        return false;
+    });
 ');
+
+Yii::$app->toolbar->add()->add('Edit menus', ['menus'], 'bars');
+
+$this->title = Yii::$app->id . ' | Menu items';
 ?>
+
 <div class="row">
     <div class="col-md-12">
         <div id="alert">
         </div>
-        <?= Html::a('New menu item', ['edit'], ['class' => 'btn btn-primary']); ?>
+        <h1>Menu items</h1>
         <?= ButtonDropDown::widget([
             'label' => 'Select menu',
-            'options' => ['class' => 'btn btn-info'],
+            'options' => ['class' => 'btn btn-default', 'style' => 'margin-bottom: 10px;'],
             'dropdown' => [
                 'items' => $dropdown,
             ],
         ]) ?>
-        <?= Html::a('Edit menus', ['menus'], ['class' => 'btn btn-default']); ?>
-        <h1>Menu items</h1>
     </div>
 </div>
 <div class="row">

@@ -17,7 +17,7 @@ use yii\helpers\Html;
  */
 class Toolbar extends Object
 {
-    const POST_SAVE_STAY = 'saveAndStay';
+    const POST_VAR_SAVE_STAY = 'saveAndStay';
 
     /**
      * @var array list of items added to the toolbar.
@@ -41,15 +41,17 @@ class Toolbar extends Object
      */
     public function save($text = 'Save', $icon = 'check-square', $options = [])
     {
-        $this->items[] = Html::label($this->createIcon($icon) . ' ' . $text, 'save-button', $this->createButtonOptions('success', $options));
-        echo Html::submitInput($text, ['style' => 'display:none;', 'id' => 'save-button']);
+        $this->items[] = Html::label($this->createIcon($icon) . ' ' . $text, 'save-button', $this->createButtonOptions($options));
+        echo Html::submitInput('save', ['style' => 'display:none;', 'id' => 'save-button']);
         return $this;
     }
 
     /**
      * Adds a save button. When clicked the form will be submitted with the $_POST value
-     * of "saveAndStay". Used this to redirect appropriately in a controller.
-     * @see [[save()]].
+     * of "saveAndStay". Use [[stayAfterSave()]] to redirect appropriately in a controller.
+     * 
+     * This method MUST be called within a form as it renders a hidden form field. The
+     * hidden field is used to save the form with a submit button outside the form. 
      *
      * @param string $text a text for the button.
      * @param string $icon name of an icon type to use
@@ -60,12 +62,12 @@ class Toolbar extends Object
     {
         Yii::$app->getView()->registerJs('
             $("#save-stay-button").click(function(e){
-                $("#' . self::POST_SAVE_STAY . '").val("1");
+                $("#' . static::POST_VAR_SAVE_STAY . '").val("1");
             });
         ');
-        $this->items[] = Html::label($this->createIcon($icon) . ' ' . $text, 'save-stay-button', $this->createButtonOptions('success', $options));
-        echo Html::submitInput($text, ['style' => 'display:none;', 'id' => 'save-stay-button']);
-        echo Html::hiddenInput(self::POST_SAVE_STAY, '', ['id' => self::POST_SAVE_STAY]);
+        $this->items[] = Html::label($this->createIcon($icon) . ' ' . $text, 'save-stay-button', $this->createButtonOptions($options));
+        echo Html::submitInput('saveStay', ['style' => 'display:none;', 'id' => 'save-stay-button']);
+        echo Html::hiddenInput(static::POST_VAR_SAVE_STAY, '', ['id' => static::POST_VAR_SAVE_STAY]);
         return $this;
     }
 
@@ -80,7 +82,7 @@ class Toolbar extends Object
      */
     public function add($text = 'New', $url = ['edit'], $icon = 'plus-circle', $options = [])
     {
-        $this->items[] = Html::a($this->createIcon($icon) . ' ' . $text, $url, $this->createButtonOptions('primary', $options));
+        $this->items[] = Html::a($this->createIcon($icon) . ' ' . $text, $url, $this->createButtonOptions($options));
         return $this;
     }
 
@@ -92,7 +94,7 @@ class Toolbar extends Object
      */
     public function back($text = 'Back', $url = ['index'], $icon = 'chevron-circle-left', $options = [])
     {
-        $this->items[] = Html::a($this->createIcon($icon) . ' ' . $text, $url, $this->createButtonOptions('danger', $options));
+        $this->items[] = Html::a($this->createIcon($icon) . ' ' . $text, $url, $this->createButtonOptions($options));
         return $this;
     }
 
@@ -122,13 +124,22 @@ class Toolbar extends Object
     /**
      * Returns options form a button tag.
      *
-     * @param string $type the type of button to create options for.
      * @param array $options additional options for the button tag.
      * @return array options for a button tag.
      */
-    public function createButtonOptions($type, $options = [])
+    public function createButtonOptions($options = [])
     {
         return ArrayHelper::merge(['class' => 'btn btn-default'], $options);
+    }
+
+    /**
+     * Returns a boolean indicating whether a [[saveStay()]] buttton has been clicked.
+     *
+     * @return boolean true if a "save and stay" button has been clicked, false if not.
+     */
+    public function stayAfterSave()
+    {
+        return Yii::$app->getRequest()->post(static::POST_VAR_SAVE_STAY) === '1';
     }
 
     /**

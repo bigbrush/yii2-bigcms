@@ -19,7 +19,7 @@ class RadioButtonGroup extends InputWidget
 {
     /**
      * @var array list of buttons. Each array element represents a single button
-     * which can be specified as a string or an array of the following structure:
+     * which can be specified as an array of the following structure:
      *
      * - label: string, required, the label.
      * - value: string, required, the value.
@@ -29,13 +29,13 @@ class RadioButtonGroup extends InputWidget
         ['label' => 'No', 'value' => '0'],
     ];
     /**
-     * @var string defines the button class used with radio buttons
+     * @var string defines the button class used with radio buttons.
      */
     public $buttonClass = 'btn-primary';
 
 
     /**
-     * Runs the widget 
+     * Runs the widget.
      */
     public function run()
     {

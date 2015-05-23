@@ -13,7 +13,6 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\View;
 use yii\helpers\ArrayHelper;
-use cms\components\Toolbar;
 use cms\modules\pages\models\Page;
 
 /**
@@ -57,8 +56,8 @@ class PageController extends Controller
         $request = Yii::$app->getRequest();
         if ($model->load($request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', 'Page saved');
-            if ($request->post(Toolbar::POST_SAVE_STAY)) {
-                return $this->refresh();
+            if (Yii::$app->toolbar->stayAfterSave()) {
+                return $this->redirect(['edit', 'id' => $model->id]);
             } else {
                 return $this->redirect(['index']);
             }

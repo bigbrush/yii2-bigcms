@@ -8,13 +8,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-$this->registerJs('
-    $(".delete-form .btn").click(function(e){
-        if (confirm("Are you sure to delete this page?")) {
-            return true;
-        }
-        return false;
-    });
+$this->registerCss('
+    .popover {text-align:center;}
+    .popover h3 {font-weight: bold;}
 ');
 
 Yii::$app->toolbar->add()->add('Categories', ['category/index'], 'bars');
@@ -26,6 +22,7 @@ $this->title = Yii::$app->id . ' | Pages';
         <h1>Pages</h1>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
+            'tableOptions' => ['class' => 'table table-hover'],
             'columns' => [
                 [
                     'header' => 'Title',
@@ -35,16 +32,10 @@ $this->title = Yii::$app->id . ' | Pages';
                     },
                 ],
                 [
+                    'class' => 'cms\grid\DeleteColumn',
                     'header' => 'Delete',
-                    'format' => 'raw',
-                    'options' => ['width' => '1%'],
+                    'options' => ['width' => '5%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
-                    'value' => function($data) {
-                        return Html::beginForm(['delete', 'id' => $data->id], 'post', ['class' => 'delete-form'])
-                            . Html::submitButton('<i class="fa fa-trash"></i>', ['class' => 'btn btn-default btn-xs'])
-                            . Html::hiddenInput('id', $data->id)
-                            . Html::endForm();
-                    },
                 ],
             ],
         ]); ?>

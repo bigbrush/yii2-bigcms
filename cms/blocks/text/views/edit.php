@@ -12,7 +12,7 @@ use bigbrush\big\widgets\editor\Editor;
 <div class="row">
     <div class="col-md-12">
         <?php $form = ActiveForm::begin(); ?>
-            <?php Yii::$app->toolbar->save()->back(); ?>
+            <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
             <h1><?= $model->id ? 'Edit' : 'Create' ?> block</h1>
 
             <div class="row">

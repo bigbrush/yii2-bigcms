@@ -12,11 +12,10 @@ use bigbrush\big\widgets\editor\Editor;
 $action = $model->id ? 'Edit' : 'Create';
 $this->title = Yii::$app->id . ' | ' . $action . ' category';
 ?>
-<?php
-$form = ActiveForm::begin();
 
-Yii::$app->toolbar->save()->back();
-?>
+<?php $form = ActiveForm::begin(); ?>
+    
+    <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
 
     <h1><?= $action ?> category</h1>
     

@@ -62,7 +62,11 @@ class CategoryController extends Controller
         $model = $manager->getModel($id);
         if ($manager->saveModel($model)) {
             Yii::$app->getSession()->setFlash('success', 'Category saved');
-            return $this->redirect(['index']);
+            if (Yii::$app->toolbar->stayAfterSave()) {
+                return $this->redirect(['edit', 'id' => $model->id]);
+            } else {
+                return $this->redirect(['index']);
+            }
         }
         $parents = ['Root'];
         foreach ($manager->getCategories() as $category) {

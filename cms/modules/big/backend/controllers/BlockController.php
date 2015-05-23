@@ -54,7 +54,11 @@ class BlockController extends Controller
         if ($model->load($post)) {
             if ($model->save()) {
                 Yii::$app->getSession()->setFlash('success', 'Block saved');
-                return $this->redirect(['index']);
+                if (Yii::$app->toolbar->stayAfterSave()) {
+                    return $this->redirect(['edit', 'id' => $model->id]);
+                } else {
+                    return $this->redirect(['index']);
+                }
             }
         } elseif (!empty($post)) {
             throw new MethodNotAllowedHttpException('Form not saved because "Block" was not set in $_POST');

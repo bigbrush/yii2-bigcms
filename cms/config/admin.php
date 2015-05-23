@@ -8,15 +8,15 @@
 $config = [
     'id' => 'Big',
     'basePath' => dirname(dirname(__DIR__)),
-    'defaultRoute' => 'app/frontpage/index',
+    'defaultRoute' => 'big/frontpage/index',
     'language' => 'da',
     'on big.search' => ['cms\modules\pages\components\PageFinder', 'onSearch'],
     'bootstrap' => [
         'big',
     ],
     'modules' => [
-        'app' => ['class' => 'cms\modules\app\backend\Module'],
         'pages' => ['class' => 'cms\modules\pages\backend\Module'],
+        'big' => ['class' => 'cms\modules\big\backend\Module'],
     ],
     'components' => [
         'big' => [
@@ -42,10 +42,6 @@ $config = [
             'theme' => [
                 'basePath' => '@app/themes/admin',
                 'baseUrl' => '@web/themes/admin',
-                'pathMap' => [
-                    '@app' => '@app/themes/admin',
-                    '@bigbrush/big/modules' => '@app/themes/admin/modules',
-                ],
             ],
         ],
         'user' => [

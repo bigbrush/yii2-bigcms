@@ -6,6 +6,8 @@
  */
 
 use bigbrush\big\widgets\filemanager\FileManager;
+
+$this->title = Yii::$app->id . ' | Media manager';
 ?>
 <div class="row">
     <div class="col-md-12">

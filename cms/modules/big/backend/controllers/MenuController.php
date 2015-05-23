@@ -115,7 +115,11 @@ class MenuController extends Controller
                 $model->save(false);
             }
             Yii::$app->getSession()->setFlash('success', 'Menu item saved');
-            return $this->redirect(['index']);
+            if (Yii::$app->toolbar->stayAfterSave()) {
+                return $this->redirect(['edit', 'id' => $model->id]);
+            } else {
+                return $this->redirect(['index']);
+            }
         }
         $menus = $manager->getMenus();
         if ($model->getIsNewRecord()) {
@@ -215,7 +219,11 @@ class MenuController extends Controller
         	    $model->save(false);
         	}
             Yii::$app->getSession()->setFlash('success', 'Menu saved');
-            return $this->redirect(['menus']);
+            if (Yii::$app->toolbar->stayAfterSave()) {
+                return $this->redirect(['edit-menu', 'id' => $model->id]);
+            } else {
+                return $this->redirect(['menus']);
+            }
         }
         return $this->render('edit_menu', [
             'model' => $model,

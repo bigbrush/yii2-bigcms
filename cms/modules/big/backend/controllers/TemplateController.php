@@ -35,14 +35,18 @@ class TemplateController extends Controller
     /**
      * Creates and edits a template
      *
-     * @return int $id optional template id to edit. If not provided a new template will be created
+     * @param int $id optional template id to edit. If not provided a new template will be created
      */
     public function actionEdit($id = 0)
     {
         $model = TemplateEditor::getModel($id);
         if (TemplateEditor::save($model)) {
             Yii::$app->getSession()->setFlash('success', 'Template saved');
-            return $this->redirect(['index']);
+            if (Yii::$app->toolbar->stayAfterSave()) {
+                return $this->redirect(['edit', 'id' => $model->id]);
+            } else {
+                return $this->redirect(['index']);
+            }
         }
         return $this->render('edit', [
             'model' => $model,
