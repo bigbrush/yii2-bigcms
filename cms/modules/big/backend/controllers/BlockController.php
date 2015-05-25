@@ -8,9 +8,8 @@
 namespace cms\modules\big\backend\controllers;
 
 use Yii;
-use yii\base\InvalidParamException;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use yii\web\InvalidCallException;
 use yii\web\MethodNotAllowedHttpException;
 
 /**
@@ -27,7 +26,7 @@ class BlockController extends Controller
     {
         $manager = Yii::$app->big->blockManager;
         $blocks = $manager->find()->all();
-        $installedBlocks = ['' => 'Select block'] + $manager->getInstalledBlocks();
+        $installedBlocks = $manager->getInstalledBlocks();
         return $this->render('index', [
             'blocks' => $blocks,
             'installedBlocks' => $installedBlocks,
@@ -72,19 +71,22 @@ class BlockController extends Controller
      * Deletes a block.
      *
      * @return int $id an id of a block to delete.
-     * @throws NotFoundHttpException if block_id in $_POST does not match the provided id. 
+     * @throws InvalidCallException if id in $_POST does not match the provided id. 
      */
     public function actionDelete($id)
     {
         $model = Yii::$app->big->blockManager->getModel()->findOne($id);
-        $blockId = $_POST['block_id'];
-        if (!$model || $model->id != $blockId) {
-            Yii::$app->getSession()->setFlash('error', "Model with id '$id' not found.");
-        } elseif ($model->delete()) {
+        $blockId = $_POST['id'];
+        if ($blockId != $id) {
+            throw new InvalidCallException("Invalid form submitted. Block with id: '$id' not deleted.");
+        }
+
+        if ($model->delete()) {
             Yii::$app->getSession()->setFlash('success', 'Block deleted.');
         } else {
-            Yii::$app->getSession()->setFlash('error', 'Block could not be deleted.');
+            Yii::$app->getSession()->setFlash('error', 'Block "' . $model->name . '" could not be deleted.');
         }
+
         return $this->redirect(['index']);
     }
 }

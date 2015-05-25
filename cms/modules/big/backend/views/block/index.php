@@ -6,23 +6,12 @@
  */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 use yii\bootstrap\ButtonDropDown;
-
-$this->registerJs('
-    $(".delete-form .btn").click(function(e){
-        if (confirm("Are you sure to delete this block?")) {
-            return true;
-        }
-        return false;
-    });
-');
+use cms\widgets\DeleteButton;
 
 $dropdown = [];
 foreach ($installedBlocks as $id => $name) {
-    if (!empty($id)) {
-        $dropdown[] = ['label' => $name, 'url' => ['edit', 'id' => $id]];
-    }
+    $dropdown[] = ['label' => $name, 'url' => ['edit', 'id' => $id]];
 }
 $toolbar = Yii::$app->toolbar;
 $toolbar->addButton(ButtonDropDown::widget([
@@ -50,10 +39,11 @@ foreach ($chunks as $blocks) : ?>
     <div class="col-md-3" style="margin-bottom:30px;">
         <div class="square">
 	        <div class="content">
-                <?= Html::beginForm(['delete', 'id' => $block['id']], 'post', ['class' => 'delete-form']) ?>
-                <?= Html::hiddenInput('block_id', $block['id']) ?>
-                <?= Html::submitButton('<i class="fa fa-trash"></i>', ['class' => 'btn btn-default btn-sm']) ?>
-                <?= Html::endForm() ?>
+                <?= DeleteButton::widget([
+                    'model' => $block,
+                    'placement' => DeleteButton::PLACEMENT_RIGHT,
+                ]); ?>
+
                 <?= Html::a($block['title'], ['edit', 'id' => $block['id']]) ?>
 	        </div>
         </div>

@@ -7,6 +7,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use cms\widgets\DeleteButton;
 
 $this->registerCss('
     .popover {text-align:center;}
@@ -32,10 +33,16 @@ $this->title = Yii::$app->id . ' | Pages';
                     },
                 ],
                 [
-                    'class' => 'cms\grid\DeleteColumn',
                     'header' => 'Delete',
                     'options' => ['width' => '5%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
+                    'format' => 'raw',
+                    'value' => function($data) {                        
+                        return DeleteButton::widget([
+                            'model' => $data,
+                            'placement' => DeleteButton::PLACEMENT_LEFT,
+                        ]);
+                    }
                 ],
             ],
         ]); ?>
