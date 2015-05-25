@@ -42,12 +42,12 @@ use cms\widgets\DeleteButton;
                     'options' => ['class' => 'btn-group btn-group-xs'],
                     'buttons' => [
                         Button::widget([
-                            'label' => '<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>',
+                            'label' => '<i class="fa fa-arrow-up"></i>',
                             'encodeLabel' => false,
                             'options' => ['data-direction' => 'up'] + $options,
                         ]),
                         Button::widget([
-                            'label' => '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>',
+                            'label' => '<i class="fa fa-arrow-down"></i>',
                             'encodeLabel' => false,
                             'options' => ['data-direction' => 'down'] + $options,
                         ]),
