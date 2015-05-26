@@ -6,8 +6,8 @@
  */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 use yii\grid\GridView;
+use cms\widgets\DeleteButton;
 
 $this->title = Yii::$app->id . ' | Templates';
 ?>
@@ -32,6 +32,18 @@ $this->title = Yii::$app->id . ' | Templates';
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
                     'value' => function($data) {
                         return ($data->is_default) ? '<i class="fa fa-star"></i>' : '';
+                    },
+                ],
+                [
+                    'header' => 'Delete',
+                    'format' => 'raw',
+                    'options' => ['width' => '1%'],
+                    'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
+                    'value' => function($data) {
+                        return DeleteButton::widget([
+                            'model' => $data,
+                            'options' => ['class' => 'btn-xs'],
+                        ]);
                     },
                 ],
             ],
