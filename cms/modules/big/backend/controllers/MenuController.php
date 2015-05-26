@@ -20,6 +20,9 @@ use bigbrush\big\models\Menu;
  */
 class MenuController extends Controller
 {
+    const ACTIVE_MENU_ID = '__big_menu_id';
+
+
     /**
      * Returns a list of predefined actions for this controller.
      *
@@ -76,7 +79,7 @@ class MenuController extends Controller
         $manager = Yii::$app->big->menuManager;
         $menus = $manager->getMenus();
         if (!$id) {
-            $mid = $session->get('__big_menu_id');
+            $mid = $session->get(self::ACTIVE_MENU_ID);
             if ($mid) {
                 $id = $mid;
             } elseif (!empty($menus)) {
@@ -84,7 +87,7 @@ class MenuController extends Controller
             }
         }
         if ($id) {
-            $session->set('__big_menu_id', $id);
+            $session->set(self::ACTIVE_MENU_ID, $id);
         }
         $dataProvider = new ArrayDataProvider([
             'allModels' => $manager->getMenuItems($id),
@@ -148,7 +151,7 @@ class MenuController extends Controller
         } else {
             $parents = [];
             $model->parent_id = 0;
-            $model->menu_id = Yii::$app->getSession()->get('__big_menu_id');
+            $model->menu_id = Yii::$app->getSession()->get(self::ACTIVE_MENU_ID);
         }
         $menus = ['Choose menu'] + ArrayHelper::map($menus, 'id', 'title');
         return $this->render('edit', [
@@ -245,6 +248,11 @@ class MenuController extends Controller
         $model = Yii::$app->big->menuManager->getModel($id);
         if ($model) {
             if ($model->deleteWithChildren()) {
+                // remove the active menu from session if the currently active is the deleted one.
+                $session = Yii::$app->getSession();
+                if ($session->get(self::ACTIVE_MENU_ID) == $id) {
+                    $session->set(self::ACTIVE_MENU_ID, null);
+                }
                 Yii::$app->getSession()->setFlash('success', 'Menu deleted.');
             } else {
                 Yii::$app->getSession()->setFlash('error', 'Menu could not be deleted.');

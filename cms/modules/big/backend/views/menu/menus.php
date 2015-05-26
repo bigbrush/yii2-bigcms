@@ -7,15 +7,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
-$this->registerJs('
-    $(".delete-form .btn").click(function(e){
-        if (confirm("Are you sure to delete this menu? All menu items are removed as well!")) {
-            return true;
-        }
-        return false;
-    });
-');
+use cms\widgets\DeleteButton;
 
 $this->title = Yii::$app->id . ' | Menus';
 ?>
@@ -43,10 +35,23 @@ $this->title = Yii::$app->id . ' | Menus';
                     'options' => ['width' => '1%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
                     'value' => function($data) {
-                        return Html::beginForm(['delete-menu', 'id' => $data->id], 'post', ['class' => 'delete-form'])
-                            . Html::submitButton('<i class="fa fa-trash"></i>', ['class' => 'btn btn-default btn-xs'])
-                            . Html::hiddenInput('id', $data->id)
-                            . Html::endForm();
+                        $popover = [];
+                        $popover[] = '<div style="text-align: center;">';
+                        $popover[] = '<p>Are you sure to delete this menu?</p>';
+                        $popover[] = '<p><strong>All menu items are removed as well!</strong></p>';
+                        $popover[] = Html::submitButton('<i class="fa fa-check"></i>', [
+                            'class' => 'btn btn-success',
+                        ]);
+                        $popover[] = Html::hiddenInput('id', $data->id);
+                        $popover[] = '</div>';
+
+                        return DeleteButton::widget([
+                            'model' => $data,
+                            'action' => ['delete-menu', 'id' => $data->id],
+                            'options' => ['class' => 'btn-xs'],
+                            'title' => '<div style="text-align: center;"><strong>Are you sure?</strong></div>',
+                            'content' => implode("\n", $popover),
+                        ]);
                     },
                 ],
             ],
