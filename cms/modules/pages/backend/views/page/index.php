@@ -40,7 +40,7 @@ $this->title = Yii::$app->id . ' | Pages';
                     'value' => function($data) {                        
                         return DeleteButton::widget([
                             'model' => $data,
-                            'placement' => DeleteButton::PLACEMENT_LEFT,
+                            'options' => ['class' => 'btn-xs'],
                         ]);
                     }
                 ],

@@ -52,4 +52,27 @@ class TemplateController extends Controller
             'model' => $model,
         ]);
     }
+
+    /**
+     * Deletes a block.
+     *
+     * @return int $id an id of a block to delete.
+     * @throws InvalidCallException if id in $_POST does not match the provided id. 
+     */
+    public function actionDelete($id)
+    {
+        $model = TemplateEditor::getModel($id);
+        $templateId = $_POST['id'];
+        if ($templateId != $id) {
+            throw new InvalidCallException("Invalid form submitted. Template with id: '$id' not deleted.");
+        }
+
+        if ($model->delete()) {
+            Yii::$app->getSession()->setFlash('success', 'Template deleted.');
+        } else {
+            Yii::$app->getSession()->setFlash('error', 'Template "' . $model->title . '" could not be deleted.');
+        }
+
+        return $this->redirect(['index']);
+    }
 }
