@@ -8,7 +8,7 @@
 $config = [
     'id' => 'Big',
     'basePath' => dirname(dirname(__DIR__)),
-    'defaultRoute' => 'big/frontpage/index',
+    'defaultRoute' => 'big/cms/index',
     'language' => 'da',
     'bootstrap' => [
         'big',
@@ -18,6 +18,9 @@ $config = [
         'big' => ['class' => 'cms\modules\big\backend\Module'],
     ],
     'components' => [
+        'cms' => [
+            'class' => 'cms\Cms',
+        ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
             'blockManager' => ['classPath' => 'cms\blocks'],

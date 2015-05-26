@@ -10,20 +10,12 @@ body{
  * Template structure
  *****************************************************************
  */
-#sidebar-toggler {
+/*#sidebar-toggler {
     position: absolute;
     left: 5px;
     top: 5px;
     z-index: 1500;
-}
-#sidebar-toggler #toggler-text{
-    color: #C2C2C2;
-    font-size: 10px;
-    display: none;
-}
-#sidebar-toggler:hover #toggler-text{
-    display: inline;
-}
+}*/
 #sidebar-wrapper {
     background: #EEE;
 }
@@ -36,8 +28,12 @@ body{
     list-style: none;
 }
 #sidebar-wrapper .list-group-item {
-    padding: 4px 8px;
+    /*padding: 4px 8px 8px 0;*/
+    padding: 0;
 }
+/*#sidebar-wrapper .list-group-item a {
+    padding: 10px;
+}*/
 #sidebar-wrapper .list-group-item.active a {
     color: #FFF;
 }
@@ -53,7 +49,7 @@ body{
 
 #page-content-wrapper {
     padding: 0;
-    padding-left: 20px;
+    /*padding-left: 20px;*/
 }
 
 /*
@@ -146,4 +142,18 @@ li.sortable-placeholder {
 #footer-wrapper p{
     font-size: 11px;
     color: #B5B5B5;
+}
+
+/*
+ *****************************************************************
+ * Overridden media queries
+ *****************************************************************
+ */
+@media(min-width:768px) {
+    #wrapper.toggled {
+        padding-left: 50px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 50px;
+    }
 }

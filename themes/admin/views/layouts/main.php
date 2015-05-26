@@ -6,30 +6,12 @@
  */
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use cms\components\Toolbar;
-use cms\widgets\AdminMenu;
+use cms\components\AdminMenu;
 use cms\widgets\Alert;
 use app\themes\admin\assets\ThemeAsset;
 
 ThemeAsset::register($this);
-
-$this->registerJs('
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        elm = $("#toggler-icon");
-        if(elm.hasClass("glyphicon-arrow-left")) {
-            $.get("'.Url::to(['/app/frontpage/remember-show-sidebar', 'show' => false]).'");
-            elm.removeClass("glyphicon-arrow-left").addClass("glyphicon-arrow-right");
-        } else {
-            $.get("'.Url::to(['/app/frontpage/remember-show-sidebar', 'show' => true]).'");
-            elm.removeClass("glyphicon-arrow-right").addClass("glyphicon-arrow-left");
-        }
-    });
-');
-
-$showSidebar = Yii::$app->getSession()->get('__app_show_sidebar__', true);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -43,27 +25,20 @@ $showSidebar = Yii::$app->getSession()->get('__app_show_sidebar__', true);
 </head>
 <body>
 <?php $this->beginBody() ?>
-    <?php if ($showSidebar) : ?>
-    <div id="wrapper">
-    <?php else : ?>
+    <?php if (Yii::$app->cms->getMenuCollapsed()) : ?>
     <div id="wrapper" class="toggled">
+    <?php else : ?>
+    <div id="wrapper">
     <?php endif; ?>
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <?= AdminMenu::widget(); ?>
+            <?= Yii::$app->cms->adminMenu->render(); ?>
         </div>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div id="sidebar-toggler">
-                <?php if ($showSidebar) : ?>
-                <button id="menu-toggle" type="button" class="btn btn-default btn-xs"><span id="toggler-icon" class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
-                <?php else : ?>
-                <button id="menu-toggle" type="button" class="btn btn-default btn-xs"><span id="toggler-icon" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
-                <?php endif; ?>
-            </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">

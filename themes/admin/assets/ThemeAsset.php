@@ -15,7 +15,7 @@ use yii\web\AssetBundle;
 class ThemeAsset extends AssetBundle
 {
     public $sourcePath = '@app/themes/admin';
-    // public $publishOptions = ['forceCopy' => YII_ENV_DEV];
+    // public $publishOptions = ['forceCopy' => true];
     public $css = [
         // '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
         'font-awesome-4.3.0/css/font-awesome.min.css',

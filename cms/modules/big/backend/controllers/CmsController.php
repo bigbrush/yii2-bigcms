@@ -12,9 +12,9 @@ use yii\web\Controller;
 use cms\models\LoginForm;
 
 /**
- * FrontpageController
+ * CmsController
  */
-class FrontpageController extends Controller
+class CmsController extends Controller
 {
     /**
      * @inheritdoc
@@ -50,12 +50,13 @@ class FrontpageController extends Controller
     }
     
     /**
-     * Remebers whether to show the sidebar.
-     * The selection is saved in the current session.
+     * Remembers whether the menu is collapsed.
+     *
+     * @param int $collapsed whether the menu is collapsed.
      */
-    public function actionRememberShowSidebar($show)
+    public function actionCollapseMenu($collapsed)
     {
-        Yii::$app->getSession()->set('__app_show_sidebar__', (bool)$show);
+        Yii::$app->cms->setMenuCollapsed($collapsed);
     }
     
     /**

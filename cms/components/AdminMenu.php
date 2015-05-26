@@ -9,9 +9,9 @@ namespace cms\components;
 
 use Yii;
 use yii\base\Object;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Json;
 use yii\bootstrap\Nav;
 
 /**
@@ -20,60 +20,47 @@ use yii\bootstrap\Nav;
 class AdminMenu extends Object
 {
     /**
-     * @var array list of menu items.
+     * @var int whether the menu is collapsed.
+     */
+    public $collapsed = false;
+    /**
+     * @var boolean whether the menu is collapsible.
+     */
+    public $collapsible = true;
+    /**
+     * @var boolean whether to include the default items in the menu.
+     */
+    public $useDefaultItems = true;
+    /**
+     * @var array list of menu items added to the admin menu.
      */
     private $_items = [];
 
 
     /**
-     * Initializes this widget by setting parent properties.
+     * Initializes this widget by creating default menu items.
      */
     public function init()
     {
-        $this->createItems();
-        $this->addCollapseItem();
+        if ($this->useDefaultItems) {
+            // $this->createDefaultItems();
+            foreach ($this->getDefaultItems() as $item) {   
+                $this->addItem($item); 
+            }
+        }
     }
 
     /**
-     * Renders this widget.
+     * Runs this widget.
      *
      * @return string the rendering result of this widget.
      */
-    public function run()
+    public function render()
     {
-        $this->getView()->registerJs('
-            var wrapper = $("#wrapper"),
-                menuToggler = $("#menu-toggler"),
-                icon = menuToggler.find(".fa");
+        if ($this->collapsible) {
+            $this->addCollapseItem();
+        }
 
-            function toggleIcon() {
-                if (icon.hasClass("fa-arrow-circle-left")) {
-                    icon.removeClass("fa-arrow-circle-left");
-                    icon.addClass("fa-arrow-circle-right");
-                } else {
-                    icon.removeClass("fa-arrow-circle-right");
-                    icon.addClass("fa-arrow-circle-left");
-                }
-            }
-            
-            if(wrapper.hasClass("toggled")) {
-                $(".menuitem-text").hide();
-            }
-
-            menuToggler.click(function(e) {
-                e.preventDefault();
-                wrapper.toggleClass("toggled");
-                if(wrapper.hasClass("toggled")) {
-                    $.get("'.Url::to(['/big/cms/remember-show-sidebar', 'show' => false]).'");
-                    $(".menuitem-text").hide();
-                    toggleIcon();
-                } else {
-                    $.get("'.Url::to(['/big/cms/remember-show-sidebar', 'show' => true]).'");
-                    $(".menuitem-text").show();
-                    toggleIcon();
-                }
-            });
-        ');
         $html = [];
         $html[] = '<div id="adminmenu" class="list-group">';
         $html[] = Nav::widget([
@@ -82,24 +69,26 @@ class AdminMenu extends Object
             'encodeLabels' => false,
         ]);
         $html[] = '</div>';
+
         return  implode("\n", $html);
     }
 
     /**
-     * Creates default menu items used in the admin menu.
+     * Creates default menu items for the admin menu.
      *
      * @return array configuration for menu items.
      */
-    public function createItems()
+    public function getDefaultItems()
     {
         // if no user is logged in hide the menu.
         $userLoggedIn = !Yii::$app->getUser()->getIsGuest();
         if (Yii::$app->getUser()->getIsGuest()) {
-            $item = ['label' => '<i class="fa fa-home fa-fw"></i> Welcome', 'url' => ['/']];
+            $this->collapsible = false;
+            $item = ['label' => 'Welcome', 'url' => ['/'], 'icon' => 'home fa-fw'];
             return $this->addItem($item);
         }
 
-        $itemsConfig = [
+        return [
             ['label' => 'Home', 'url' => ['/'], 'icon' => 'home'],
             ['label' => 'Pages', 'url' => ['/pages/page/index'], 'icon' => 'file',
                 // 'items' => [
@@ -113,16 +102,12 @@ class AdminMenu extends Object
             ['label' => 'Users', 'url' => ['/big/user/index'], 'icon' => 'users'],
             ['label' => 'Logout', 'url' => ['/big/frontpage/logout'], 'icon' => 'circle-o-notch'],
         ];
-
-        foreach ($itemsConfig as $item) {   
-            $this->addItem($item); 
-        }
     }
 
     /**
-     * Creates an item for the menu.
+     * Adds an item to the menu.
      *
-     * @return array
+     * @return array an item configuration array for an item. See [[yii\bootstrap\Nav]] for configuration of an item.
      */
     public function additem($item)
     {
@@ -144,18 +129,57 @@ class AdminMenu extends Object
     }
 
     /**
-     * Returns the collapse menu item.
+     * Returns the menu item that collapses the menu.
      *
      * @return string the collapse menu item.
      */
     public function addCollapseItem()
     {
-        if (Yii::$app->getSession()->get('__app_show_sidebar__', true)) {
-            $collapseIcon = 'arrow-circle-left';
+        Yii::$app->controller->getView()->registerJs('
+            var wrapper = $("#wrapper"),
+                menuToggler = $("#menu-toggler"),
+                icon = menuToggler.find(".fa");
+
+            function toggleIcon() {
+                if (wrapper.hasClass("toggled")) {
+                    icon.removeClass("fa-arrow-circle-left");
+                    icon.addClass("fa-arrow-circle-right");
+                } else {
+                    icon.removeClass("fa-arrow-circle-right");
+                    icon.addClass("fa-arrow-circle-left");
+                }
+            }
+            
+            if(' . Json::encode($this->collapsed) . ') {
+                $(".menuitem-text").hide();
+            }
+
+            menuToggler.click(function(e) {
+                e.preventDefault();
+                wrapper.toggleClass("toggled");
+                toggleIcon();
+                if(wrapper.hasClass("toggled")) {
+                    $.get("'.Url::to(['/big/cms/collapse-menu', 'collapsed' => true]).'");
+                    $(".menuitem-text").hide();
+                } else {
+                    $.get("'.Url::to(['/big/cms/collapse-menu', 'collapsed' => false]).'");
+                    $(".menuitem-text").show();
+                }
+            });
+        ');
+
+        if ($this->collapsed) {
+            $icon = 'arrow-circle-right';
         } else {
-            $collapseIcon = 'arrow-circle-right';
+            $icon = 'arrow-circle-left';
         }
-        $item = ['label' => 'Collapse', 'url' => '#', 'icon' => $collapseIcon, 'options' => ['id' => 'menu-toggler']];
-        return $this->addItem($item);
+        $this->addItem([
+            'label' => 'Collapse',
+            'url' => '#',
+            'icon' => $icon,
+            'options' => [
+                'id' => 'menu-toggler'
+            ]
+        ]);
     }
 }
