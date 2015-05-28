@@ -31,23 +31,28 @@ $this->title = Yii::$app->id . ' | Blocks';
     </div>
 </div>
 
-<?php
-$chunks = array_chunk($blocks, 4);
-foreach ($chunks as $blocks) : ?>
-<div class="row">
-    <?php foreach ($blocks as $block) : ?>
-    <div class="col-md-3" style="margin-bottom:30px;">
-        <div class="square">
-	        <div class="content">
-                <?= DeleteButton::widget([
-                    'model' => $block,
-                    'placement' => DeleteButton::PLACEMENT_RIGHT,
-                ]); ?>
+<div id="blocks-wrapper">
+    <?php
+    $chunks = array_chunk($blocks, 4);
+    
+    foreach ($chunks as $blocks) : ?>
+    <div class="row">
+        
+        <?php foreach ($blocks as $block) : ?>
+        <div class="col-md-3">
+            <div class="square">
+                <div class="content">
+                    <?= DeleteButton::widget([
+                        'model' => $block,
+                        'buttonClass' => 'btn-default delete-btn',
+                    ]); ?>
 
-                <?= Html::a($block['title'], ['edit', 'id' => $block['id']]) ?>
-	        </div>
+                    <?= Html::a($block['title'], ['edit', 'id' => $block['id']]) ?>
+                </div>
+            </div>
         </div>
+        <?php endforeach; ?>
+    
     </div>
     <?php endforeach; ?>
 </div>
-<?php endforeach; ?>

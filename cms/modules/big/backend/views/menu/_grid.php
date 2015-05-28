@@ -13,6 +13,7 @@ use cms\widgets\DeleteButton;
 ?>
  <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'tableOptions' => ['class' => 'table table-hover'],
     'columns' => [
         [
             'header' => 'Title',

@@ -45,6 +45,38 @@ class MenuController extends Controller
     }
 
     /**
+     * Returns an id of the active menu.
+     *
+     * @return string a numerical id of the active menu as a string.
+     */
+    public function getActiveMenuId()
+    {
+        $id = Yii::$app->getSession()->get(self::ACTIVE_MENU_ID, false);
+        if ($id) {
+            return $id;
+        }
+
+        $menus = Yii::$app->big->menuManager->getMenus();
+        if (!empty($menus)) {
+            $id = array_keys($menus)[0];
+            $this->setActiveMenuId($id);
+            return $id;
+        } else {
+            return '0';
+        }
+    }
+
+    /**
+     * Registers an id of the active menu.
+     *
+     * @param string $id an id of the active menu.
+     */
+    public function setActiveMenuId($id)
+    {
+        Yii::$app->getSession()->set(self::ACTIVE_MENU_ID, $id);
+    }
+
+    /**
      * Show a list of all menu items
      *
      * @param int an id of menu to load items from. If not provided or 0 (zero)
@@ -54,11 +86,12 @@ class MenuController extends Controller
     public function actionIndex($id = 0)
     {
     	$manager = Yii::$app->big->menuManager;
-        $dataProvider = $this->getDataProvider($id);
+        // create dropdown first so all menus are loaded with $manager->getMenus()
         $dropdown = [];
         foreach ($manager->getMenus() as $menu) {
             $dropdown[] = ['label' => $menu->title, 'url' => Url::to(['index', 'id' => $menu->id])];
         }
+        $dataProvider = $this->getDataProvider($id);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'dropdown' => $dropdown,
@@ -75,22 +108,13 @@ class MenuController extends Controller
      */
     public function getDataProvider($id = 0)
     {
-        $session = Yii::$app->getSession();
-        $manager = Yii::$app->big->menuManager;
-        $menus = $manager->getMenus();
-        if (!$id) {
-            $mid = $session->get(self::ACTIVE_MENU_ID);
-            if ($mid) {
-                $id = $mid;
-            } elseif (!empty($menus)) {
-                $id = array_keys($menus)[0];
-            }
-        }
         if ($id) {
-            $session->set(self::ACTIVE_MENU_ID, $id);
+            $this->setActiveMenuId($id);
+        } else {
+            $id = $this->getActiveMenuId();
         }
         $dataProvider = new ArrayDataProvider([
-            'allModels' => $manager->getMenuItems($id),
+            'allModels' => Yii::$app->big->menuManager->getMenuItems($id),
         ]);
         return $dataProvider;
     }
@@ -151,7 +175,7 @@ class MenuController extends Controller
         } else {
             $parents = [];
             $model->parent_id = 0;
-            $model->menu_id = Yii::$app->getSession()->get(self::ACTIVE_MENU_ID);
+            $model->menu_id = $this->getActiveMenuId();
         }
         $menus = ['Choose menu'] + ArrayHelper::map($menus, 'id', 'title');
         return $this->render('edit', [
@@ -250,8 +274,8 @@ class MenuController extends Controller
             if ($model->deleteWithChildren()) {
                 // remove the active menu from session if the currently active is the deleted one.
                 $session = Yii::$app->getSession();
-                if ($session->get(self::ACTIVE_MENU_ID) == $id) {
-                    $session->set(self::ACTIVE_MENU_ID, null);
+                if ($this->getActiveMenuId() == $id) {
+                    $this->setActiveMenuId(null);
                 }
                 Yii::$app->getSession()->setFlash('success', 'Menu deleted.');
             } else {

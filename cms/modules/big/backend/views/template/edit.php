@@ -18,19 +18,28 @@ $this->title = Yii::$app->id . ' | ' . $action . ' template';
     <div class="row">
         <div class="col-md-12">
             <h1><?= $action ?> template</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
             <?= $form->field($model, 'title') ?>
-            <?= $form->field($model, 'is_default')->dropDownList(['No', 'Yes']) ?>
+        </div>
+        <div class="col-md-3">
+            <?php
+            /**
+             * The default template can not be changed.
+             */
+            if ($model->is_default) {
+                echo $form->field($model, 'is_default', ['inputOptions' => ['disabled' => 'disabled']])->dropDownList(['No', 'Yes']);
+            } else {
+                echo $form->field($model, 'is_default')->dropDownList(['No', 'Yes']);
+            }
+            ?>
         </div>
     </div>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <?php TemplateEditor::begin(['template' => $model]); ?>
-        </div>
-    </div>
-    
-    <div class="row">
-        <?php TemplateEditor::end(); ?>
-    </div>
+
+    <?= TemplateEditor::widget([
+        'model' => $model,
+    ]) ?>
     
 <?php ActiveForm::end(); ?>

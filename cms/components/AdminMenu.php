@@ -19,10 +19,8 @@ use yii\bootstrap\Nav;
  */
 class AdminMenu extends Object
 {
-    /**
-     * @var int whether the menu is collapsed.
-     */
-    public $collapsed = false;
+    const ADMIN_MENU_STATE_VAR = '__cms_collapse_menu__';
+
     /**
      * @var boolean whether the menu is collapsible.
      */
@@ -32,7 +30,11 @@ class AdminMenu extends Object
      */
     public $useDefaultItems = true;
     /**
-     * @var array list of menu items added to the admin menu.
+     * @var boolean whether the menu is collapsed.
+     */
+    private $_collapsed;
+    /**
+     * @var array list of menu items added to the admin menu. The items are used with [[yii\bootstrap\Nav]] widget.
      */
     private $_items = [];
 
@@ -43,10 +45,7 @@ class AdminMenu extends Object
     public function init()
     {
         if ($this->useDefaultItems) {
-            // $this->createDefaultItems();
-            foreach ($this->getDefaultItems() as $item) {   
-                $this->addItem($item); 
-            }
+            $this->addItems($this->getDefaultItems());
         }
     }
 
@@ -70,7 +69,7 @@ class AdminMenu extends Object
         ]);
         $html[] = '</div>';
 
-        return  implode("\n", $html);
+        return implode("\n", $html);
     }
 
     /**
@@ -85,7 +84,7 @@ class AdminMenu extends Object
         if (Yii::$app->getUser()->getIsGuest()) {
             $this->collapsible = false;
             $item = ['label' => 'Welcome', 'url' => ['/'], 'icon' => 'home fa-fw'];
-            return $this->addItem($item);
+            return [$item];
         }
 
         return [
@@ -105,11 +104,23 @@ class AdminMenu extends Object
     }
 
     /**
+     * Adds an array of items to the menu.
+     *
+     * @param array $items list of items to add.
+     */
+    public function addItems($items)
+    {
+        foreach ($items as $item) {
+            $this->addItem($item);
+        }
+    }
+
+    /**
      * Adds an item to the menu.
      *
      * @return array an item configuration array for an item. See [[yii\bootstrap\Nav]] for configuration of an item.
      */
-    public function additem($item)
+    public function addItem($item)
     {
         $icon = $item['icon'];
         unset($item['icon']);
@@ -129,9 +140,8 @@ class AdminMenu extends Object
     }
 
     /**
-     * Returns the menu item that collapses the menu.
-     *
-     * @return string the collapse menu item.
+     * Adds a menu item that collapses the menu.
+     * This method is only used when [[collapsible]] is true.
      */
     public function addCollapseItem()
     {
@@ -150,7 +160,7 @@ class AdminMenu extends Object
                 }
             }
             
-            if(' . Json::encode($this->collapsed) . ') {
+            if(' . Json::encode($this->getIsCollapsed()) . ') {
                 $(".menuitem-text").hide();
             }
 
@@ -168,18 +178,42 @@ class AdminMenu extends Object
             });
         ');
 
-        if ($this->collapsed) {
+        if ($this->getIsCollapsed()) {
             $icon = 'arrow-circle-right';
         } else {
             $icon = 'arrow-circle-left';
         }
         $this->addItem([
-            'label' => 'Collapse',
+            'label' => 'Minimize',
             'url' => '#',
             'icon' => $icon,
             'options' => [
                 'id' => 'menu-toggler'
             ]
         ]);
+    }
+    
+    /**
+     * Remebers whether the admin menu is collapsed.
+     * The selection is saved in the current session.
+     *
+     * @param string $collapsed whether the admin menu is collapsed. "1" if menu is collapsed and "0" if it is not collapsed.
+     */
+    public function setIsCollapsed($collapsed)
+    {
+        Yii::$app->getSession()->set(static::ADMIN_MENU_STATE_VAR, $collapsed);
+    }
+    
+    /**
+     * Returns a boolean indicating whether the admin menu is collapsed.
+     *
+     * @return boolean whether the admin menu is collapsed.
+     */
+    public function getIsCollapsed()
+    {
+        if ($this->_collapsed === null) {
+            $this->_collapsed = Yii::$app->getSession()->get(static::ADMIN_MENU_STATE_VAR) === '1';
+        }
+        return $this->_collapsed;
     }
 }

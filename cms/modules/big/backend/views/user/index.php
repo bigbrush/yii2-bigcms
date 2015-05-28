@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-$options = $model->getStateOptions();
+$stateOptions = $model->getStateOptions();
 Yii::$app->toolbar->add();
 
 $this->title = Yii::$app->id . ' | Users';
@@ -18,6 +18,7 @@ $this->title = Yii::$app->id . ' | Users';
         <h1>Users</h1>
         <?php echo GridView::widget([
             'dataProvider' => $dataProvider,
+            'tableOptions' => ['class' => 'table table-hover'],
             'columns' => [
                 [
                     'header' => 'Username',
@@ -28,23 +29,23 @@ $this->title = Yii::$app->id . ' | Users';
                 ],
                 [
                     'header' => 'Name',
-                    'options' => ['width' => '30%'],
+                    'options' => ['width' => '20%'],
                     'value' => function($data) {
                         return Html::encode($data->name);
                     }
                 ],
                 [
-                    'header' => 'Phone',
-                    'options' => ['width' => '15%'],
+                    'header' => 'Email',
+                    'options' => ['width' => '20%'],
                     'value' => function($data) {
-                        return Html::encode($data->phone);
+                        return Html::encode($data->email);
                     }
                 ],
                 [
                     'header' => 'State',
-                    'options' => ['width' => '10%'],
-                    'value' => function($data) use ($options) {
-                        return Html::encode($options[$data->state]);
+                    'options' => ['width' => '5%'],
+                    'value' => function($data) use ($stateOptions) {
+                        return Html::encode($data->getStateText());
                     }
                 ],
             ],

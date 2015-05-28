@@ -12,17 +12,34 @@ use yii\bootstrap\ActiveForm;
 $action = $model->id ? 'Edit' : 'Create';
 $this->title = Yii::$app->id . ' | ' . $action . ' user';
 ?>
-<div class="row">
-    <div class="col-md-12">
-        <?php $form = ActiveForm::begin(); ?>
-            <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
-            <h1><?= $action ?> user</h1>
+<?php $form = ActiveForm::begin(); ?>
+    
+    <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
+    
+    <h1><?= $action ?> user</h1>
+    <div class="row">
+        <div class="col-md-6">
             <?= $form->field($model, 'username') ?>
-            <?= $form->field($model, 'password')->passwordInput() ?>
-            <?= $form->field($model, 'email')->input('email') ?>
+        </div>
+        <div class="col-md-6">
             <?= $form->field($model, 'name') ?>
-            <?= $form->field($model, 'phone') ?>
-            <?= $form->field($model, 'state')->dropDownList($model->getStateOptions()) ?>
-        <?php ActiveForm::end(); ?>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'password')->passwordInput() ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'email')->input('email') ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'phone') ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'state')->dropDownList($model->getStateOptions()) ?>
+        </div>
+    </div>
+
+<?php ActiveForm::end(); ?>

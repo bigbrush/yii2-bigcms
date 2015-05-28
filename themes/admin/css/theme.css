@@ -7,15 +7,9 @@ body{
 
 /*
  *****************************************************************
- * Template structure
+ * Sidebar
  *****************************************************************
  */
-/*#sidebar-toggler {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    z-index: 1500;
-}*/
 #sidebar-wrapper {
     background: #EEE;
 }
@@ -28,12 +22,8 @@ body{
     list-style: none;
 }
 #sidebar-wrapper .list-group-item {
-    /*padding: 4px 8px 8px 0;*/
     padding: 0;
 }
-/*#sidebar-wrapper .list-group-item a {
-    padding: 10px;
-}*/
 #sidebar-wrapper .list-group-item.active a {
     color: #FFF;
 }
@@ -47,9 +37,23 @@ body{
     background-color: #337ab7;
 }
 
+/*
+ *****************************************************************
+ * Global views styles
+ *****************************************************************
+ */
 #page-content-wrapper {
     padding: 0;
-    /*padding-left: 20px;*/
+}
+#page-content-wrapper .content-wrapper {
+    background-color: #FFF;
+    padding: 10px;
+}
+#page-content-wrapper .content-wrapper h1 {
+    background-color: #337ab7;
+    color: #FFF;
+    padding: 10px;
+    margin: -10px -10px 25px -10px;
 }
 
 /*
@@ -64,50 +68,43 @@ body{
 
 /*
  *****************************************************************
- * Global views styles
- *****************************************************************
- */
-#page-content-wrapper .content-wrapper {
-    background-color: #FFF;
-    padding: 10px;
-}
-#page-content-wrapper .content-wrapper h1 {
-    background-color: #337ab7;
-    color: #FFF;
-    padding: 10px;
-    margin: -10px -10px 25px -10px;
-}
-
-/*
- *****************************************************************
  * Blocks index page (list of created blocks)
  * see: http://www.mademyday.de/css-height-equals-width-with-pure-css.html
  *****************************************************************
  */
-.square {
+#blocks-wrapper {
+}
+#blocks-wrapper .square {
     position: relative;
     width: 100%;
+    margin-bottom: 30px;
 }
-.square:before {
+#blocks-wrapper .square:before {
     content: "";
     display: block;
     padding-top: 100%;
 }
-.content {
+#blocks-wrapper .content {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: #eaeaea;
-    border: 1px dashed #CCCCCC;
-    padding: 10px;
-}
-.content a{
+    background-color: #337ab7;
+    border: 5px solid #6aa7dc;
     text-align: center;
-    padding-top: 40%;
-    height: 10%;
+}
+#blocks-wrapper .content .delete-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+#blocks-wrapper .content a{
+    margin-top: 25%;
     display: block;
+    padding: 10px;
+    background-color: #6aa7dc;
+    color: #FFF;
 }
 
 /*
@@ -115,18 +112,55 @@ body{
  * TemplateEditor widget
  *****************************************************************
  */
-ul.connected{
+#template-editor {
+    margin-top: 25px;
+}
+#template-editor h3 {
+    margin: 0;
+    padding: 6px 0 6px 0;
+    text-align: center;
+}
+#template-editor #available-blocks {
+    background-color: #f5f5f5;
+    text-align: center;
+}
+#template-editor #available-blocks h3 {
+    background-color: #e7e7e7;
+    color: #575757;
+}
+#template-editor #assigned-blocks h3 {
+    background-color: #337ab7;
+    color: #FFF;
+}
+#template-editor #assigned-blocks .row {
+    margin-bottom: 30px;
+}
+#template-editor #assigned-blocks .block-position {
+    background-color: #F5F5F5;
+    text-align: center;
+}
+#template-editor ul.connected{
     padding: 0;
+    padding: 10px 0 10px 0;
 }
-ul.connected li{
+#template-editor ul.connected li{
     list-style-type: none;
-    margin-top: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
-li.sortable-placeholder {
+#template-editor ul.connected li span{
+    background: #FFF;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+#template-editor li.sortable-placeholder {
     border: 1px dashed #CCC;
     background: none;
-    min-width: 100px;
-    min-height: 35px;
+    width: 90%;
+    margin: 0 auto;
+    height: 34px;
 }
 
 /*

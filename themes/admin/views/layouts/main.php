@@ -25,7 +25,7 @@ ThemeAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-    <?php if (Yii::$app->cms->getMenuCollapsed()) : ?>
+    <?php if (Yii::$app->cms->getAdminMenu()->getIsCollapsed()) : ?>
     <div id="wrapper" class="toggled">
     <?php else : ?>
     <div id="wrapper">
@@ -33,7 +33,7 @@ ThemeAsset::register($this);
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <?= Yii::$app->cms->adminMenu->render(); ?>
+            <?= Yii::$app->cms->getAdminMenu()->render(); ?>
         </div>
         <!-- /#sidebar-wrapper -->
 

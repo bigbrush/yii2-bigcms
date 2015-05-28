@@ -56,7 +56,7 @@ class CmsController extends Controller
      */
     public function actionCollapseMenu($collapsed)
     {
-        Yii::$app->cms->setMenuCollapsed($collapsed);
+        Yii::$app->cms->getAdminMenu()->setIsCollapsed($collapsed);
     }
     
     /**

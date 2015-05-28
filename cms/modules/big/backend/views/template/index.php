@@ -17,6 +17,7 @@ $this->title = Yii::$app->id . ' | Templates';
         <h1>Templates</h1>
         <?php echo GridView::widget([
             'dataProvider' => $dataProvider,
+            'tableOptions' => ['class' => 'table table-hover'],
             'columns' => [
                 [
                     'header' => 'Title',

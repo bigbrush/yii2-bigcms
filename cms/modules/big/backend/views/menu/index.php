@@ -21,11 +21,10 @@ $this->registerJs('
         });
         var alert = $("<div>", {
             class: "alert alert-"+type+" fade in",
-        }).css("margin-top", "15px").append(button).append(message);
+        }).append(button).append(message);
         $("#alert").empty().html(alert);
     }
     
-    var wrapper = $("#grid");
     $("#grid").on("click", ".changeDirectionBtn", function(e){
         var self = $(this),
             direction = self.data("direction"),
@@ -33,20 +32,13 @@ $this->registerJs('
 
         $.post("'.Url::to(['move']).'", {node_id: menuId, direction: direction}, function(data){
             if (data.status === "success") {
-                wrapper.empty().html(data.grid);
+                $("#grid").empty().html(data.grid);
             }
             var type = data.status == "error" ? "danger" : data.status;
             alert(data.message, type);
         }, "json");
 
         e.preventDefault();
-    });
-
-    $(".delete-form .btn").click(function(e){
-        if (confirm("Are you sure to delete this menu item?")) {
-            return true;
-        }
-        return false;
     });
 ');
 
@@ -59,7 +51,9 @@ $this->title = Yii::$app->id . ' | Menu items';
     <div class="col-md-12">
         <div id="alert">
         </div>
+        
         <h1>Menu items</h1>
+        
         <?= ButtonDropDown::widget([
             'label' => 'Select menu',
             'options' => ['class' => 'btn btn-default', 'style' => 'margin-bottom: 10px;'],
@@ -67,10 +61,7 @@ $this->title = Yii::$app->id . ' | Menu items';
                 'items' => $dropdown,
             ],
         ]) ?>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
+        
         <div id="grid">
             <?= $this->render('_grid', ['dataProvider' => $dataProvider]); ?>
         </div>

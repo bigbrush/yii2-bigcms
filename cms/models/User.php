@@ -115,6 +115,21 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Returns the text value of the provided state. If state is not provided the value of [[state]] is returned as text.
+     *
+     * @param int $state an optional state id to get the value from.
+     * @return string the text value.
+     */
+    public function getStateText($state = null)
+    {
+        if ($state === null) {
+            $state = $this->state;
+        }
+        $options = $this->getStateOptions();
+        return $options[$state];
+    }
+
+    /**
      * Finds user by username
      *
      * @param string $username
