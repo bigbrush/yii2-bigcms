@@ -90,8 +90,8 @@ body{
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: #337ab7;
-    border: 5px solid #6aa7dc;
+    background-color: #eaeaea;
+    border: 1px solid #337ab7;
     text-align: center;
 }
 #blocks-wrapper .content .delete-btn {
@@ -103,7 +103,7 @@ body{
     margin-top: 25%;
     display: block;
     padding: 10px;
-    background-color: #6aa7dc;
+    background-color: #337ab7;
     color: #FFF;
 }
 
