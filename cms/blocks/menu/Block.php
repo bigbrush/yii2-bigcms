@@ -9,6 +9,7 @@ namespace cms\blocks\menu;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use cms\blocks\menu\components\ModelBehavior;
 
 /**
@@ -36,9 +37,11 @@ class Block extends \bigbrush\big\core\Block
         $menus = Yii::$app->big->menuManager->getMenuItems($this->model->menu_id);
         reset($menus);
         $items = $this->createDropDownMenu($menus);
+        $options = $this->getDisplayOptions();
         return $this->render('index', [
             'model' => $this->model,
             'items' => $items,
+            'options' => $options,
         ]);
     }
 
@@ -83,5 +86,26 @@ class Block extends \bigbrush\big\core\Block
             }
         }
         return $items;
+    }
+
+    /**
+     * Returns a string representation of [[type]].
+     *
+     * @return string the type represented as a string.
+     */
+    public function getDisplayOptions()
+    {
+        $options = [];
+        Html::addCssClass($options, ModelBehavior::TYPE_DEFAULT);
+        
+        $type = $this->model->type;
+        if ($type === ModelBehavior::TYPE_DEFAULT) {
+            return $options;
+        }
+
+        if (array_key_exists($type, $this->model->getTypeOptions())) {
+            Html::addCssClass($options, $type);
+        }
+        return $options;
     }
 }

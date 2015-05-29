@@ -16,6 +16,6 @@ use yii\bootstrap\Nav;
     <?php endif; ?>
     <?= Nav::widget([
         'items' => $items,
-        'options' => empty($model->class) ? [] : ['class' => $model->class],
+        'options' => $options,
     ]) ?>
 </div>

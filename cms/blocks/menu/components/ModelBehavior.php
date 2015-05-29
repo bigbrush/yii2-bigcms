@@ -19,6 +19,11 @@ use yii\validators\Validator;
  */
 class ModelBehavior extends Behavior
 {
+    const TYPE_DEFAULT = 'nav';
+    const TYPE_PILLS = 'nav-pills';
+    const TYPE_PILLS_STACKED = 'nav-pills nav-stacked';
+    const TYPE_TABS = 'nav-tabs';
+
     /**
      * @var int an id of the menu to display in the block.
      */
@@ -27,7 +32,7 @@ class ModelBehavior extends Behavior
      * @var string optional class for the menu.
      * For example "nav-pills" to create a bootstrap pills menu.
      */
-    public $class = '';
+    public $type;
 
 
     /**
@@ -42,17 +47,32 @@ class ModelBehavior extends Behavior
     }
 
     /**
+     * Returns options available for [[type]].
+     *
+     * @return array list of available options.
+     */
+    public function getTypeOptions()
+    {
+        return [
+            self::TYPE_DEFAULT => 'Default',
+            self::TYPE_PILLS => 'Pills',
+            self::TYPE_PILLS_STACKED => 'Pills stacked',
+            self::TYPE_TABS => 'Tabs',
+        ]; 
+    }
+
+    /**
      * Initializes this behavior by setting its properties and registering
      * these properties as additional validators in the [[owner]].
      */
     public function init()
     {
         $this->owner->validators[] = Validator::createValidator('required', $this->owner, 'menu_id', ['message' => 'Please select a menu']);
-        $this->owner->validators[] = Validator::createValidator('default', $this->owner, 'class', ['value' => '']);
+        $this->owner->validators[] = Validator::createValidator('default', $this->owner, 'type', ['value' => '']);
         if (!empty($this->owner->content)) {
             $properties = Json::decode($this->owner->content);
             $this->menu_id = $properties['menu_id'];
-            $this->class = $properties['class'];
+            $this->type = $properties['type'];
         }
     }
 
@@ -66,7 +86,7 @@ class ModelBehavior extends Behavior
     {
     	$this->owner->content = Json::encode([
     	    'menu_id' => $this->menu_id,
-    	    'class' => $this->class,
+    	    'type' => $this->type,
     	]);
     }
 }
