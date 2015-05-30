@@ -1,10 +1,21 @@
 BIG CMS Change Log
 ==========================
 
-1.0.0 May 10, 2015
+0.0.1 May 27, 2015
 ------------------
-  - Features:
-    - Frontend and backend themes
-    - SEO optimized pages
-    - Dynamic layouts
-    - Menu system based on the nested set model
+- Backend based on Big Framework
+- New: Frontend and backend themes
+- New: SEO optimized pages
+- New: User registration
+- New: Widgets
+    - Alert (from yii2-advanced template)
+    - DeleteButton
+    - PopoverButton
+    - RadioButtonGroup
+- New: Components
+    - AdminMenu
+    - Toolbar
+- New: Blocks
+    - Contact
+    - Menu
+    - Text
