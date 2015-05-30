@@ -17,7 +17,7 @@ use cms\components\AdminMenu;
  */
 class Cms extends Object implements BootstrapInterface
 {
-    const VERSION = '0.0.1';
+    const VERSION = '0.0.2';
 
     /**
      * @var array list of components used in the CMS.
