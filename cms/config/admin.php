@@ -12,6 +12,7 @@ $config = [
     'language' => 'da',
     'bootstrap' => [
         'big',
+        'cms',
     ],
     'modules' => [
         'pages' => ['class' => 'cms\modules\pages\backend\Module'],

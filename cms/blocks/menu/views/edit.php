@@ -7,6 +7,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+$type = Yii::t('cms', 'block');
+$title = $block->model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
 ?>
 <?php $form = ActiveForm::begin(); ?>
     
@@ -14,7 +17,7 @@ use yii\bootstrap\ActiveForm;
     
     <div class="row">
         <div class="col-md-12">
-            <h1><?= $model->id ? 'Edit' : 'Create' ?> block</h1>    
+            <h1><?= $title ?></h1>    
         </div>
     </div>
 

@@ -42,9 +42,10 @@ $this->registerJs('
     });
 ');
 
-Yii::$app->toolbar->add()->add('Edit menus', ['menus'], 'bars');
+Yii::$app->toolbar->add()->add(Yii::t('cms', 'Edit menus'), ['menus'], 'bars');
 
-$this->title = Yii::$app->id . ' | Menu items';
+$title = Yii::t('cms', 'Menu items');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 
 <div class="row">
@@ -52,10 +53,10 @@ $this->title = Yii::$app->id . ' | Menu items';
         <div id="alert">
         </div>
         
-        <h1>Menu items</h1>
+        <h1><?= $title ?></h1>
         
         <?= ButtonDropDown::widget([
-            'label' => 'Select menu',
+            'label' => Yii::t('cms', 'Select menu'),
             'options' => ['class' => 'btn btn-default', 'style' => 'margin-bottom: 10px;'],
             'dropdown' => [
                 'items' => $dropdown,

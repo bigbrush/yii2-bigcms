@@ -14,14 +14,15 @@ $this->registerJs('$("#btn-select-content").click(function(e){
     e.preventDefault();
 });');
 
-$action = $model->id ? 'Edit' : 'Create';
-$this->title = Yii::$app->id . ' | ' . $action . ' menu item';
+$type = Yii::t('cms', 'menu item');
+$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
     <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
     <div class="row">
         <div class="col-md-12">
-            <h1><?= $action ?> menu item</h1>
+            <h1><?= $title ?></h1>
         </div>
     </div>
 

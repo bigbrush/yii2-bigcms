@@ -8,12 +8,15 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use bigbrush\big\widgets\editor\Editor;
+
+$type = Yii::t('cms', 'block');
+$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
 ?>
 <div class="row">
     <div class="col-md-12">
         <?php $form = ActiveForm::begin(); ?>
             <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
-            <h1><?= $model->id ? 'Edit' : 'Create' ?> block</h1>
+            <h1><?= $title ?></h1>
 
             <div class="row">
                 <div class="col-md-9">

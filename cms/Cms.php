@@ -9,12 +9,13 @@ namespace cms;
 
 use Yii;
 use yii\base\Object;
+use yii\base\BootstrapInterface;
 use cms\components\AdminMenu;
 
 /**
  * Cms
  */
-class Cms extends Object
+class Cms extends Object implements BootstrapInterface
 {
     const VERSION = '0.0.1';
 
@@ -23,6 +24,21 @@ class Cms extends Object
      */
     public $components = [];
 
+
+    /**
+     * Bootstraps the Cms component.
+     */
+    public function bootstrap($app)
+    {
+        Yii::$app->i18n->translations['cms*'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => '@cms/messages',
+            // 'fileMap' => [
+            //     'cms' => 'cms.php',
+            //     'cms/toolbar' => 'components/toolbar.php',
+            // ]
+        ];
+    }
 
     /**
      * Returns the admin menu.

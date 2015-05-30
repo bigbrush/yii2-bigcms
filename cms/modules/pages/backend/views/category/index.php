@@ -21,13 +21,14 @@ $this->registerJs('
     });
 ');
 
-Yii::$app->toolbar->add()->add('Pages', ['page/index'], 'file');
+Yii::$app->toolbar->add()->add(Yii::t('cms', 'Pages'), ['page/index'], 'file');
 
-$this->title = Yii::$app->id . ' | Page categories';
+$title = Yii::t('cms', 'Categories');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1>Page categories</h1>
+        <h1><?= $title ?></h1>
         <?= Html::beginForm(['move']) ?>
             <?= $this->render('_grid', ['dataProvider' => $dataProvider]) ?>
             <?= Html::hiddenInput('direction', '', ['id' => 'field-direction']) ?>

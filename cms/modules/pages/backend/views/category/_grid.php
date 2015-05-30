@@ -14,14 +14,14 @@ use yii\bootstrap\ButtonGroup;
     'dataProvider' => $dataProvider,
     'columns' => [
         [
-            'header' => 'Title',
+            'header' => Yii::t('cms', 'Title'),
             'format' => 'raw',
             'value' => function($data) {
                 return str_repeat('- ', $data->depth-1) . Html::a($data->title, ['edit', 'id' => $data->id]);
             },
         ],
         [
-            'header' => 'Ordering',
+            'header' => Yii::t('cms', 'Ordering'),
             'headerOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
             'format' => 'raw',
             'options' => ['width' => '10%'],

@@ -9,12 +9,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use cms\widgets\DeleteButton;
 
-$this->title = Yii::$app->id . ' | Menus';
+$title = Yii::t('cms', 'Menus');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
-        <?php Yii::$app->toolbar->add('New', ['edit-menu'])->add('Menu items', ['index'], 'tree'); ?>
-        <h1>Menus</h1>
+        <?php Yii::$app->toolbar->add(null, ['edit-menu'])->add(Yii::t('cms', 'Menu items'), ['index'], 'tree'); ?>
+        <h1><?= $title ?></h1>
     </div>
 </div>
 <div class="row">

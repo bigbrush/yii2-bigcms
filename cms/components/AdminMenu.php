@@ -83,23 +83,23 @@ class AdminMenu extends Object
         $userLoggedIn = !Yii::$app->getUser()->getIsGuest();
         if (Yii::$app->getUser()->getIsGuest()) {
             $this->collapsible = false;
-            $item = ['label' => 'Welcome', 'url' => ['/'], 'icon' => 'home fa-fw'];
+            $item = ['label' => Yii::t('cms', 'Welcome'), 'url' => ['/'], 'icon' => 'home fa-fw'];
             return [$item];
         }
 
         return [
-            ['label' => 'Home', 'url' => ['/'], 'icon' => 'home'],
-            ['label' => 'Pages', 'url' => ['/pages/page/index'], 'icon' => 'file',
+            ['label' => Yii::t('cms', 'Home'), 'url' => ['/'], 'icon' => 'home'],
+            ['label' => Yii::t('cms', 'Pages'), 'url' => ['/pages/page/index'], 'icon' => 'file',
                 // 'items' => [
                 //     ['label' => 'Categories', 'url' => ['/pages/categories/index'], 'icon' => 'square', 'options' => ['class' => 'pull-right']],
                 // ]
             ],
-            ['label' => 'Blocks', 'url' => ['/big/block/index'], 'icon' => 'square'],
-            ['label' => 'Menus', 'url' => ['/big/menu/index'], 'icon' => 'bars'],
-            ['label' => 'Media', 'url' => ['/big/media/show'], 'icon' => 'picture-o'],
-            ['label' => 'Templates', 'url' => ['/big/template/index'], 'icon' => 'simplybuilt'],
-            ['label' => 'Users', 'url' => ['/big/user/index'], 'icon' => 'users'],
-            ['label' => 'Logout', 'url' => ['/big/frontpage/logout'], 'icon' => 'circle-o-notch'],
+            ['label' => Yii::t('cms', 'Blocks'), 'url' => ['/big/block/index'], 'icon' => 'square'],
+            ['label' => Yii::t('cms', 'Menus'), 'url' => ['/big/menu/index'], 'icon' => 'bars'],
+            ['label' => Yii::t('cms', 'File manager'), 'url' => ['/big/media/show'], 'icon' => 'picture-o'],
+            ['label' => Yii::t('cms', 'Templates'), 'url' => ['/big/template/index'], 'icon' => 'simplybuilt'],
+            ['label' => Yii::t('cms', 'Users'), 'url' => ['/big/user/index'], 'icon' => 'users'],
+            ['label' => Yii::t('cms', 'Logout'), 'url' => ['/big/frontpage/logout'], 'icon' => 'circle-o-notch'],
         ];
     }
 
@@ -184,7 +184,7 @@ class AdminMenu extends Object
             $icon = 'arrow-circle-left';
         }
         $this->addItem([
-            'label' => 'Minimize',
+            'label' => Yii::t('cms', 'Minimize'),
             'url' => '#',
             'icon' => $icon,
             'options' => [

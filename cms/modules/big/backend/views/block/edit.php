@@ -5,7 +5,8 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-$action = $block->model->id ? 'Edit' : 'Create';
-$this->title = Yii::$app->id . ' | ' . $action . ' block';
+$type = Yii::t('cms', 'block');
+$title = $block->model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <?= $block->edit($block->model) ?>

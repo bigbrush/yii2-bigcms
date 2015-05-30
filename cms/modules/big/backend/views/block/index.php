@@ -15,7 +15,7 @@ foreach ($installedBlocks as $id => $name) {
 }
 $toolbar = Yii::$app->toolbar;
 $toolbar->addButton(ButtonDropDown::widget([
-    'label' => $toolbar->createIcon('square') . ' ' . 'New block',
+    'label' => $toolbar->createText('square', Yii::t('cms', 'New {0}', Yii::t('cms', 'block'))),
     'options' => ['class' => 'btn btn-default'],
     'encodeLabel' => false,
     'dropdown' => [
@@ -23,11 +23,12 @@ $toolbar->addButton(ButtonDropDown::widget([
     ],
 ]));
 
-$this->title = Yii::$app->id . ' | Blocks';
+$title = Yii::t('cms', 'Blocks');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1>Blocks</h1>
+        <h1><?= $title ?></h1>
     </div>
 </div>
 

@@ -39,9 +39,12 @@ class Toolbar extends Object
      * @param array $options additional tag options
      * @return Toolbar the current toolbar instance to support chaining.
      */
-    public function save($text = 'Save', $icon = 'check-square', $options = [])
+    public function save($text = null, $icon = 'check-square', $options = [])
     {
-        $this->items[] = Html::label($this->createIcon($icon) . ' ' . $text, 'save-button', $this->createButtonOptions($options));
+        if ($text === null) {
+            $text = Yii::t('cms/toolbar', 'Save');
+        }
+        $this->items[] = Html::label($this->createText($icon, $text), 'save-button', $this->createButtonOptions($options));
         echo Html::submitInput('save', ['style' => 'display:none;', 'id' => 'save-button']);
         return $this;
     }
@@ -58,14 +61,20 @@ class Toolbar extends Object
      * @param array $options additional tag options
      * @return Toolbar the current toolbar instance to support chaining.
      */
-    public function saveStay($text = 'Save \'n stay', $icon = 'refresh', $options = [])
+    public function saveStay($text = null, $icon = 'refresh', $options = [])
     {
+        if ($text === null) {
+            $text = Yii::t('cms/toolbar', 'Update');
+        }
         Yii::$app->getView()->registerJs('
             $("#save-stay-button").click(function(e){
                 $("#' . static::POST_VAR_SAVE_STAY . '").val("1");
             });
+            $("#save-button").click(function(e){
+                $("#' . static::POST_VAR_SAVE_STAY . '").val("0");
+            });
         ');
-        $this->items[] = Html::label($this->createIcon($icon) . ' ' . $text, 'save-stay-button', $this->createButtonOptions($options));
+        $this->items[] = Html::label($this->createText($icon, $text), 'save-stay-button', $this->createButtonOptions($options));
         echo Html::submitInput('saveStay', ['style' => 'display:none;', 'id' => 'save-stay-button']);
         echo Html::hiddenInput(static::POST_VAR_SAVE_STAY, '', ['id' => static::POST_VAR_SAVE_STAY]);
         return $this;
@@ -80,9 +89,12 @@ class Toolbar extends Object
      * @param array $options additional tag options
      * @return Toolbar the current toolbar instance to support chaining.
      */
-    public function add($text = 'New', $url = ['edit'], $icon = 'plus-circle', $options = [])
+    public function add($text = null, $url = ['edit'], $icon = 'plus-circle', $options = [])
     {
-        $this->items[] = Html::a($this->createIcon($icon) . ' ' . $text, $url, $this->createButtonOptions($options));
+        if ($text === null) {
+            $text = Yii::t('cms/toolbar', 'New');
+        }
+        $this->items[] = Html::a($this->createText($icon, $text), $url, $this->createButtonOptions($options));
         return $this;
     }
 
@@ -92,9 +104,12 @@ class Toolbar extends Object
      * @param string $text a text for the button.
      * @return Toolbar the current toolbar instance to support chaining.
      */
-    public function back($text = 'Back', $url = ['index'], $icon = 'chevron-circle-left', $options = [])
+    public function back($text = null, $url = ['index'], $icon = 'chevron-circle-left', $options = [])
     {
-        $this->items[] = Html::a($this->createIcon($icon) . ' ' . $text, $url, $this->createButtonOptions($options));
+        if ($text === null) {
+            $text = Yii::t('cms/toolbar', 'Back');
+        }
+        $this->items[] = Html::a($this->createText($icon, $text), $url, $this->createButtonOptions($options));
         return $this;
     }
 
@@ -111,14 +126,15 @@ class Toolbar extends Object
     }
 
     /**
-     * Creates an icon tag based on Font Awesome.
+     * Creates a text value with an icon tag prepended. The icon is based on Font Awesome.
      *
-     * @param string $type the type of icon to create
-     * @return string an icon tag
+     * @param string $icon a type of icon to use.
+     * @param string $text a text value
+     * @return string a text value an icon tag
      */
-    public function createIcon($type)
+    public function createText($icon, $text)
     {
-    	return '<i class="fa fa-' . $type . '"></i>';
+    	return '<i class="fa fa-' . $icon . '"></i> ' . $text;
     }
 
     /**
@@ -149,9 +165,10 @@ class Toolbar extends Object
      */
     public function render()
     {
-        $html = Html::beginTag('div', ['class' => 'toolbar']);
-        $html .= implode("\n", $this->items);
-        $html .= Html::endTag('div');
-        return $html;
+        $html = [];
+        $html[] = Html::beginTag('div', ['class' => 'toolbar']);
+        $html[] = implode("\n", $this->items);
+        $html[] = Html::endTag('div');
+        return implode("\n", $html);
     }
 }

@@ -8,8 +8,9 @@
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
 
-$action = $model->id ? 'Edit' : 'Create';
-$this->title = Yii::$app->id . ' | ' . $action . ' page';
+$type = Yii::t('cms', 'page');
+$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 
 <?php
@@ -19,7 +20,7 @@ Yii::$app->toolbar->save()->saveStay()->back();
 
 $items = [
     [
-        'label' => 'Page',
+        'label' => Yii::t('cms', 'Page'),
         'content' => $this->render('_tab_page', [
             'model' => $model,
             'form' => $form,
@@ -28,7 +29,7 @@ $items = [
         ]),
     ],
     [
-        'label' => 'Seo',
+        'label' => Yii::t('cms', 'Seo'),
         'content' => $this->render('_tab_seo', [
             'model' => $model,
             'form' => $form
@@ -37,7 +38,7 @@ $items = [
 ];
 if ($model->getIsNewRecord() === false) {
     $items[] = [
-    'label' => 'Info',
+    'label' => Yii::t('cms', 'Info'),
     'content' => $this->render('_tab_meta', [
         'model' => $model,
         'form' => $form
@@ -45,7 +46,7 @@ if ($model->getIsNewRecord() === false) {
 ];
 }
 ?>
-    <h1><?= $action ?> page</h1>
+    <h1><?= $title ?></h1>
     
     <div class="row">
         <div class="col-md-12">

@@ -8,14 +8,15 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$action = $model->id ? 'Edit' : 'Create';
-$this->title = Yii::$app->id . ' | ' . $action . ' menu';
+$type = Yii::t('cms', 'menu');
+$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
         <?php $form = ActiveForm::begin(); ?>
             <?php Yii::$app->toolbar->save()->saveStay()->back('Back', ['menus']); ?>
-            <h1><?= $action ?> menu</h1>
+            <h1><?= $title ?></h1>
             <?= $form->field($model, 'title') ?>
         <?php ActiveForm::end(); ?>
     </div>

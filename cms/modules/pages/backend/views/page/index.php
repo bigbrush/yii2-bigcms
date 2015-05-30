@@ -14,26 +14,27 @@ $this->registerCss('
     .popover h3 {font-weight: bold;}
 ');
 
-Yii::$app->toolbar->add()->add('Categories', ['category/index'], 'bars');
+Yii::$app->toolbar->add()->add(Yii::t('cms', 'Categories'), ['category/index'], 'bars');
 
-$this->title = Yii::$app->id . ' | Pages';
+$title = Yii::t('cms', 'Pages');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1>Pages</h1>
+        <h1><?= $title ?></h1>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'table table-hover'],
             'columns' => [
                 [
-                    'header' => 'Title',
+                    'header' => Yii::t('cms', 'Title'),
                     'format' => 'raw',
                     'value' => function($data) {
                         return Html::a($data->title, ['edit', 'id' => $data->id]);
                     },
                 ],
                 [
-                    'header' => 'Delete',
+                    'header' => Yii::t('cms', 'Delete'),
                     'options' => ['width' => '5%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
                     'format' => 'raw',
