@@ -38,6 +38,7 @@ return [
     'Seo' => 'Seo',
     'Templates' => 'Skabeloner',
     'Title' => 'Overskrift',
+    'Use default template' => 'Brug standard skabelon',
     'Users' => 'Brugere',
     'Welcome' => 'Velkommen',
     'block' => 'blok',

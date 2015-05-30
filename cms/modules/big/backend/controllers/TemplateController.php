@@ -25,7 +25,7 @@ class TemplateController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Yii::$app->big->getTemplate()->getModel()->find(),
+            'query' => Yii::$app->big->templateManager->getModel()->find(),
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,

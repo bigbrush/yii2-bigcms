@@ -99,7 +99,7 @@ class AdminMenu extends Object
             ['label' => Yii::t('cms', 'File manager'), 'url' => ['/big/media/show'], 'icon' => 'picture-o'],
             ['label' => Yii::t('cms', 'Templates'), 'url' => ['/big/template/index'], 'icon' => 'simplybuilt'],
             ['label' => Yii::t('cms', 'Users'), 'url' => ['/big/user/index'], 'icon' => 'users'],
-            ['label' => Yii::t('cms', 'Logout'), 'url' => ['/big/frontpage/logout'], 'icon' => 'circle-o-notch'],
+            ['label' => Yii::t('cms', 'Logout'), 'url' => ['/big/cms/logout'], 'icon' => 'circle-o-notch'],
         ];
     }
 

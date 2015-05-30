@@ -12,7 +12,6 @@ use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\View;
-use yii\helpers\ArrayHelper;
 use cms\modules\pages\models\Page;
 
 /**
@@ -45,9 +44,8 @@ class PageController extends Controller
     public function actionEdit($id = 0)
     {
         $model = new Page();
-        $manager = Yii::$app->big->categoryManager;
         $categories = [];
-        foreach ($manager->getCategories() as $category) {
+        foreach (Yii::$app->big->categoryManager->getCategories() as $category) {
             $categories[$category->id] = str_repeat('- ', $category->depth - 1) . $category->title;
         }
         if ($id) {
@@ -62,8 +60,7 @@ class PageController extends Controller
                 return $this->redirect(['index']);
             }
         }
-        $templates = Yii::$app->big->template->find()->select(['id', 'title'])->all();
-        $templates = ['- Use default template -'] + ArrayHelper::map($templates, 'id', 'title');
+        $templates = Yii::$app->big->templateManager->getDropDownList();
         return $this->render('edit', [
             'model' => $model,
             'templates' => $templates,
