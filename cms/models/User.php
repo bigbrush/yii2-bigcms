@@ -61,6 +61,17 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function beforeSave($insert)
+    {
+        if (!empty($this->password)) {
+            $this->setPassword($this->password);
+        }
+        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -88,9 +99,7 @@ class User extends ActiveRecord implements IdentityInterface
             }, 'whenClient' => 'function(attribute, value) {
                 return '.$this->getIsNewRecord().';
             }'],
-            ['password', 'string', 'min' => 6, 'skipOnEmpty' => false, 'when' => function ($model) {
-                return $model->getIsNewRecord();
-            }, 'whenClient' => 'function(attribute, value) {
+            ['password', 'string', 'min' => 6, 'skipOnEmpty' => false, 'whenClient' => 'function(attribute, value) {
                 return value.length > 0;
             }'],
 
