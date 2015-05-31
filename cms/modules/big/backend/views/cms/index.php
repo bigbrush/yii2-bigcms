@@ -5,11 +5,11 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-$this->title = Yii::$app->id . ' | Welcome';
+$title = Yii::t('cms', 'Welcome to Big CMS');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
-    	<h1>Welcome to Big!</h1>
-    	<p>What to do on the frontpage??</p>
+    	<h1><?= $title ?></h1>
     </div>
 </div>

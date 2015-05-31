@@ -16,14 +16,14 @@ use cms\widgets\DeleteButton;
     'tableOptions' => ['class' => 'table table-hover'],
     'columns' => [
         [
-            'header' => 'Title',
+            'header' => Yii::t('cms', 'Title'),
             'format' => 'raw',
             'value' => function($data) {
                 return str_repeat('- ', $data->depth-1) . Html::a($data->title, ['edit', 'id' => $data->id]);
             },
         ],
         [
-            'header' => 'Default',
+            'header' => Yii::t('cms', 'Default'),
             'format' => 'raw',
             'options' => ['width' => '1%'],
             'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
@@ -32,7 +32,7 @@ use cms\widgets\DeleteButton;
             },
         ],
         [
-            'header' => 'Ordering',
+            'header' => Yii::t('cms', 'Ordering'),
             'headerOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
             'format' => 'raw',
             'options' => ['width' => '10%'],
@@ -57,7 +57,7 @@ use cms\widgets\DeleteButton;
             },
         ],
         [
-            'header' => 'Delete',
+            'header' => Yii::t('cms', 'Delete'),
             'format' => 'raw',
             'options' => ['width' => '1%'],
             'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],

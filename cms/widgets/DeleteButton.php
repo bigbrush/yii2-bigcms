@@ -7,6 +7,7 @@
 
 namespace cms\widgets;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -71,7 +72,7 @@ class DeleteButton extends PopoverButton
         $this->useHtml = true;
 
         if ($this->title === null) {
-            $this->title = '<strong>Sure?</strong>';
+            $this->title = '<strong>' . Yii::t('cms', 'Sure?') . '</strong>';
         }
         if ($this->action === null) {
             $this->action = ['delete', 'id' => $this->model['id']];

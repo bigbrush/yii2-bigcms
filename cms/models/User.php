@@ -51,6 +51,23 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Yii::t('cms', 'Name'),
+            'username' => Yii::t('cms', 'Username'),
+            'email' => Yii::t('cms', 'Email'),
+            'phone' => Yii::t('cms', 'Phone'),
+            'state' => Yii::t('cms', 'State'),
+            'created_at' => Yii::t('cms', 'Created at'),
+            'updated_at' => Yii::t('cms', 'Updated at'),
+            'password' => Yii::t('cms', 'Password'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -117,9 +134,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function getStateOptions()
     {
         return [
-            self::STATE_ACTIVE => 'Active',
-            self::STATE_INACTIVE => 'Inactive',
-            self::STATE_TRASHED => 'Trashed',
+            self::STATE_ACTIVE => Yii::t('cms', 'Active'),
+            self::STATE_INACTIVE => Yii::t('cms', 'Inactive'),
+            self::STATE_TRASHED => Yii::t('cms', 'Trashed'),
         ];
     }
 
@@ -139,10 +156,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by username
+     * Finds user by username. Only active users is searched.
      *
-     * @param string $username
-     * @return static|null
+     * @param string $username the username to search for.
+     * @return static|null a [[User]] model if found otherwise null.
      */
     public static function findByUsername($username)
     {

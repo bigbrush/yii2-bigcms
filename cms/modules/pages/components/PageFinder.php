@@ -36,7 +36,7 @@ class PageFinder
                 'route' => Route::page($item),
                 'text' => substr($item['content'], 0, 100),
                 'date' => $item['created_at'],
-                'section' => 'Pages',
+                'section' => Yii::t('cms', 'Pages'),
             ]);
         }
 
@@ -55,7 +55,7 @@ class PageFinder
                 'route' => Route::category($item),
                 'text' => substr($item['content'], 0, 100),
                 'date' => $item['created_at'],
-                'section' => 'Pages categories',
+                'section' => Yii::t('cms', 'Pages categories'),
             ]);
         }
     }

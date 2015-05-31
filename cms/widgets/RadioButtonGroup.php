@@ -7,6 +7,7 @@
 
 namespace cms\widgets;
 
+use Yii;
 use yii\helpers\Html;
 use yii\widgets\InputWidget;
 use yii\bootstrap\ButtonGroup;
@@ -23,16 +24,28 @@ class RadioButtonGroup extends InputWidget
      *
      * - label: string, required, the label.
      * - value: string, required, the value.
+     *
+     * Defaults to a "yes/no" button.
      */
-    public $buttons = [
-        ['label' => 'Yes', 'value' => '1'],
-        ['label' => 'No', 'value' => '0'],
-    ];
+    public $buttons;
     /**
      * @var string defines the button class used with radio buttons.
      */
     public $buttonClass = 'btn-primary';
 
+
+    /**
+     * Initializes the widget.
+     */
+    public function init()
+    {
+        if ($this->buttons === null) {
+            $this->buttons = [
+                ['label' => Yii::t('cms', 'Yes'), 'value' => '1'],
+                ['label' => Yii::t('cms', 'No'), 'value' => '0'],
+            ];
+        }
+    }
 
     /**
      * Runs the widget.

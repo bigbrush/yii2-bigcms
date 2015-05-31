@@ -19,6 +19,20 @@ class ContactForm extends Model
     public $phone;
     public $message;
 
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Yii::t('cms', 'Name'),
+            'email' => Yii::t('cms', 'Email'),
+            'phone' => Yii::t('cms', 'Phone'),
+            'message' => Yii::t('cms', 'Message'),
+        ];
+    }
+
     /**
      * @inheritdoc
      */

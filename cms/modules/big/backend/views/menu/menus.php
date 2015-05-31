@@ -24,14 +24,14 @@ $this->title = Yii::$app->id . ' | ' . $title;
             'dataProvider' => $dataProvider,
             'columns' => [
                 [
-                    'header' => 'Title',
+                    'header' => Yii::t('cms', 'Title'),
                     'format' => 'raw',
                     'value' => function($data) {
                         return Html::a($data->title, ['edit-menu', 'id' => $data->id]);
                     },
                 ],
                 [
-                    'header' => 'Delete',
+                    'header' => Yii::t('cms', 'Delete'),
                     'format' => 'raw',
                     'options' => ['width' => '1%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
@@ -50,7 +50,7 @@ $this->title = Yii::$app->id . ' | ' . $title;
                             'model' => $data,
                             'action' => ['delete-menu', 'id' => $data->id],
                             'options' => ['class' => 'btn-xs'],
-                            'title' => '<div style="text-align: center;"><strong>Are you sure?</strong></div>',
+                            'title' => '<div style="text-align: center;"><strong>' . Yii::t('cms', 'Are you sure?')  . '</strong></div>',
                             'content' => implode("\n", $popover),
                         ]);
                     },

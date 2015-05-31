@@ -9,25 +9,26 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use cms\widgets\DeleteButton;
 
-$this->title = Yii::$app->id . ' | Templates';
+$title = Yii::t('cms', 'Templates');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
         <?php Yii::$app->toolbar->add(); ?>
-        <h1>Templates</h1>
+        <h1><?= $title ?></h1>
         <?php echo GridView::widget([
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'table table-hover'],
             'columns' => [
                 [
-                    'header' => 'Title',
+                    'header' => Yii::t('cms', 'Title'),
                     'format' => 'raw',
                     'value' => function($data) {
                         return Html::a($data->title, ['edit', 'id' => $data->id]);
                     },
                 ],
                 [
-                    'header' => 'Default',
+                    'header' => Yii::t('cms', 'Default'),
                     'format' => 'raw',
                     'options' => ['width' => '1%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
@@ -36,7 +37,7 @@ $this->title = Yii::$app->id . ' | Templates';
                     },
                 ],
                 [
-                    'header' => 'Delete',
+                    'header' => Yii::t('cms', 'Delete'),
                     'format' => 'raw',
                     'options' => ['width' => '1%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],

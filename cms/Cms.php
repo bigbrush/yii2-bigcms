@@ -33,17 +33,14 @@ class Cms extends Object implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        // enable translations
-        Yii::$app->i18n->translations['cms*'] = [
+        $config = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => '@cms/messages',
-            // 'fileMap' => [
-            //     'cms' => 'cms.php',
-            //     'cms/toolbar' => 'components/toolbar.php',
-            // ]
         ];
-        // translate template manager default text
-        Yii::$app->big->templateManager->defaultText = '- ' . Yii::t('cms', 'Use default template') . ' -';
+        // enable translations
+        Yii::$app->i18n->translations['cms*'] = $config;
+        // override translations registered by Big
+        Yii::$app->big->registerTranslations($config);
     }
 
     /**

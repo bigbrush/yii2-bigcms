@@ -34,7 +34,7 @@ $widget = Yii::createObject([
 $sections = $widget->triggerSearch();
 $buttons = $widget->createDropDownButtons(array_keys($sections));
 $buttons[] = [
-    'label' => 'Media',
+    'label' => Yii::t('cms', 'Media'),
     'url' => '#',
     'linkOptions' => [
         'class' => 'section-selector',
@@ -53,7 +53,7 @@ $FileManager = FileManager::widget([
     }'
 ]);
 $ButtonDropDown = ButtonDropDown::widget([
-    'label' => 'Select section',
+    'label' => Yii::t('cms', 'Select section'),
     'options' => ['class' => 'btn btn-info'],
     'dropdown' => [
         'options' => ['id' => 'sections-dropdown'],
@@ -66,7 +66,7 @@ $ButtonDropDown = ButtonDropDown::widget([
 <html>
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <title>Insert link</title>
+    <title><?= Yii::t('cms', 'Select a link') ?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -90,14 +90,19 @@ $ButtonDropDown = ButtonDropDown::widget([
                     'dataProvider' => new ArrayDataProvider(['allModels' => $items]),
                     'columns' => [
                         [
-                            'header' => 'Title',
+                            'header' => Yii::t('cms', 'Title'),
                             'format' => 'raw',
                             'options' => ['width' => '75%'],
                             'value' => function($data){
                                 return Html::a($data['title'], '#', ['data-route' => $data['route'], 'class' => 'insert-on-click']);
                             },
                         ],
-                        'section',
+                        [
+                            'header' => Yii::t('cms', 'Section'),
+                            'value' => function($data){
+                                return $data['section'];
+                            },
+                        ],
                     ],
                 ]); ?>
             </div>

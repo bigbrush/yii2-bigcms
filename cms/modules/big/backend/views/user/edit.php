@@ -9,14 +9,16 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
-$action = $model->id ? 'Edit' : 'Create';
-$this->title = Yii::$app->id . ' | ' . $action . ' user';
+$type = Yii::t('cms', 'user');
+$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
     
     <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
     
-    <h1><?= $action ?> user</h1>
+    <h1><?= $title ?></h1>
+
     <div class="row">
         <div class="col-md-6">
             <?= $form->field($model, 'username') ?>

@@ -16,7 +16,7 @@ $this->registerJs('$("#btn-select-content").click(function(e){
 });');
 
 $type = Yii::t('cms', 'block');
-$title = $block->model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
+$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -27,21 +27,33 @@ $title = $block->model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'C
             <div class="row">
                 <div class="col-md-9">
                     <?= $form->field($model, 'title') ?>
-                    <?= $form->field($model, 'receiver') ?>
+                    <?= $form->field($model, 'receiver')->label(Yii::t('cms', 'Receiver')) ?>
 
-                    <h3>Contact form fields</h3>
+                    <h3><?= Yii::t('cms', 'Contact form fields') ?></h3>
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Choose which form fields to display</strong></p>
-                            <?= $form->field($model, 'showEmail')->widget(RadioButtonGroup::className()) ?>
-                            <?= $form->field($model, 'showName')->widget(RadioButtonGroup::className()) ?>
-                            <?= $form->field($model, 'showPhone')->widget(RadioButtonGroup::className()) ?>
-                            <?= $form->field($model, 'showMessage')->widget(RadioButtonGroup::className()) ?>
+                            <p><strong><?= Yii::t('cms', 'Choose which form fields to display') ?></strong></p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'showEmail')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show email')) ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'showName')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show name')) ?>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'showPhone')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show phone')) ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field($model, 'showMessage')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show message')) ?>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>Message after a successful form submission</strong></p>
+                            <p><strong><?= Yii::t('cms', 'Message after a successful form submission') ?></strong></p>
                             <?= $form->field($model, 'successMessage')->textArea()->label(false) ?>
-                            <p><strong>Where to go after form is submitted.</strong></p>
+                            <p><strong><?= Yii::t('cms', 'Where to go after form is submitted') ?></strong></p>
                             <?= $form->field($model, 'redirectTo', [
                                 'template' => '
                                     {label}
@@ -72,8 +84,8 @@ $title = $block->model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'C
 
 <?php
 Modal::begin([
-    'header' => '<h4>Select content</h4>',
-    'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>',
+    'header' => '<h4>' . Yii::t('cms', 'Select content') . '</h4>',
+    'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">' . Yii::t('cms', 'Close') . '</button>',
     'id' => 'content-modal',
     'size' => Modal::SIZE_LARGE,
 ]); ?>

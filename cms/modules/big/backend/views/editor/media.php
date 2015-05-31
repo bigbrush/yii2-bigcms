@@ -13,7 +13,7 @@ use bigbrush\big\widgets\filemanager\FileManager;
 <html>
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <title>Insert media</title>
+    <title><?= Yii::t('cms', 'Insert media') ?></title>
     <?php $this->head() ?>
 </head>
 <body>

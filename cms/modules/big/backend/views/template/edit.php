@@ -8,8 +8,9 @@
 use yii\bootstrap\ActiveForm;
 use bigbrush\big\widgets\templateeditor\TemplateEditor;
 
-$action = $model->id ? 'Edit' : 'Create';
-$this->title = Yii::$app->id . ' | ' . $action . ' template';
+$type = Yii::t('cms', 'template');
+$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
     
@@ -17,7 +18,7 @@ $this->title = Yii::$app->id . ' | ' . $action . ' template';
     
     <div class="row">
         <div class="col-md-12">
-            <h1><?= $action ?> template</h1>
+            <h1><?= $title ?></h1>
         </div>
     </div>
     <div class="row">

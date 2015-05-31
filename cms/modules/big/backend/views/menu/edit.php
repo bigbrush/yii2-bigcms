@@ -6,6 +6,7 @@
  */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Modal;
 use bigbrush\big\widgets\bigsearch\BigSearch;
@@ -79,8 +80,8 @@ $this->title = Yii::$app->id . ' | ' . $title;
 
 <?php
 Modal::begin([
-    'header' => '<h4>Select content</h4>',
-    'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>',
+    'header' => '<h4>' . Yii::t('cms', 'Select content') . '</h4>',
+    'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">' . Yii::t('cms', 'Close') . '</button>',
     'id' => 'content-modal',
     'size' => Modal::SIZE_LARGE,
 ]); ?>
@@ -93,6 +94,15 @@ Modal::begin([
             $("#menu-route").val(route);
         }).modal("hide");
     }',
+    'fileManager' => [
+        'getFileCallback' => 'function(file){
+            var baseUrl = "' . Url::to('@web/../') . '";
+            var url = file.url.slice(baseUrl.length);
+            $("#content-modal").on("hidden.bs.modal", function(){
+                $("#menu-route").val(url);
+            }).modal("hide");
+        }',
+    ],
 ]); ?>
 
 <?php Modal::end(); ?>

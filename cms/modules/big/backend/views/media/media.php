@@ -7,11 +7,12 @@
 
 use bigbrush\big\widgets\filemanager\FileManager;
 
-$this->title = Yii::$app->id . ' | Media manager';
+$title = Yii::t('cms', 'File manager');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
-    	<h1>Media manager</h1>
+    	<h1><?= $title ?></h1>
         <?= FileManager::widget() ?>
     </div>
 </div>

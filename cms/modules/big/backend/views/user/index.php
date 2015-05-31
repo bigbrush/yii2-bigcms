@@ -11,38 +11,39 @@ use yii\grid\GridView;
 $stateOptions = $model->getStateOptions();
 Yii::$app->toolbar->add();
 
-$this->title = Yii::$app->id . ' | Users';
+$title = Yii::t('cms', 'Users');
+$this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1>Users</h1>
+        <h1><?= $title ?></h1>
         <?php echo GridView::widget([
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'table table-hover'],
             'columns' => [
                 [
-                    'header' => 'Username',
+                    'header' => Yii::t('cms', 'Username'),
                     'format' => 'raw',
                     'value' => function($data) {
                         return Html::a(Html::encode($data->username), ['edit', 'id' => $data->id]);
                     }
                 ],
                 [
-                    'header' => 'Name',
+                    'header' => Yii::t('cms', 'Name'),
                     'options' => ['width' => '20%'],
                     'value' => function($data) {
                         return Html::encode($data->name);
                     }
                 ],
                 [
-                    'header' => 'Email',
+                    'header' => Yii::t('cms', 'Email'),
                     'options' => ['width' => '20%'],
                     'value' => function($data) {
                         return Html::encode($data->email);
                     }
                 ],
                 [
-                    'header' => 'State',
+                    'header' => Yii::t('cms', 'State'),
                     'options' => ['width' => '5%'],
                     'value' => function($data) use ($stateOptions) {
                         return Html::encode($data->getStateText());
