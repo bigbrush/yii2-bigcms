@@ -92,7 +92,7 @@ Modal::begin([
 
 <?= BigSearch::widget([
     'dynamicUrls' => true,
-    'linkClickCallback' => 'function(e){
+    'onClickCallback' => 'function(e){
         e.preventDefault();
         var route = $(this).data("route");
         $("#content-modal").on("hidden.bs.modal", function(){

@@ -7,6 +7,7 @@
 
 namespace cms\blocks\menu\components;
 
+use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Json;
@@ -67,7 +68,7 @@ class ModelBehavior extends Behavior
      */
     public function init()
     {
-        $this->owner->validators[] = Validator::createValidator('required', $this->owner, 'menu_id', ['message' => 'Please select a menu']);
+        $this->owner->validators[] = Validator::createValidator('required', $this->owner, 'menu_id', ['message' => Yii::t('cms', 'Please select a menu')]);
         $this->owner->validators[] = Validator::createValidator('default', $this->owner, 'type', ['value' => '']);
         if (!empty($this->owner->content)) {
             $properties = Json::decode($this->owner->content);

@@ -74,7 +74,7 @@ class CategoryController extends Controller
         $manager = Yii::$app->big->categoryManager;
         $model = $manager->getModel($id);
         if ($manager->saveModel($model)) {
-            Yii::$app->getSession()->setFlash('success', 'Category saved');
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Category saved'));
             if (Yii::$app->toolbar->stayAfterSave()) {
                 return $this->redirect(['edit', 'id' => $model->id]);
             } else {
@@ -111,12 +111,14 @@ class CategoryController extends Controller
         $model = Yii::$app->big->categoryManager->getModel($id);
         if ($model) {
             if ($model->delete()) {
-                Yii::$app->getSession()->setFlash('success', 'Category deleted.');
+                Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Category deleted.'));
             } else {
-                Yii::$app->getSession()->setFlash('info', 'Category not deleted, please try again.');
+                Yii::$app->getSession()->setFlash('info', Yii::t('cms', 'Category not deleted, please try again.'));
             }
         } else {
-            Yii::$app->getSession()->setFlash('error', 'Category with id "' . $id . '" not found.');
+            Yii::$app->getSession()->setFlash('error', Yii::t('cms', 'Category with id "{id}" not found.', [
+                'id' => $id
+        	]));
         }
         return $this->redirect(['index']);
     }

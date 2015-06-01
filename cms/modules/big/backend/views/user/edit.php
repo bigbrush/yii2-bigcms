@@ -24,20 +24,20 @@ $this->title = Yii::$app->id . ' | ' . $title;
             <?= $form->field($model, 'username') ?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'name') ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
             <?= $form->field($model, 'password')->passwordInput() ?>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'email')->input('email') ?>
+            <?= $form->field($model, 'name') ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'phone') ?>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'phone') ?>
+            <?= $form->field($model, 'email')->input('email') ?>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'state')->dropDownList($model->getStateOptions()) ?>

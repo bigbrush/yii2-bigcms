@@ -22,8 +22,8 @@ use bigbrush\big\widgets\filemanager\FileManager;
     <div class="row">
         <div class="col-md-12">
             <?= FileManager::widget([
-                'getFileCallback' => 'function(file){
-                    top.tinymce.activeEditor.windowManager.getParams().setMedia(file.url);
+                'onClickCallback' => 'function(file){
+                    top.tinymce.activeEditor.windowManager.getParams().setUrl(file.url);
                 }'
             ]) ?>
         </div>

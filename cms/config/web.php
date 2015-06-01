@@ -11,11 +11,15 @@ $config = [
     'layout' => 'column2',
     'bootstrap' => [
         'big',
+        'cms',
     ],
     'modules' => [
         'pages' => ['class' => 'cms\modules\pages\frontend\Module'],
     ],
     'components' => [
+        'cms' => [
+            'class' => 'cms\Cms',
+        ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
             'blockManager' => ['classPath' => 'cms\blocks'],

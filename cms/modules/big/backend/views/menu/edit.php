@@ -87,22 +87,26 @@ Modal::begin([
 ]); ?>
 
 <?= BigSearch::widget([
-    'linkClickCallback' => 'function(e){
+    'onClickCallback' => 'function(e){
         e.preventDefault();
         var route = $(this).data("route");
         $("#content-modal").on("hidden.bs.modal", function(){
             $("#menu-route").val(route);
         }).modal("hide");
     }',
-    'fileManager' => [
-        'getFileCallback' => 'function(file){
-            var baseUrl = "' . Url::to('@web/../') . '";
-            var url = file.url.slice(baseUrl.length);
-            $("#content-modal").on("hidden.bs.modal", function(){
-                $("#menu-route").val(url);
-            }).modal("hide");
-        }',
-    ],
+    /**
+     * TODO
+     * implement linking to files from menus.
+     */
+    // 'fileManager' => [
+    //     'onClickCallback' => 'function(file){
+    //         var baseUrl = "' . Url::to('@web/../') . '";
+    //         var url = file.url.slice(baseUrl.length);
+    //         $("#content-modal").on("hidden.bs.modal", function(){
+    //             $("#menu-route").val(url);
+    //         }).modal("hide");
+    //     }',
+    // ],
 ]); ?>
 
 <?php Modal::end(); ?>

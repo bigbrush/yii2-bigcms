@@ -141,7 +141,7 @@ class MenuController extends Controller
             } else {
                 $model->save(false);
             }
-            Yii::$app->getSession()->setFlash('success', 'Menu item saved');
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Menu item saved'));
             if (Yii::$app->toolbar->stayAfterSave()) {
                 return $this->redirect(['edit', 'id' => $model->id]);
             } else {
@@ -199,16 +199,18 @@ class MenuController extends Controller
         $model = Yii::$app->big->menuManager->getModel($id);
         if ($model) {
             if ($model->is_default) {
-                Yii::$app->getSession()->setFlash('info', 'Cannot delete the default menu item.');
+                Yii::$app->getSession()->setFlash('info', Yii::t('cms', 'Cannot delete the default menu item.'));
             } else {
                 if ($model->delete()) {
-                    Yii::$app->getSession()->setFlash('success', 'Menu item deleted.');
+                    Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Menu item deleted.'));
                 } else {
-                    Yii::$app->getSession()->setFlash('error', 'Menu item could not be deleted.');
+                    Yii::$app->getSession()->setFlash('error', Yii::t('cms', 'Menu item could not be deleted.'));
                 }
             }
         } else {
-            Yii::$app->getSession()->setFlash('error', 'Menu item with id "' . $id . '" not found.');
+            Yii::$app->getSession()->setFlash('error', Yii::t('cms', 'Menu item with id "{id}" not found.', [
+                'id' => $id
+            ]));
         }
         return $this->redirect(['index']);
     }
@@ -245,7 +247,7 @@ class MenuController extends Controller
         	} else {
         	    $model->save(false);
         	}
-            Yii::$app->getSession()->setFlash('success', 'Menu saved');
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Menu saved'));
             if (Yii::$app->toolbar->stayAfterSave()) {
                 return $this->redirect(['edit-menu', 'id' => $model->id]);
             } else {
@@ -277,12 +279,14 @@ class MenuController extends Controller
                 if ($this->getActiveMenuId() == $id) {
                     $this->setActiveMenuId(null);
                 }
-                Yii::$app->getSession()->setFlash('success', 'Menu deleted.');
+                Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Menu deleted.'));
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Menu could not be deleted.');
+                Yii::$app->getSession()->setFlash('error', Yii::t('cms', 'Menu could not be deleted.'));
             }
         } else {
-            Yii::$app->getSession()->setFlash('error', 'Menu with id "' . $id . '" not found.');
+            Yii::$app->getSession()->setFlash('error', Yii::t('cms', 'Menu with id "{id}" not found.', [
+                'id' => $id
+            ]));
         }
         return $this->redirect(['menus']);
     }

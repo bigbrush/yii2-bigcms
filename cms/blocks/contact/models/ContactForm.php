@@ -7,6 +7,7 @@
 
 namespace cms\blocks\contact\models;
 
+use Yii;
 use yii\base\Model;
 
 /**

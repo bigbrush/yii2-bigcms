@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         $model = $this->getModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'User saved successfully.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'User saved.'));
             if (Yii::$app->toolbar->stayAfterSave()) {
                 return $this->redirect(['edit', 'id' => $model->id]);
             } else {

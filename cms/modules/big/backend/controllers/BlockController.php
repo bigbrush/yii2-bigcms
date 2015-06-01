@@ -52,7 +52,7 @@ class BlockController extends Controller
         $post = Yii::$app->getRequest()->post();
         if ($model->load($post)) {
             if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', 'Block saved');
+                Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Block saved.'));
                 if (Yii::$app->toolbar->stayAfterSave()) {
                     return $this->redirect(['edit', 'id' => $model->id]);
                 } else {
@@ -82,9 +82,11 @@ class BlockController extends Controller
         }
 
         if ($model->delete()) {
-            Yii::$app->getSession()->setFlash('success', 'Block deleted.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Block deleted.'));
         } else {
-            Yii::$app->getSession()->setFlash('error', 'Block "' . $model->name . '" could not be deleted.');
+            Yii::$app->getSession()->setFlash('error', Yii::t('cms', 'Block "{name}" could not be deleted.', [
+                'name' => $model->name
+            ]));
         }
 
         return $this->redirect(['index']);

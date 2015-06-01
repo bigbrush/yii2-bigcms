@@ -53,7 +53,7 @@ class PageController extends Controller
         }
         $request = Yii::$app->getRequest();
         if ($model->load($request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Page saved');
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Page saved'));
             if (Yii::$app->toolbar->stayAfterSave()) {
                 return $this->redirect(['edit', 'id' => $model->id]);
             } else {
@@ -83,12 +83,14 @@ class PageController extends Controller
         $model = Page::findOne($id);
         if ($model) {
             if ($model->delete()) {
-                Yii::$app->getSession()->setFlash('success', 'Page deleted.');
+                Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Page deleted.'));
             } else {
-                Yii::$app->getSession()->setFlash('info', 'Page not deleted, please try again.');
+                Yii::$app->getSession()->setFlash('info', Yii::t('cms', 'Page not deleted, please try again.'));
             }
         } else {
-            Yii::$app->getSession()->setFlash('error', 'Page with id "' . $id . '" not found.');
+            Yii::$app->getSession()->setFlash('error', Yii::t('cms', 'Page with id "{id}" not found.', [
+                'id' => $id
+            ]));
         }
         return $this->redirect(['index']);
     }

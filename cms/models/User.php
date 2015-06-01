@@ -116,7 +116,9 @@ class User extends ActiveRecord implements IdentityInterface
             }, 'whenClient' => 'function(attribute, value) {
                 return '.$this->getIsNewRecord().';
             }'],
-            ['password', 'string', 'min' => 6, 'skipOnEmpty' => false, 'whenClient' => 'function(attribute, value) {
+            ['password', 'string', 'min' => 6, 'skipOnEmpty' => false, 'when' => function ($model) {
+                return $model->getIsNewRecord();
+            }, 'whenClient' => 'function(attribute, value) {
                 return value.length > 0;
             }'],
 
