@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap\Button;
 use yii\bootstrap\ButtonGroup;
+use cms\widgets\DeleteButton;
 ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -46,16 +47,16 @@ use yii\bootstrap\ButtonGroup;
             },
         ],
         [
-            'header' => 'Delete',
-            'format' => 'raw',
-            'options' => ['width' => '1%'],
+            'header' => Yii::t('cms', 'Delete'),
+            'options' => ['width' => '5%'],
             'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
-            'value' => function($data) {
-                return Html::beginForm(['delete', 'id' => $data->id], 'post', ['class' => 'delete-form'])
-                    . Html::submitButton('<i class="fa fa-trash"></i>', ['class' => 'btn btn-default btn-xs'])
-                    . Html::hiddenInput('id', $data->id)
-                    . Html::endForm();
-            },
+            'format' => 'raw',
+            'value' => function($data) {                        
+                return DeleteButton::widget([
+                    'model' => $data,
+                    'options' => ['class' => 'btn-xs'],
+                ]);
+            }
         ],
     ],
 ]); ?>

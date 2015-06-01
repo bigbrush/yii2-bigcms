@@ -14,7 +14,12 @@ return [
     /**
      * Global
      */
+    'Yes' => 'Ja',
+    'No' => 'Nej',
     'Title' => 'Titel',
+    'Active' => 'Aktiv',
+    'Inactive' => 'Inaktiv',
+    'Thrashed' => 'Smidt ud',
     
     /**
      * Managers

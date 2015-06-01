@@ -42,7 +42,7 @@ $this->title = Yii::$app->id . ' | ' . $title;
 
         </div>
         <div class="col-md-3">
-            <h3>Page SEO</h3>
+            <h3><?= Yii::t('cms', 'Page SEO') ?></h3>
             <?= $form->field($model, 'meta_title') ?>
             <?= $form->field($model, 'meta_description')->textArea() ?>
             <?= $form->field($model, 'alias') ?>

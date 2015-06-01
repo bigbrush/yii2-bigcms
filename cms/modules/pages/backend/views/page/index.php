@@ -9,11 +9,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use cms\widgets\DeleteButton;
 
-$this->registerCss('
-    .popover {text-align:center;}
-    .popover h3 {font-weight: bold;}
-');
-
 Yii::$app->toolbar->add()->add(Yii::t('cms', 'Categories'), ['category/index'], 'bars');
 
 $title = Yii::t('cms', 'Pages');
@@ -31,6 +26,14 @@ $this->title = Yii::$app->id . ' | ' . $title;
                     'format' => 'raw',
                     'value' => function($data) {
                         return Html::a($data->title, ['edit', 'id' => $data->id]);
+                    },
+                ],
+                [
+                    'header' => Yii::t('cms', 'Category'),
+                    'options' => ['width' => '20%'],
+                    'format' => 'raw',
+                    'value' => function($data) {
+                        return $data->category->title;
                     },
                 ],
                 [

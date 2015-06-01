@@ -30,6 +30,9 @@ class CategoryController extends Controller
             'move' => [
                 'class' => 'bigbrush\big\core\NestedSetAction',
                 'model' => Yii::$app->big->categoryManager->getModel(),
+                'updateContent' => function() {
+                    return $this->renderPartial('_grid', ['dataProvider' => $this->getDataProvider()]);
+                },
             ],
         ];
     }
@@ -41,14 +44,24 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $manager = Yii::$app->big->categoryManager;
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => $manager->getCategories(),
-        ]);
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $this->getDataProvider(),
         ]);
     }
+
+    /**
+     * Returns a dataprovider used in views.
+     *
+     * @return ArrayDataProvider a data provider.
+     */
+    public function getDataProvider()
+    {
+        $manager = Yii::$app->big->categoryManager;
+        return new ArrayDataProvider([
+            'allModels' => $manager->getCategories(),
+        ]);
+    }
+
     /**
      * Edit or create a single category.
      *

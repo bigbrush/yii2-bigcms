@@ -13,6 +13,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\BlameableBehavior;
 use bigbrush\big\models\Template;
+use bigbrush\big\models\Category;
 use cms\models\User;
 
 /**
@@ -41,6 +42,32 @@ class Page extends ActiveRecord
 
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'title' => Yii::t('cms', 'Title'),
+            'alias' => Yii::t('cms', 'Alias'),
+            'content' => Yii::t('cms', 'Content'),
+            'category_id' => Yii::t('cms', 'Category'),
+            'state' => Yii::t('cms', 'State'),
+            'created_at' => Yii::t('cms', 'Created'),
+            'updated_at' => Yii::t('cms', 'Updated'),
+            'created_by' => Yii::t('cms', 'Created by'),
+            'updated_by' => Yii::t('cms', 'Updated by'),
+            'meta_title' => Yii::t('cms', 'Meta title'),
+            'meta_description' => Yii::t('cms', 'Meta description'),
+            'meta_keywords' => Yii::t('cms', 'Meta keywords'),
+            'template_id' => Yii::t('cms', 'Template'),
+
+            // methods
+            'createdAtText' => Yii::t('cms', 'Created'),
+            'updatedAtText' => Yii::t('cms', 'Updated'),
+        ];
+    }
+
+    /**
      * Returns an array used in dropdown lists for field [[state]]
      *
      * @return array
@@ -48,9 +75,9 @@ class Page extends ActiveRecord
     public function getStateOptions()
     {
         return [
-            self::STATE_ACTIVE => 'Active',
-            self::STATE_INACTIVE => 'Inactive',
-            self::STATE_THRASHED => 'Thrashed',
+            self::STATE_ACTIVE => Yii::t('cms', 'Active'),
+            self::STATE_INACTIVE => Yii::t('cms', 'Inactive'),
+            self::STATE_THRASHED => Yii::t('cms', 'Trashed'),
         ];
     }
 
@@ -82,6 +109,16 @@ class Page extends ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * Returns the category of this page.
+     *
+     * @return ActiveQueryInterface the relational query object.
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**

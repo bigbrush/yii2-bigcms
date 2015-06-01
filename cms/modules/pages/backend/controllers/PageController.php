@@ -27,7 +27,7 @@ class PageController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Page::find(),
+            'query' => Page::find()->with(['category']),
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,

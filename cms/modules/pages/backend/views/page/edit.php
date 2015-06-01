@@ -39,7 +39,7 @@ $items = [
 if ($model->getIsNewRecord() === false) {
     $items[] = [
     'label' => Yii::t('cms', 'Info'),
-    'content' => $this->render('_tab_meta', [
+    'content' => $this->render('_tab_info', [
         'model' => $model,
         'form' => $form
     ]),
@@ -51,7 +51,6 @@ if ($model->getIsNewRecord() === false) {
     <div class="row">
         <div class="col-md-12">
             <?= Tabs::widget([
-                'options' => ['style' => 'margin-bottom: 15px;'],
                 'items' => $items,
             ]) ?>
         </div>

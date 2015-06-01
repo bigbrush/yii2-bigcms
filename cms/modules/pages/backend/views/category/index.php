@@ -6,19 +6,39 @@
  */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->registerJs('
-    $(".changeDirectionBtn").click(function(){
-        var self = $(this);
-        $("#field-direction").val(self.data("direction"));
-        $("#field-id").val(self.data("pid"));
+    function alert(message, type) {
+        var button = $("<button>", {
+            type: "button",
+            class: "close",
+            "data-dismiss": "alert",
+            "aria-hidden": "true",
+            text: "x"
+        });
+        var alert = $("<div>", {
+            class: "alert alert-"+type+" fade in",
+        }).append(button).append(message);
+        $("#alert").empty().html(alert);
+    }
+    
+    $("#grid").on("click", ".changeDirectionBtn", function(e){
+        var self = $(this),
+            direction = self.data("direction"),
+            menuId = self.data("pid");
+
+        $.post("'.Url::to(['move']).'", {node_id: menuId, direction: direction}, function(data){
+            if (data.status === "success") {
+                $("#grid").empty().html(data.grid);
+            }
+            var type = data.status == "error" ? "danger" : data.status;
+            alert(data.message, type);
+        }, "json");
+
+        e.preventDefault();
     });
-    $(".delete-form .btn").click(function(e){
-        if (confirm("Are you sure to delete this category?")) {
-            return true;
-        }
-        return false;
-    });
+
 ');
 
 Yii::$app->toolbar->add()->add(Yii::t('cms', 'Pages'), ['page/index'], 'file');
@@ -28,11 +48,12 @@ $this->title = Yii::$app->id . ' | ' . $title;
 ?>
 <div class="row">
     <div class="col-md-12">
+        <div id="alert">
+        </div>
+
         <h1><?= $title ?></h1>
-        <?= Html::beginForm(['move']) ?>
+        <div id="grid">
             <?= $this->render('_grid', ['dataProvider' => $dataProvider]) ?>
-            <?= Html::hiddenInput('direction', '', ['id' => 'field-direction']) ?>
-            <?= Html::hiddenInput('node_id', '', ['id' => 'field-id']) ?>
-        <?= Html::endForm() ?>
+        </div>
     </div>
 </div>
