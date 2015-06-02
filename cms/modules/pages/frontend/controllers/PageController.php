@@ -18,29 +18,21 @@ use cms\modules\pages\models\Page;
 class PageController extends Controller
 {    
     /**
-     * Shows a single page
+     * Shows a single page.
      *
-     * @param int $id the id of a page
-     * @return string
-     * @throws InvalidParamException
+     * @param int $id the id of a page.
+     * @return string the rendering result of this action.
+     * @throws InvalidParamException if a model with the provided id is not found. 
      */
     public function actionShow($id)
     {
-        $model = Page::findOne($id);
+        $model = Page::find()->where(['id' => $id])->byState(Page::STATE_ACTIVE)->one();
         if (!$model) {
-            throw new NotFoundHttpException("Page with id '$id' could not be found.");
+            throw new NotFoundHttpException("Page with id '$id' not found.");
         }
         Yii::$app->big->setTemplate($model->template_id);
         return $this->render('index', [
             'model' => $model,
         ]);
-    }
-    
-    /**
-     *
-     */
-    public function actionNews()
-    {
-        return $this->render('news');
     }
 }

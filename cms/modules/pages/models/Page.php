@@ -64,6 +64,7 @@ class Page extends ActiveRecord
             // methods
             'createdAtText' => Yii::t('cms', 'Created'),
             'updatedAtText' => Yii::t('cms', 'Updated'),
+            'stateText' => Yii::t('cms', 'State'),
         ];
     }
 
@@ -79,6 +80,17 @@ class Page extends ActiveRecord
             self::STATE_INACTIVE => Yii::t('cms', 'Inactive'),
             self::STATE_THRASHED => Yii::t('cms', 'Trashed'),
         ];
+    }
+
+    /**
+     * Returns the text value of the [[state]] property.
+     * 
+     * @return string the [[state]] property as a string representation.
+     */
+    public function getStateText()
+    {
+        $options = $this->getStateOptions();
+        return isset($options[$this->state]) ? $options[$this->state] : '';
     }
 
     /**

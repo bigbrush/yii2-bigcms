@@ -37,6 +37,14 @@ $this->title = Yii::$app->id . ' | ' . $title;
                     },
                 ],
                 [
+                    'header' => Yii::t('cms', 'State'),
+                    'options' => ['width' => '10%'],
+                    'format' => 'raw',
+                    'value' => function($data) {
+                        return $data->getStateText();
+                    },
+                ],
+                [
                     'header' => Yii::t('cms', 'Delete'),
                     'options' => ['width' => '5%'],
                     'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],

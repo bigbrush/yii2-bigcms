@@ -49,7 +49,7 @@ class PageController extends Controller
             $categories[$category->id] = str_repeat('- ', $category->depth - 1) . $category->title;
         }
         if ($id) {
-            $model = Page::find()->where(['id' => $id])->with(['template', 'author', 'editor'])->one();
+            $model = Page::find()->where(['id' => $id])->with(['author', 'editor'])->one();
         }
         $request = Yii::$app->getRequest();
         if ($model->load($request->post()) && $model->save()) {
