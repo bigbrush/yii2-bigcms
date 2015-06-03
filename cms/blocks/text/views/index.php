@@ -9,8 +9,8 @@
 /* @var $model big\models\Block */
 ?>
 <div class="block text">
-    <?php if ($model->showTitle) : ?>
-    <h3><?= $model->title ?></h3>
+    <?php if ($block->showTitle) : ?>
+    <h3><?= $block->title ?></h3>
     <?php endif; ?>
-    <?= $model->content ?>
+    <?= $block->content ?>
 </div>

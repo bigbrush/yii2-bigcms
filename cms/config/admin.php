@@ -21,14 +21,13 @@ $config = [
     'components' => [
         'cms' => [
             'class' => 'cms\Cms',
+            'scope' => \cms\Cms::SCOPE_BACKEND,
         ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
-            'blockManager' => ['classPath' => 'cms\blocks'],
             'urlManager' => ['enableUrlRule' => false],
             'menuManager' => ['autoLoad' => false],
             'parser' => false,
-            'scope' => \bigbrush\big\core\Big::SCOPE_BACKEND,
             'frontendTheme' => '@app/themes/web',
             'searchHandlers' => [
                 ['cms\modules\pages\components\PageFinder', 'onSearch'],

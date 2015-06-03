@@ -11,8 +11,8 @@ use yii\bootstrap\Nav;
 /* @var $model big\models\Block */
 ?>
 <div class="block menu">
-    <?php if ($model->showTitle) : ?>
-    <h3><?= $model->title ?></h3>
+    <?php if ($block->showTitle) : ?>
+    <h3><?= $block->title ?></h3>
     <?php endif; ?>
     <?= Nav::widget([
         'items' => $items,

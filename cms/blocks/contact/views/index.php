@@ -12,22 +12,22 @@ use yii\helpers\Html;
 /* @var $model big\models\Block */
 ?>
 <div class="block contact">
-    <?php if ($model->showTitle) : ?>
-    <h3><?= Html::encode($model->title) ?></h3>
+    <?php if ($block->showTitle) : ?>
+    <h3><?= Html::encode($block->title) ?></h3>
     <?php endif; ?>
 
     <?php $form = ActiveForm::begin() ?>
         <?php
-        if ($model->showName) {
+        if ($block->model->showName) {
             echo $form->field($contactModel, 'name');
         }
-        if ($model->showEmail) {
+        if ($block->model->showEmail) {
             echo $form->field($contactModel, 'email');
         }
-        if ($model->showPhone) {
+        if ($block->model->showPhone) {
             echo $form->field($contactModel, 'phone');
         }
-        if ($model->showMessage) {
+        if ($block->model->showMessage) {
             echo $form->field($contactModel, 'message')->textArea();
         }
         ?>

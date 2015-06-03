@@ -22,7 +22,7 @@ $config = [
         ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
-            'blockManager' => ['classPath' => 'cms\blocks'],
+            'menuManager' => ['setApplicationDefaultRoute' => true],
         ],
         'request' => [
             'cookieValidationKey' => 'Tm0TqcYJYJLX9PTIPNyYjEFzUbX-wMoB',

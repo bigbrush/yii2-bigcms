@@ -39,7 +39,7 @@ class Block extends \bigbrush\big\core\Block
         $items = $this->createDropDownMenu($menus);
         $options = $this->getDisplayOptions();
         return $this->render('index', [
-            'model' => $this->model,
+            'block' => $this,
             'items' => $items,
             'options' => $options,
         ]);
@@ -49,14 +49,16 @@ class Block extends \bigbrush\big\core\Block
      * Edits the block.
      *
      * @param Block $model the model for this block.
+     * @param yii\bootstrap\ActiveForm $form the form used to edit this block.
      * @return string html form ready to be rendered.
      */
-    public function edit($model)
+    public function edit($model, $form)
     {
         $menus = Yii::$app->big->menuManager->getMenus();
         $dropDownList = ['' => '- Select menu -'] + ArrayHelper::map($menus, 'id', 'title');
         return $this->render('edit', [
             'model' => $model,
+            'form' => $form,
             'dropDownList' => $dropDownList,
         ]);
     }

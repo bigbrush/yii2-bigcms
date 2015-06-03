@@ -5,10 +5,10 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-use bigbrush\big\widgets\editor\Editor;
+$categories = ['' => Yii::t('cms', 'Select menu')] + Yii::$app->big->categoryManager->getDropDownList('pages');
 ?>
 <div class="row">
     <div class="col-md-9">
-        <?= $form->field($model, 'content')->widget(Editor::className()) ?>
+        <?= $form->field($model, 'category_id')->dropDownList($categories)->label(Yii::t('cms', 'Category')) ?>
     </div>
 </div>

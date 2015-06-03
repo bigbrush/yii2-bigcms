@@ -11,7 +11,7 @@ use cms\widgets\DeleteButton;
 
 $dropdown = [];
 foreach ($installedBlocks as $id => $name) {
-    $dropdown[] = ['label' => $name, 'url' => ['edit', 'id' => $id]];
+    $dropdown[] = ['label' => $name, 'url' => ['create', 'id' => $id]];
 }
 $toolbar = Yii::$app->toolbar;
 $toolbar->addButton(ButtonDropDown::widget([
@@ -44,11 +44,11 @@ $this->title = Yii::$app->id . ' | ' . $title;
             <div class="square">
                 <div class="content">
                     <?= DeleteButton::widget([
-                        'model' => $block,
+                        'model' => $block->model,
                         'buttonClass' => 'btn-default delete-btn',
                     ]); ?>
 
-                    <?= Html::a($block['title'], ['edit', 'id' => $block['id']]) ?>
+                    <?= Html::a($block->title, ['edit', 'id' => $block->model->id]) ?>
                 </div>
             </div>
         </div>

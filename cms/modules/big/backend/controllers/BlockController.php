@@ -18,15 +18,15 @@ use yii\web\MethodNotAllowedHttpException;
 class BlockController extends Controller
 {
     /**
-     * Show a page with all created blocks.
+     * Shows a page with all created blocks.
      *
      * @return string the rendering result.
      */
     public function actionIndex()
     {
         $manager = Yii::$app->big->blockManager;
-        $blocks = $manager->find()->all();
-        $installedBlocks = $manager->getInstalledBlocks();
+        $blocks = $manager->getBlocks();
+        $installedBlocks = $manager->getInstalledBlocks(true); // only active
         return $this->render('index', [
             'blocks' => $blocks,
             'installedBlocks' => $installedBlocks,
@@ -34,21 +34,47 @@ class BlockController extends Controller
     }
 
     /**
-     * Edit and create a block
+     * Creates a block based on the provided extension id.
+     *
+     * @param int $id an extension id to create the block from.
+     * @return string the rendering result.
+     */
+    public function actionCreate($id)
+    {
+        $block = Yii::$app->big->blockManager->createNewBlock($id);
+        $model = $block->model;
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Block saved.'));
+            if (Yii::$app->toolbar->stayAfterSave()) {
+                return $this->redirect(['edit', 'id' => $model->id]);
+            } else {
+                return $this->redirect(['index']);
+            }
+        }
+
+        if ($block->getEditRaw()) {
+            return $this->render('edit_raw', [
+                'block' => $block,
+            ]);
+        } else {
+            return $this->render('edit', [
+                'block' => $block,
+            ]);
+        }
+    }
+
+    /**
+     * Edits and creates a block.
      *
      * @param string|int $id if an integer is provided it is regarded as database record. If it is a
      * string it is regarded as a new block.
-     * @return string
-     * @throws MethodNotAllowedHttpException if form is posted and 'Block' is not a key in $_POST
+     * @return string the rendering result.
+     * @throws MethodNotAllowedHttpException if form is posted and 'Block' is not a key in $_POST.
      */
     public function actionEdit($id)
     {
-        $block = Yii::$app->big->blockManager->createBlock($id);
+        $block = Yii::$app->big->blockManager->getBlock($id);
         $model = $block->model;
-        if ($model->getIsNewRecord()) {
-            $model->name = $id;
-            $model->show_title = true;
-        }
         $post = Yii::$app->getRequest()->post();
         if ($model->load($post)) {
             if ($model->save()) {
@@ -62,25 +88,34 @@ class BlockController extends Controller
         } elseif (!empty($post)) {
             throw new MethodNotAllowedHttpException('Form not saved because "Block" was not set in $_POST');
         }
-        return $this->render('edit', [
-            'block' => $block,
-        ]);
+
+        if ($block->getEditRaw()) {
+            return $this->render('edit_raw', [
+                'block' => $block,
+            ]);
+        } else {
+            return $this->render('edit', [
+                'block' => $block,
+            ]);
+        }
     }
 
     /**
      * Deletes a block.
      *
-     * @return int $id an id of a block to delete.
+     * @param int $id an id of a block to delete.
+     * @return string the rendering result.
      * @throws InvalidCallException if id in $_POST does not match the provided id. 
      */
     public function actionDelete($id)
     {
-        $model = Yii::$app->big->blockManager->getModel()->findOne($id);
         $blockId = $_POST['id'];
         if ($blockId != $id) {
             throw new InvalidCallException("Invalid form submitted. Block with id: '$id' not deleted.");
         }
 
+        $block = Yii::$app->big->blockManager->getBlock($id);
+        $model = $block->model;
         if ($model->delete()) {
             Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Block deleted.'));
         } else {

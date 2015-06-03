@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\categories\components;
+namespace cms\blocks\pagescategories\components;
 
 use Yii;
 use yii\base\Behavior;

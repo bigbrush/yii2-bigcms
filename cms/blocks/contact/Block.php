@@ -54,7 +54,7 @@ class Block extends \bigbrush\big\core\Block
             Yii::$app->controller->refresh();
         }
         return $this->render('index', [
-            'model' => $this->model,
+            'block' => $this,
             'contactModel' => $contactModel,
         ]);
     }
@@ -63,12 +63,24 @@ class Block extends \bigbrush\big\core\Block
      * Edits the block.
      *
      * @param Block $model the model for this block.
+     * @param yii\bootstrap\ActiveForm $form the form used to edit this block.
      * @return string html form ready to be rendered.
      */
-    public function edit($model)
+    public function edit($model, $form)
     {
         return $this->render('edit', [
             'model' => $model,
+            'form' => $form,
         ]);
+    }
+
+    /**
+     * Indicates that this block will render its own UI when editing.
+     *
+     * @return boolean true because this block will take complete control over the UI when editing.
+     */
+    public function getEditRaw()
+    {
+        return true;
     }
 }

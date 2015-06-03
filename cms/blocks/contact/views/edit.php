@@ -75,6 +75,8 @@ $title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {
                 </div>
                 <div class="col-md-3">
                     <?= $form->field($model, 'show_title')->dropDownList(['No', 'Yes']) ?>
+                    <?= $form->field($model, 'state')->dropDownList([Yii::t('cms', 'Inactive'), Yii::t('cms', 'Active')]) ?>
+                    <?= $form->field($model, 'scope')->dropDownList(['backend', 'frontend']) ?>
                 </div>
             </div>
 

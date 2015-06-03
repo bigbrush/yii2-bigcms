@@ -5,11 +5,11 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\categories;
+namespace cms\blocks\pagescategories;
 
 use Yii;
 use yii\validators\Validator;
-use cms\blocks\categories\components\ModelBehavior;
+use cms\blocks\pagescategories\components\ModelBehavior;
 use cms\modules\pages\models\Page;
 
 /**
@@ -34,10 +34,10 @@ class Block extends \bigbrush\big\core\Block
      */
     public function run()
     {
-        $models = Page::find()->byCategory($this->model->category_id)->byState(Page::STATE_ACTIVE)->asArray()->all();
+        $pages = Page::find()->byCategory($this->model->category_id)->byState(Page::STATE_ACTIVE)->asArray()->all();
         return $this->render('index', [
-            'model' => $this->model,
-            'models' => $models,
+            'block' => $this,
+            'pages' => $pages,
         ]);
     }
 
@@ -45,12 +45,14 @@ class Block extends \bigbrush\big\core\Block
      * Edits the block.
      *
      * @param Block $model the model for this block.
+     * @param yii\bootstrap\ActiveForm $form the form used to edit this block.
      * @return string html form ready to be rendered.
      */
-    public function edit($model)
+    public function edit($model, $form)
     {
         return $this->render('edit', [
             'model' => $model,
+            'form' => $form,
         ]);
     }
 }

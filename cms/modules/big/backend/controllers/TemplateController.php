@@ -61,12 +61,12 @@ class TemplateController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = TemplateEditor::getModel($id);
         $templateId = $_POST['id'];
         if ($templateId != $id) {
             throw new InvalidCallException("Invalid form submitted. Template with id: '$id' not deleted.");
         }
 
+        $model = TemplateEditor::getModel($id);
         if ($model->delete()) {
             Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Template deleted.'));
         } else {

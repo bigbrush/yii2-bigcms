@@ -10,12 +10,12 @@ use yii\helpers\Url;
 use cms\modules\pages\components\Route;
 ?>
 <div class="block pages-categories">
-    <?php if ($model->showTitle) : ?>
-    <h3><?= $model->title ?></h3>
+    <?php if ($block->showTitle) : ?>
+    <h3><?= $block->title ?></h3>
     <?php endif; ?>
     <ul>
-    <?php foreach ($models as $model) : ?>
-        <li><?= Html::a($model['title'], Route::page($model, '/')) ?></li>
+    <?php foreach ($pages as $page) : ?>
+        <li><?= Html::a($page['title'], Route::page($page, '/')) ?></li>
     <?php endforeach; ?>
     </ul>
 </div>

@@ -30,7 +30,7 @@ class Block extends \bigbrush\big\core\Block
     public function run()
     {
         return $this->render('index', [
-            'model' => $this->model,
+            'block' => $this,
         ]);
     }
 
@@ -38,12 +38,14 @@ class Block extends \bigbrush\big\core\Block
      * Edits the block.
      *
      * @param Block $model the model for this block.
+     * @param yii\bootstrap\ActiveForm $form the form used to edit this block.
      * @return string html form ready to be rendered.
      */
-    public function edit($model)
+    public function edit($model, $form)
     {
         return $this->render('edit', [
             'model' => $model,
+            'form' => $form,
         ]);
     }
 }
