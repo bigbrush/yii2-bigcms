@@ -2,6 +2,13 @@ BIG CMS Change Log
 ==========================
 
 
+0.0.3 June 03, 2015
+------------------
+- New: "Scope" added to Cms
+- New: Big extension manager integrated
+- Upd: Blocks refactored
+
+
 0.0.2 May 31, 2015
 ------------------
 - New: Console application added
