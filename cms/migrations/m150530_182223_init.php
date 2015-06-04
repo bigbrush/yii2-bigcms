@@ -84,7 +84,7 @@ class m150530_182223_init extends Migration
         $this->insert('{{%user}}', [
             'id' => 1,
             'name' => 'Admin',
-            'username' => 'admin',
+            'username' => 'bigadmin',
             'email' => 'admin@admin.com',
             'phone' => '',
             'auth_key' => '',

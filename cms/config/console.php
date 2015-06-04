@@ -8,6 +8,7 @@
 return [
     'id' => 'bigcms-console',
     'basePath' => dirname(__DIR__),
+    'controllerNamespace' => 'cms\console\controllers',
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
     'bootstrap' => ['log'],
     'components' => [
