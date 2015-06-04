@@ -26,8 +26,8 @@ yii cms/install
 Then follow the on screen instruction which helps to specify your database login credentials.
 
 After the installion has finished go to http://YOURSITE.COM/admin/ and login with:
-Username: bigadmin
-Password: bigadmin
+  - Username: bigadmin
+  - Password: bigadmin
 
 **REMEMBER TO CHANGE PASSWORD WHEN USING IN PRODUCTION**
 
@@ -89,7 +89,7 @@ To enable templates in your theme place a file called "positions.php" in the roo
 
 The file should look like the following:
 
-~~~
+~~~php
 return [
     'POSITION-ID' => 'POSITION NAME',
     'gallery' => 'Gallery',
