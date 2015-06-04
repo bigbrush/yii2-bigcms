@@ -46,6 +46,40 @@ class m150530_182223_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
 
+        // insert default block extensions into extension table
+        $this->insert('{{%extension}}', [
+            'id' => 1,
+            'name' => 'Pages categories',
+            'type' => 'block',
+            'namespace' => 'cms\blocks\pagescategories\Block',
+            'description' => '',
+            'state' => 1,
+        ]);
+        $this->insert('{{%extension}}', [
+            'id' => 2,
+            'name' => 'Contact',
+            'type' => 'block',
+            'namespace' => 'cms\blocks\contact\Block',
+            'description' => '',
+            'state' => 1,
+        ]);
+        $this->insert('{{%extension}}', [
+            'id' => 3,
+            'name' => 'Menu',
+            'type' => 'block',
+            'namespace' => 'cms\blocks\menu\Block',
+            'description' => '',
+            'state' => 1,
+        ]);
+        $this->insert('{{%extension}}', [
+            'id' => 4,
+            'name' => 'Text',
+            'type' => 'block',
+            'namespace' => 'cms\blocks\text\Block',
+            'description' => '',
+            'state' => 1,
+        ]);
+        
         // insert a default admin into user table
         $this->insert('{{%user}}', [
             'id' => 1,
