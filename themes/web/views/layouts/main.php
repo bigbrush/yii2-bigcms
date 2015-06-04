@@ -25,7 +25,7 @@ ThemeAsset::register($this);
 <?php $this->beginBody() ?>
 
 <?php if (Yii::$app->big->isPositionActive('mainmenu')) : ?>
-<big:include position="mainmenu" />
+<big:block position="mainmenu" />
 <?php endif; ?>
 
 <div class="container">
@@ -35,7 +35,7 @@ ThemeAsset::register($this);
 
 <?php if (Yii::$app->big->isPositionActive('footer')) : ?>
 <footer>
-    <big:include position="footer" />
+    <big:block position="footer" />
 </footer>
 <?php endif; ?>
 

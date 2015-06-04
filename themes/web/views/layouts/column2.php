@@ -11,8 +11,8 @@
 		<?= $content ?>
 	</div>
 	<div class="col-md-3">
-		<big:include position="sidebar" showTitle="false" />
-		<big:include position="gallery" class="big\models\User" />
+		<big:block position="sidebar" showTitle="false" />
+		<big:block position="gallery" class="big\models\User" />
 	</div>
 </div>
 <?php $this->endContent(); ?>
