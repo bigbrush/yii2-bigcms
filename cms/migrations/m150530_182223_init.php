@@ -79,6 +79,93 @@ class m150530_182223_init extends Migration
             'description' => '',
             'state' => 1,
         ]);
+
+        // insert default categories into category table
+        $this->insert('{{%category}}', [
+            'id' => 1,
+            'module' => 'pages',
+            'title' => 'pages',
+            'content' => '',
+            'state' => 1,
+            'tree' => 1,
+            'lft' => 1,
+            'rgt' => 4,
+            'depth' => 0,
+            'created_at' => new Expression('NOW()'),
+            'updated_at' => new Expression('NOW()'),
+            'alias' => 'pages-root',
+            'meta_title' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
+        ]);
+        $this->insert('{{%category}}', [
+            'id' => 2,
+            'module' => '',
+            'title' => 'Pages',
+            'content' => '',
+            'state' => 1,
+            'tree' => 1,
+            'lft' => 2,
+            'rgt' => 3,
+            'depth' => 1,
+            'created_at' => new Expression('NOW()'),
+            'updated_at' => new Expression('NOW()'),
+            'alias' => 'pages',
+            'meta_title' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
+        ]);
+
+        // insert home page into page table
+        $this->insert('{{%page}}', [
+            'id' => 1,
+            'title' => 'Welcome to Big CMS demo site',
+            'alias' => 'welcome-to-big-cms-demo-site',
+            'content' => '<p>Thank you for choosing Big CMS.</p><p>You can <a href="admin">visit the backend</a> and login with the following credentials:</p><p><strong>Username</strong>: bigadmin</p><p><strong>Password</strong>: bigadmin</p>',
+            'category_id' => 2,
+            'state' => 1,
+            'created_at' => new Expression('NOW()'),
+            'updated_at' => new Expression('NOW()'),
+            'created_by' => 1,
+            'updated_by' => 1,
+            'meta_title' => 'Big CMS demo site',
+            'meta_description' => '',
+            'meta_keywords' => '',
+            'template_id' => 0,
+
+        ]);
+        
+        // insert a menu and a home menu item into menu table
+        $this->insert('{{%menu}}', [
+            'id' => 1,
+            'title' => 'Main menu',
+            'alias' => 'main-menu',
+            'route' => '',
+            'state' => 1,
+            'tree' => 1,
+            'lft' => 1,
+            'rgt' => 4,
+            'depth' => 0,
+            'is_default' => 0,
+            'meta_title' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
+        ]);
+        $this->insert('{{%menu}}', [
+            'id' => 2,
+            'title' => 'Welcome',
+            'alias' => 'welcome',
+            'route' => 'pages/page/show&id=1&catid=2&alias=welcome-to-big-cms-demo-site',
+            'state' => 1,
+            'tree' => 1,
+            'lft' => 2,
+            'rgt' => 3,
+            'depth' => 1,
+            'is_default' => 1,
+            'meta_title' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
+        ]);
         
         // insert a default admin into user table
         $this->insert('{{%user}}', [
