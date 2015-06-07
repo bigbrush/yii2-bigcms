@@ -1,11 +1,28 @@
+######################################################
+# Line below can be commented out if causes errors.
+######################################################
 Options +FollowSymLinks
+
 IndexIgnore */*
 
 RewriteEngine on
 
+######################################################
+# redirect non-www url to a www url (SEO purpose)
+# also see: http://stackoverflow.com/questions/234723/generic-htaccess-redirect-www-to-non-www#comment610401_234723
+#
+# remove comments (#) from 2 lines below on production server
+######################################################
+# RewriteCond %{HTTP_HOST} !^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+######################################################
 # if a directory or a file exists, use it directly
+######################################################
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+######################################################
 # otherwise forward it to index.php
+######################################################
 RewriteRule . index.php
