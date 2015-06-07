@@ -99,7 +99,7 @@ return [
 ~~~
 
 Then in the layout file of your theme you add an include statement like the following:
-~~~
+~~~html
 <big:block position="mainmenu" />
 ~~~
 
