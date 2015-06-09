@@ -29,34 +29,62 @@ $this->registerJs('
 ');
 ?>
 <div class="row">
-    <div class="col-md-4">
-        <?= $form->field($model, 'menu_id')->label(Yii::t('cms', 'Select menu'))->dropDownList($menusDropDown) ?>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong><?= Yii::t('cms', 'Select menu') ?></strong>
+            </div>
+            <div class="panel-body">
+                <?= $form->field($model, 'menu_id')->label(false)->dropDownList($menusDropDown) ?>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <?= $form->field($model, 'type')->dropDownList($model->getTypeOptions())->label(Yii::t('cms', 'Menu type')) ?>
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong><?= Yii::t('cms', 'Menu type') ?></strong>
+            </div>
+            <div class="panel-body">
+                <?= $form->field($model, 'type')->dropDownList($model->getTypeOptions())->label(false) ?>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <?php if ($isNavbar) : ?>
         <div id="block-brand-wrapper">
         <?php else : ?>
         <div id="block-brand-wrapper" style="display:none;">
         <?php endif ?>
-        <?= $form->field($model, 'brand', [
-                'template' => '
-                    {label}
-                    <div class="form-group">
-                        <div class="input-group">
-                            {input}
-                            <span class="input-group-btn">
-                                <button id="btn-select-content" class="btn btn-info btn-block" data-toggle="modal" data-target="#modal-wrapper">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    '
-            ])->label(Yii::t('cms', 'Brand')) ?>
-        </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong><?= Yii::t('cms', 'Brand') ?></strong>
+                </div>
+                <div class="panel-body">
+
+                    <?= $form->field($model, 'brand', [
+                        'template' => '
+                            {label}
+                            <div class="form-group">
+                                <div class="input-group">
+                                    {input}
+                                    <span class="input-group-btn">
+                                        <button id="btn-select-content" class="btn btn-info btn-block" data-toggle="modal" data-target="#modal-wrapper">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            '
+                    ])->label(false) ?>
+                </div>
+
+            </div>
+        </div>  
     </div>
 </div>
 
