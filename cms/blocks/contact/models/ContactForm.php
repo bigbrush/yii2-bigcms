@@ -19,6 +19,10 @@ class ContactForm extends Model
     public $email;
     public $phone;
     public $message;
+    /**
+     * @var array list of required fields. Used during validation in [[rules()]].
+     */
+    public $requiredFields;
 
 
     /**
@@ -40,7 +44,7 @@ class ContactForm extends Model
     public function rules()
     {
         return [
-            [['name', 'email'], 'required'],
+            [$this->requiredFields, 'required'],
             ['email', 'email'],
             [['name', 'phone'], 'string', 'max' => 255],
             ['message', 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process'],

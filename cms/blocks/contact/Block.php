@@ -8,6 +8,7 @@
 namespace cms\blocks\contact;
 
 use Yii;
+use yii\helpers\Url;
 use cms\blocks\contact\components\ModelBehavior;
 use cms\blocks\contact\models\ContactForm;
 
@@ -18,6 +19,9 @@ use cms\blocks\contact\models\ContactForm;
  */
 class Block extends \bigbrush\big\core\Block
 {
+    const SESSION_VAR_FORM_POSTED = '__contact_block_posted';
+
+
     /**
      * Initializes this block by attaching a behavior to [[model]].
      */
@@ -27,35 +31,37 @@ class Block extends \bigbrush\big\core\Block
     }
 
     /**
-     * Returns the content of this block
+     * Runs this block.
      *
-     * @return string the content of this block
+     * @return string the content of this block.
      */
     public function run()
     {
-        $contactModel = new ContactForm();
-        if ($contactModel->load(Yii::$app->getRequest()->post()) && $contactModel->validate()) {
-            $result = Yii::$app->mailer->compose()
-                ->setFrom('from@domain.com')
-                ->setTo('mj@philowebstudio.dk')
-                ->setSubject('Message subject')
-                ->setTextBody('Plain text content')
-                ->setHtmlBody('<b>HTML content</b>')
-                ->send();
-            if ($result) {
-                Yii::$app->getSession()->setFlash('success', $this->model->successMessage);
-                if (!empty($this->model->redirectTo)) {
+        $session = Yii::$app->getSession();
+        $model = new ContactForm();
+        $model->requiredFields = $this->model->getRequiredFields();
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->validate()) {
+            if ($this->sendEmail($model)) {
+                // either flag form as posted in session or redirect to a page selected by the user
+                if (empty($this->model->redirectTo)) {
+                    $session->set(self::SESSION_VAR_FORM_POSTED, 1);
+                    return Yii::$app->controller->refresh();
+                } else {
                     $url = Yii::$app->big->urlManager->parseInternalUrl($this->model->redirectTo);
-                    Yii::$app->controller->redirect($url);
+                    return Yii::$app->controller->redirect($url);
                 }
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Email not sent - please try again.');
+                $session->setFlash('error', Yii::t('cms', 'Email not sent - please try again.'));
             }
-            Yii::$app->controller->refresh();
+        }
+        // check the form has been posted. Done to ensure a redirect is done so form does not get posted twice.
+        if ($session->get(self::SESSION_VAR_FORM_POSTED)) {
+            $session->setFlash('success', $this->model->successMessage);
+            $session->set(self::SESSION_VAR_FORM_POSTED, null);
         }
         return $this->render('index', [
             'block' => $this,
-            'contactModel' => $contactModel,
+            'model' => $model,
         ]);
     }
 
@@ -75,12 +81,42 @@ class Block extends \bigbrush\big\core\Block
     }
 
     /**
-     * Indicates that this block will render its own UI when editing.
-     *
-     * @return boolean true because this block will take complete control over the UI when editing.
+     * This method gets called right before a block model is saved. The model is validated at this point.
+     * In this method any Block specific logic should run. For example saving a block specific model.
+     * 
+     * @param bigbrush\big\models\Block the model being saved.
+     * @return boolean whether the current save procedure should proceed. If any block.
+     * specific logic fails false should be returned - i.e. return $blockSpecificModel->save();
      */
-    public function getEditRaw()
+    public function save($model)
     {
+        $model->updateOwner();
         return true;
+    }
+
+    /**
+     * Sends an email.
+     *
+     * @param ContactForm $model a validated contact model.
+     * @return boolean true if email was sent and false if not.
+     */
+    public function sendEmail($model)
+    {
+        $site = Url::to('@web', true);
+        $htmlBody = $this->render('_email_html', [
+            'model' => $model,
+            'site' => $site,
+        ]);
+        $textBody = $this->render('_email_text', [
+            'model' => $model,
+            'site' => $site,
+        ]);
+        return Yii::$app->mailer->compose()
+            ->setFrom(empty($model->email) ? 'noreply@noreply.com' : $model->email)
+            ->setTo($this->model->receiver)
+            ->setSubject(Yii::t('cms', 'Contact from {site}', ['site' => $site]))
+            ->setTextBody($textBody)
+            ->setHtmlBody($htmlBody)
+            ->send();
     }
 }

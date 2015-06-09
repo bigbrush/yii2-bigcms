@@ -8,8 +8,9 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model big\models\Block */
+/* @var yii\web\View $this */
+/* @var cms\blocks\contact\Block $block */
+/* @var cms\blocks\contact\models\ContactForm $model */
 ?>
 <div class="block contact">
     <?php if ($block->showTitle) : ?>
@@ -18,17 +19,17 @@ use yii\helpers\Html;
 
     <?php $form = ActiveForm::begin() ?>
         <?php
-        if ($block->model->showName) {
-            echo $form->field($contactModel, 'name');
+        if ($block->model->getField('name', 'show')) {
+            echo $form->field($model, 'name');
         }
-        if ($block->model->showEmail) {
-            echo $form->field($contactModel, 'email');
+        if ($block->model->getField('email', 'show')) {
+            echo $form->field($model, 'email');
         }
-        if ($block->model->showPhone) {
-            echo $form->field($contactModel, 'phone');
+        if ($block->model->getField('phone', 'show')) {
+            echo $form->field($model, 'phone');
         }
-        if ($block->model->showMessage) {
-            echo $form->field($contactModel, 'message')->textArea();
+        if ($block->model->getField('message', 'show')) {
+            echo $form->field($model, 'message')->textArea();
         }
         ?>
         <div class="form-group">

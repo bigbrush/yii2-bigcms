@@ -11,76 +11,94 @@ use cms\widgets\RadioButtonGroup;
 use yii\bootstrap\Modal;
 use bigbrush\big\widgets\bigsearch\BigSearch;
 
+// prevent form submission when modal button is clicked
 $this->registerJs('$("#btn-select-content").click(function(e){
     e.preventDefault();
 });');
-
-$type = Yii::t('cms', 'block');
-$title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
 ?>
+
 <div class="row">
     <div class="col-md-12">
-        <?php $form = ActiveForm::begin(); ?>
-            <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
-            <h1><?= $title ?></h1>
+        <?= $form->field($model, 'receiver')->label(Yii::t('cms', 'Receiver')) ?>
 
-            <div class="row">
-                <div class="col-md-9">
-                    <?= $form->field($model, 'title') ?>
-                    <?= $form->field($model, 'receiver')->label(Yii::t('cms', 'Receiver')) ?>
+        <div class="row">
+            <div class="col-md-6">
+                <h3><?= Yii::t('cms', 'Contact form fields') ?></h3>
 
-                    <h3><?= Yii::t('cms', 'Contact form fields') ?></h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong><?= Yii::t('cms', 'Choose which form fields to display') ?></strong></p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <?= $form->field($model, 'showEmail')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show email')) ?>
-                                </div>
-                                <div class="col-md-6">
-                                    <?= $form->field($model, 'showName')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show name')) ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <?= $form->field($model, 'showPhone')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show phone')) ?>
-                                </div>
-                                <div class="col-md-6">
-                                    <?= $form->field($model, 'showMessage')->widget(RadioButtonGroup::className())->label(Yii::t('cms', 'Show message')) ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong><?= Yii::t('cms', 'Message after a successful form submission') ?></strong></p>
-                            <?= $form->field($model, 'successMessage')->textArea()->label(false) ?>
-                            <p><strong><?= Yii::t('cms', 'Where to go after form is submitted') ?></strong></p>
-                            <?= $form->field($model, 'redirectTo', [
-                                'template' => '
-                                    {label}
-                                    <div class="form-group">
-                                        {error}
-                                        <div class="input-group">
-                                            {input}
-                                            <span class="input-group-btn">
-                                                <button id="btn-select-content" class="btn btn-info btn-block" data-toggle="modal" data-target="#content-modal">
-                                                    <span class="glyphicon glyphicon-search"></span>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    '
-                            ])->label(false); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <?= $form->field($model, 'show_title')->dropDownList(['No', 'Yes']) ?>
-                    <?= $form->field($model, 'state')->dropDownList([Yii::t('cms', 'Inactive'), Yii::t('cms', 'Active')]) ?>
-                    <?= $form->field($model, 'scope')->dropDownList(['backend', 'frontend']) ?>
-                </div>
+                <?= $this->render('_button_panel', [
+                    'form' => $form,
+                    'model' => $model,
+                    'field' => 'name',
+                    'header' => Yii::t('cms', 'Name'),
+                ]); ?>
+                
+                <?= $this->render('_button_panel', [
+                    'form' => $form,
+                    'model' => $model,
+                    'field' => 'email',
+                    'header' => Yii::t('cms', 'Email'),
+                ]); ?>
+                
+                <?= $this->render('_button_panel', [
+                    'form' => $form,
+                    'model' => $model,
+                    'field' => 'phone',
+                    'header' => Yii::t('cms', 'Phone'),
+                ]); ?>
+                
+                <?= $this->render('_button_panel', [
+                    'form' => $form,
+                    'model' => $model,
+                    'field' => 'message',
+                    'header' => Yii::t('cms', 'Message'),
+                ]); ?>
+                
             </div>
 
-        <?php ActiveForm::end(); ?>
+            <div class="col-md-6">
+                <h3><?= Yii::t('cms', 'Confirmation') ?></h3>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><?= Yii::t('cms', 'Success message') ?></strong>
+                    </div>
+                    <div class="panel-body">
+                        <?= $form->field($model, 'successMessage')->textArea()->label(false) ?>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><?= Yii::t('cms', 'Confirmation page') ?></strong>
+                    </div>
+                    <div class="panel-body">
+                        <?= $form->field($model, 'redirectTo', [
+                            'template' => '
+                            {label}
+                            <div class="form-group">
+                                {error}
+                                <div class="input-group">
+                                    {input}
+                                    <span class="input-group-btn">
+                                        <button id="btn-select-content" class="btn btn-info btn-block" data-toggle="modal" data-target="#content-modal">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            '
+                        ])->label(false); ?>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong><?= Yii::t('cms', 'Note') ?></strong>
+                        <?= Yii::t('cms', 'Success message is only used when no confirmation page is selected.') ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
