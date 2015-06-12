@@ -24,18 +24,35 @@ class ModelBehavior extends Behavior
      * @var int an id of the chosen category.
      */
     public $category_id;
-
-
     /**
-     * @inheritdoc
+     * @var int maximum number of pages to show in the block.
      */
-    public function events()
-    {
-        return [
-            ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
-            ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
-        ]; 
-    }
+    public $max_pages = 0;
+    /**
+     * @var string a table column to sort pages by.
+     */
+    public $order_by;
+    /**
+     * @var string the direction to sort pages.
+     */
+    public $order_direction;
+    /**
+     * @var string indicates whether to show the author or the editor of the page. Can also be disbled.
+     */
+    public $author_editor;
+    /**
+     * @var string optional text that is displayed before the author/editor.
+     */
+    public $author_editor_text;
+    /**
+     * @var string indicates which date to show. Can also be disbled.
+     */
+    public $date_displayed;
+    /**
+     * @var string optional text that is displayed before the displayed date.
+     */
+    public $date_displayed_text;
+
 
     /**
      * Initializes this behavior.
@@ -43,24 +60,85 @@ class ModelBehavior extends Behavior
     public function init()
     {
     	$this->owner->validators[] = Validator::createValidator('required', $this->owner, 'category_id', [
-    	    'message' => Yii::t('cms', 'Please select a menu')
+    	    'message' => Yii::t('cms', 'Please select a category')
 	    ]);
+        $this->owner->validators[] = Validator::createValidator('string', $this->owner, ['order_by', 'order_direction', 'author_editor', 'date_displayed', 'author_editor_text', 'date_displayed_text']);
+        $this->owner->validators[] = Validator::createValidator('integer', $this->owner, ['max_pages']);
 	    if (!empty($this->owner->content)) {
             $properties = Json::decode($this->owner->content);
-            $this->category_id = $properties['category_id'];
+            foreach ($properties as $key => $value) {
+                $this->$key = $value;
+            }
         }
     }
 
     /**
-     * Runs before the owner of this behavior updates or insert a record.
-     * The owner is validated at this point.
-     *
-     * @param yii\base\ModelEvent the event being triggered.
+     * Updates attributes in [[owner]] from this behavior.
+     * Called from [[cms\blocks\pagecategories\Block::save()]].
      */
-    public function beforeSave($event)
+    public function updateOwner()
     {
-    	$this->owner->content = Json::encode([
-    	    'category_id' => $this->category_id,
-    	]);
+        $properties = ['category_id', 'max_pages', 'order_by', 'order_direction', 'author_editor', 'date_displayed', 'author_editor_text', 'date_displayed_text'];
+        $data = [];
+        foreach ($properties as $property) {
+            $data[$property] = $this->$property;
+        }
+        $this->owner->content = Json::encode($data);
+    }
+
+    /**
+     * Returns an array of available options to filter pages by.
+     *
+     * @return array list of options to filter by.
+     */
+    public function getSortByOptions()
+    {
+        return [
+            'id' => Yii::t('cms', 'Id'),
+            'title' => Yii::t('cms', 'Title'),
+            'updated_at' => Yii::t('cms', 'Updated at'),
+            'created_at' => Yii::t('cms', 'Created at'),
+        ];
+    }
+
+    /**
+     * Returns available sort directions.
+     *
+     * @return array list of directions
+     */
+    public function getSortDirectionOptions()
+    {
+        return [
+            'DESC' => Yii::t('cms', 'Descending'),
+            'ASC' => Yii::t('cms', 'Ascending'),
+        ];
+    }
+
+    /**
+     * Returns available dates.
+     *
+     * @return array list of directions
+     */
+    public function getDisplayDateOptions()
+    {
+        return [
+            0 => Yii::t('cms', 'None'),
+            'updated_at' => Yii::t('cms', 'Updated at'),
+            'created_at' => Yii::t('cms', 'Created at'),
+        ];
+    }
+
+    /**
+     * Returns an array of author options.
+     *
+     * @return 
+     */
+    public function getShowAuthorOptions()
+    {
+        return [
+            0 => Yii::t('cms', 'None'),
+            'author' => Yii::t('cms', 'Created by'),
+            'editor' => Yii::t('cms', 'Updated by'),
+        ];
     }
 }

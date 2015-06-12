@@ -34,7 +34,17 @@ class Block extends \bigbrush\big\core\Block
      */
     public function run()
     {
-        $pages = Page::find()->byCategory($this->model->category_id)->byState(Page::STATE_ACTIVE)->asArray()->all();
+        $orderCondition = $this->model->order_by . ' ' . $this->model->order_direction;
+        $maxPages = (int)$this->model->max_pages;
+        $query = Page::find()
+            ->byCategory($this->model->category_id)
+            ->byState(Page::STATE_ACTIVE)
+            ->orderBy($orderCondition)
+            ->with(['author', 'editor']);
+        if ($maxPages > 0) {
+            $query->limit($this->model->max_pages);
+        }
+        $pages = $query->asArray()->all();
         return $this->render('index', [
             'block' => $this,
             'pages' => $pages,
@@ -50,9 +60,27 @@ class Block extends \bigbrush\big\core\Block
      */
     public function edit($model, $form)
     {
+        $categories = ['' => Yii::t('cms', 'Select category')] + Yii::$app->big->categoryManager->getDropDownList('pages');
+        $sortOptions = $model->getSortByOptions();
         return $this->render('edit', [
             'model' => $model,
             'form' => $form,
+            'categories' => $categories,
+            'sortOptions' => $sortOptions,
         ]);
+    }
+
+    /**
+     * This method gets called right before a block model is saved. The model is validated at this point.
+     * In this method any Block specific logic should run. For example saving a block specific model.
+     * 
+     * @param bigbrush\big\models\Block the model being saved.
+     * @return boolean whether the current save procedure should proceed. If any block.
+     * specific logic fails false should be returned - i.e. return $blockSpecificModel->save();
+     */
+    public function save($model)
+    {
+        $model->updateOwner();
+        return true;
     }
 }
