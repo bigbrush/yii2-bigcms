@@ -26,7 +26,7 @@ class Cms extends Object implements BootstrapInterface
     /**
      * version
      */
-    const VERSION = '0.0.3';
+    const VERSION = '0.0.4';
 
     /**
      * @var array list of components used in the CMS.
