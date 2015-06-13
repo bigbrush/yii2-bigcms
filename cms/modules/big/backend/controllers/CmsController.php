@@ -36,10 +36,11 @@ class CmsController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->getUser()->getIsGuest()) {
+        $user = Yii::$app->getUser();
+        if ($user->getIsGuest()) {
             $model = new LoginForm();
             if ($model->load(Yii::$app->getRequest()->post()) && $model->login()) {
-                return $this->goBack();
+                return $this->redirect($user->returnUrl);
             }
             return $this->render('login', [
                 'model' => $model,

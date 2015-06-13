@@ -7,9 +7,29 @@
 
 namespace cms\modules\big\backend;
 
+use yii\filters\AccessControl;
+
 /**
  * Module
  */
 class Module extends \yii\base\Module
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'except' => ['cms/index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
 }

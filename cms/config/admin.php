@@ -52,6 +52,7 @@ $config = [
         'user' => [
             'identityClass' => 'cms\models\User',
             'enableAutoLogin' => false,
+            'loginUrl' => [''],
         ],
         'session' => [
             'name' => 'BACKENDID',
