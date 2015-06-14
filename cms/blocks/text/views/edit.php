@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-use bigbrush\big\widgets\editor\Editor;
+use cms\widgets\Editor;
 ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -15,12 +15,7 @@ use bigbrush\big\widgets\editor\Editor;
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <?= $form->field($model, 'content')->widget(Editor::className(), [
-                    'clientOptions' => [
-                    'plugins' => 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table contextmenu paste',
-                    'toolbar' => 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
-                ]
-            ])->label(false) ?>
+                <?= $form->field($model, 'content')->widget(Editor::className())->label(false) ?>
             </div>
         </div>
 	</div>

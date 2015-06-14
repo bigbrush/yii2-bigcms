@@ -68,7 +68,7 @@ class Cms extends Object implements BootstrapInterface
         // this way the widgets can be used without setting the base url each time. The base url can still be overridden 
         if ($scope === self::SCOPE_BACKEND) {
             $baseUrl = Url::to('@web/../');
-            Yii::$container->set('bigbrush\big\widgets\editor\Editor', [
+            Yii::$container->set('cms\widgets\Editor', [
                 'baseUrl' => $baseUrl,
             ]);
             Yii::$container->set('bigbrush\big\widgets\filemanager\FileManager', [

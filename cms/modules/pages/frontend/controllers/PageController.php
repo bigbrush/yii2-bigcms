@@ -11,6 +11,7 @@ use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
 use cms\modules\pages\models\Page;
+use cms\widgets\Editor;
 
 /**
  * PageController
@@ -31,6 +32,7 @@ class PageController extends Controller
             throw new NotFoundHttpException("Page with id '$id' not found.");
         }
         Yii::$app->big->setTemplate($model->template_id);
+        $model->content = Editor::process($model->content);
         return $this->render('index', [
             'model' => $model,
         ]);

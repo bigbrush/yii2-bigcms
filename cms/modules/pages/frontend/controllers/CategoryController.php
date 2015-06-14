@@ -10,6 +10,7 @@ namespace cms\modules\pages\frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use cms\modules\pages\models\Page;
+use cms\widgets\Editor;
 
 /**
  * CategoryController
@@ -25,6 +26,9 @@ class CategoryController extends Controller
     public function actionPages($catid)
     {
         $pages = Page::find()->byCategory($catid)->byState(Page::STATE_ACTIVE)->orderBy('created_at')->all();
+        foreach ($pages as $page) {
+            $page->content = Editor::process($page->content);
+        }
         return $this->render('pages', [
             'pages' => $pages,
         ]);

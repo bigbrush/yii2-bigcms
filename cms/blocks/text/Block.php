@@ -8,6 +8,7 @@
 namespace cms\blocks\text;
 
 use yii\validators\Validator;
+use cms\widgets\Editor;
 
 /**
  * Block
@@ -29,6 +30,7 @@ class Block extends \bigbrush\big\core\Block
      */
     public function run()
     {
+        $this->model->content = Editor::process($this->model->content);
         return $this->render('index', [
             'block' => $this,
         ]);
