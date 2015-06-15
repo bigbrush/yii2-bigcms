@@ -7,7 +7,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use cms\widgets\DeleteButton;
+use bigbrush\cms\widgets\DeleteButton;
 
 $title = Yii::t('cms', 'Menus');
 $this->title = Yii::$app->id . ' | ' . $title;

@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\big\backend;
+namespace bigbrush\cms\modules\big\backend;
 
 use yii\filters\AccessControl;
 

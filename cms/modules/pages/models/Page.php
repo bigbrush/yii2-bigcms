@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\models;
+namespace bigbrush\cms\modules\pages\models;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -14,7 +14,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\BlameableBehavior;
 use bigbrush\big\models\Template;
 use bigbrush\big\models\Category;
-use cms\models\User;
+use bigbrush\cms\models\User;
 
 /**
  * Page

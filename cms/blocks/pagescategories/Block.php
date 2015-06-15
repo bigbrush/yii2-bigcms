@@ -5,12 +5,12 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\pagescategories;
+namespace bigbrush\cms\blocks\pagescategories;
 
 use Yii;
 use yii\validators\Validator;
-use cms\blocks\pagescategories\components\ModelBehavior;
-use cms\modules\pages\models\Page;
+use bigbrush\cms\blocks\pagescategories\components\ModelBehavior;
+use bigbrush\cms\modules\pages\models\Page;
 
 /**
  * Block

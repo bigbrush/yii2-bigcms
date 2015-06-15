@@ -5,13 +5,13 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\console\controllers;
+namespace bigbrush\cms\console\controllers;
 
 use Yii;
 use yii\console\controllers\MigrateController;
 use yii\helpers\Console;
 use yii\db\Exception;
-use cms\Cms;
+use bigbrush\cms\Cms;
 
 /**
  * CmsController

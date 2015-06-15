@@ -14,11 +14,11 @@ $config = [
         'cms',
     ],
     'modules' => [
-        'pages' => ['class' => 'cms\modules\pages\frontend\Module'],
+        'pages' => ['class' => 'bigbrush\cms\modules\pages\frontend\Module'],
     ],
     'components' => [
         'cms' => [
-            'class' => 'cms\Cms',
+            'class' => 'bigbrush\cms\Cms',
         ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
@@ -39,7 +39,7 @@ $config = [
             ],
         ],
         'user' => [
-            'identityClass' => 'cms\models\User',
+            'identityClass' => 'bigbrush\cms\models\User',
             'enableAutoLogin' => false,
         ],
         'session' => [

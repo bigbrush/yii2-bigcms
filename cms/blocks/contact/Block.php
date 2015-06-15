@@ -5,12 +5,12 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\contact;
+namespace bigbrush\cms\blocks\contact;
 
 use Yii;
 use yii\helpers\Url;
-use cms\blocks\contact\components\ModelBehavior;
-use cms\blocks\contact\models\ContactForm;
+use bigbrush\cms\blocks\contact\components\ModelBehavior;
+use bigbrush\cms\blocks\contact\models\ContactForm;
 
 /**
  * Block

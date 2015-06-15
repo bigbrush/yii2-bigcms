@@ -5,10 +5,10 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\components;
+namespace bigbrush\cms\modules\pages\components;
 
 use Yii;
-use cms\modules\pages\models\Page;
+use bigbrush\cms\modules\pages\models\Page;
 
 /**
  * PageFinder

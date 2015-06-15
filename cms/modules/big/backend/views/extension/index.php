@@ -8,7 +8,7 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\bootstrap\ButtonDropDown;
-use cms\widgets\DeleteButton;
+use bigbrush\cms\widgets\DeleteButton;
 
 $dropdown = [];
 foreach ($types as $type => $name) {

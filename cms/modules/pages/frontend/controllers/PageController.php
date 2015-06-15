@@ -5,13 +5,13 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\frontend\controllers;
+namespace bigbrush\cms\modules\pages\frontend\controllers;
 
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\Controller;
-use cms\modules\pages\models\Page;
-use cms\widgets\Editor;
+use bigbrush\cms\modules\pages\models\Page;
+use bigbrush\cms\widgets\Editor;
 
 /**
  * PageController

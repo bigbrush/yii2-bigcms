@@ -6,7 +6,7 @@
  */
 
 use yii\helpers\Html;
-use cms\modules\pages\components\Route;
+use bigbrush\cms\modules\pages\components\Route;
 ?>
 <div class="row">
     <?php foreach ($pages as $page) : ?>

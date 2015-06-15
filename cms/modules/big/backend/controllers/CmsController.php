@@ -5,11 +5,11 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\big\backend\controllers;
+namespace bigbrush\cms\modules\big\backend\controllers;
 
 use Yii;
 use yii\web\Controller;
-use cms\models\LoginForm;
+use bigbrush\cms\models\LoginForm;
 
 /**
  * CmsController

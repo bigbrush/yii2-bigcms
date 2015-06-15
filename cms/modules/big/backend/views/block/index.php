@@ -7,7 +7,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ButtonDropDown;
-use cms\widgets\DeleteButton;
+use bigbrush\cms\widgets\DeleteButton;
 
 $dropdown = [];
 foreach ($installedBlocks as $id => $name) {

@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\contact\models;
+namespace bigbrush\cms\blocks\contact\models;
 
 use Yii;
 use yii\base\Model;

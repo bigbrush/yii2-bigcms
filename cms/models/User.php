@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\models;
+namespace bigbrush\cms\models;
 
 use Yii;
 use yii\base\NotSupportedException;

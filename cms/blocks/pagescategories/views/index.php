@@ -6,7 +6,7 @@
  */
 
 use yii\helpers\Html;
-use cms\modules\pages\components\Route;
+use bigbrush\cms\modules\pages\components\Route;
 ?>
 <div class="block pages-categories">
     <?php if ($block->showTitle) : ?>

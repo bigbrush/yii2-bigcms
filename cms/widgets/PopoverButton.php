@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\widgets;
+namespace bigbrush\cms\widgets;
 
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;

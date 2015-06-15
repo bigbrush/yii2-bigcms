@@ -5,14 +5,14 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\backend\controllers;
+namespace bigbrush\cms\modules\pages\backend\controllers;
 
 use Yii;
 use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\View;
-use cms\modules\pages\models\Page;
+use bigbrush\cms\modules\pages\models\Page;
 
 /**
  * PageController

@@ -1,2 +1,2 @@
 <?php
-Yii::setAlias('cms', dirname(__DIR__));
+Yii::setAlias('bigbrush/cms', dirname(__DIR__));

@@ -5,10 +5,10 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\text;
+namespace bigbrush\cms\blocks\text;
 
 use yii\validators\Validator;
-use cms\widgets\Editor;
+use bigbrush\cms\widgets\Editor;
 
 /**
  * Block

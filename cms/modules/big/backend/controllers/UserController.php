@@ -5,12 +5,12 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\big\backend\controllers;
+namespace bigbrush\cms\modules\big\backend\controllers;
 
 use Yii;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
-use cms\models\User;
+use bigbrush\cms\models\User;
 
 /**
  * UserController

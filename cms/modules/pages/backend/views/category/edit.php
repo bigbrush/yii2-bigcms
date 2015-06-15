@@ -7,7 +7,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use cms\widgets\Editor;
+use bigbrush\cms\widgets\Editor;
 
 $type = Yii::t('cms', 'category');
 $title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);

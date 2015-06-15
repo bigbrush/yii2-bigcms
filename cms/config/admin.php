@@ -15,13 +15,13 @@ $config = [
         'cms',
     ],
     'modules' => [
-        'pages' => ['class' => 'cms\modules\pages\backend\Module'],
-        'big' => ['class' => 'cms\modules\big\backend\Module'],
+        'big' => ['class' => 'bigbrush\cms\modules\big\backend\Module'],
+        'pages' => ['class' => 'bigbrush\cms\modules\pages\backend\Module'],
     ],
     'components' => [
         'cms' => [
-            'class' => 'cms\Cms',
-            'scope' => \cms\Cms::SCOPE_BACKEND,
+            'class' => 'bigbrush\cms\Cms',
+            'scope' => \bigbrush\cms\Cms::SCOPE_BACKEND,
         ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
@@ -30,11 +30,11 @@ $config = [
             'parser' => false,
             'frontendTheme' => '@app/themes/web',
             'searchHandlers' => [
-                ['cms\modules\pages\components\PageFinder', 'onSearch'],
+                ['bigbrush\cms\modules\pages\components\PageFinder', 'onSearch'],
             ],
         ],
         'toolbar' => [
-            'class' => 'cms\components\Toolbar',
+            'class' => 'bigbrush\cms\components\Toolbar',
         ],
         'request' => [
             'cookieValidationKey' => 'Tm0TqcYJYJLX9PTIPNyYjEFzUbX-wMoB',
@@ -50,7 +50,7 @@ $config = [
             ],
         ],
         'user' => [
-            'identityClass' => 'cms\models\User',
+            'identityClass' => 'bigbrush\cms\models\User',
             'enableAutoLogin' => false,
             'loginUrl' => [''],
         ],

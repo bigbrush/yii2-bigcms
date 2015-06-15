@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\contact\components;
+namespace bigbrush\cms\blocks\contact\components;
 
 use yii\base\Behavior;
 use yii\db\ActiveRecord;

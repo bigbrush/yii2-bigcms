@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\frontend;
+namespace bigbrush\cms\modules\pages\frontend;
 
 /**
  * Module

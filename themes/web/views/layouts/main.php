@@ -7,7 +7,7 @@
 
 use yii\helpers\Html;
 use app\themes\web\assets\ThemeAsset;
-use cms\widgets\Alert;
+use bigbrush\cms\widgets\Alert;
 
 ThemeAsset::register($this);
 ?>

@@ -6,9 +6,9 @@
  */
 
 use yii\helpers\Html;
-use cms\components\Toolbar;
-use cms\components\AdminMenu;
-use cms\widgets\Alert;
+use bigbrush\cms\components\Toolbar;
+use bigbrush\cms\components\AdminMenu;
+use bigbrush\cms\widgets\Alert;
 use app\themes\admin\assets\ThemeAsset;
 
 ThemeAsset::register($this);

@@ -6,7 +6,7 @@
  */
 
 use yii\helpers\Html;
-use cms\widgets\RadioButtonGroup;
+use bigbrush\cms\widgets\RadioButtonGroup;
 ?>
 <div class="panel panel-default">
 	<div class="panel-heading">

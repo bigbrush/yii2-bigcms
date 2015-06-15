@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\widgets;
+namespace bigbrush\cms\widgets;
 
 use Yii;
 use yii\base\Object;

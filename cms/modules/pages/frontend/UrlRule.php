@@ -5,12 +5,12 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\frontend;
+namespace bigbrush\cms\modules\pages\frontend;
 
 use Yii;
 use yii\base\Object;
 use yii\web\UrlRuleInterface;
-use cms\modules\pages\components\Route;
+use bigbrush\cms\modules\pages\components\Route;
 
 /**
  * UrlRule

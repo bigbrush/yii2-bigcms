@@ -7,9 +7,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use cms\widgets\RadioButtonGroup;
 use yii\bootstrap\Modal;
 use bigbrush\big\widgets\bigsearch\BigSearch;
+use bigbrush\cms\widgets\RadioButtonGroup;
 
 // prevent form submission when modal button is clicked
 $this->registerJs('$("#btn-select-content").click(function(e){

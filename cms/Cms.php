@@ -5,13 +5,13 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms;
+namespace bigbrush\cms;
 
 use Yii;
 use yii\base\Object;
 use yii\base\BootstrapInterface;
 use yii\helpers\Url;
-use cms\components\AdminMenu;
+use bigbrush\cms\components\AdminMenu;
 
 /**
  * Cms
@@ -51,7 +51,7 @@ class Cms extends Object implements BootstrapInterface
         // enable translations
         $config = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'basePath' => '@cms/messages',
+            'basePath' => '@bigbrush/cms/messages',
         ];
         Yii::$app->i18n->translations['cms*'] = $config;
         // override translations registered by Big
@@ -68,7 +68,7 @@ class Cms extends Object implements BootstrapInterface
         // this way the widgets can be used without setting the base url each time. The base url can still be overridden 
         if ($scope === self::SCOPE_BACKEND) {
             $baseUrl = Url::to('@web/../');
-            Yii::$container->set('cms\widgets\Editor', [
+            Yii::$container->set('bigbrush\cms\widgets\Editor', [
                 'baseUrl' => $baseUrl,
             ]);
             Yii::$container->set('bigbrush\big\widgets\filemanager\FileManager', [

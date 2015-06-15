@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\backend\controllers;
+namespace bigbrush\cms\modules\pages\backend\controllers;
 
 use Yii;
 use yii\data\ArrayDataProvider;

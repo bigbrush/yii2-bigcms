@@ -7,7 +7,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use cms\widgets\DeleteButton;
+use bigbrush\cms\widgets\DeleteButton;
 
 Yii::$app->toolbar->add()->add(Yii::t('cms', 'Categories'), ['category/index'], 'bars');
 

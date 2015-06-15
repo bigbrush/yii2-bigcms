@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-use cms\widgets\Editor;
+use bigbrush\cms\widgets\Editor;
 ?>
 <div class="row">
     <div class="col-md-12">

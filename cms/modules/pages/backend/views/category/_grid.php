@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap\Button;
 use yii\bootstrap\ButtonGroup;
-use cms\widgets\DeleteButton;
+use bigbrush\cms\widgets\DeleteButton;
 ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

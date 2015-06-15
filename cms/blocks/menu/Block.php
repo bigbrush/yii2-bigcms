@@ -5,12 +5,12 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\blocks\menu;
+namespace bigbrush\cms\blocks\menu;
 
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use cms\blocks\menu\components\ModelBehavior;
+use bigbrush\cms\blocks\menu\components\ModelBehavior;
 
 /**
  * Block

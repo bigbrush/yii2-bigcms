@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace cms\modules\pages\models;
+namespace bigbrush\cms\modules\pages\models;
 
 use yii\db\ActiveQuery;
 
