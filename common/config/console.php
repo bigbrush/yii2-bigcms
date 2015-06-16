@@ -7,8 +7,8 @@
 
 return [
     'id' => 'bigcms-console',
-    'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'cms\console\controllers',
+    'basePath' => dirname(dirname(__DIR__)),
+    'controllerNamespace' => 'bigbrush\cms\console\controllers',
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
     'bootstrap' => ['log'],
     'components' => [
@@ -20,6 +20,5 @@ return [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
     ],
 ];

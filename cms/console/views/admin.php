@@ -5,11 +5,21 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
+echo "<?php\n";
+?>
+/**
+ * This file is generated automatically with the install console command.
+ * 
+ * @link http://www.bigbrush-agency.com/
+ * @copyright Copyright (c) 2015 Big Brush Agency ApS
+ * @license http://www.bigbrush-agency.com/license/
+ */
+
 $config = [
     'id' => 'Big',
     'basePath' => dirname(dirname(__DIR__)),
     'defaultRoute' => 'big/cms/index',
-    'language' => 'da',
+    'language' => '<?= $language ?>',
     'bootstrap' => [
         'big',
         'cms',
@@ -65,13 +75,13 @@ $config = [
     ],
 ];
 
-if (YII_ENV_DEV) {
+// if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     // $config['bootstrap'][] = 'debug';
     // $config['modules']['debug'] = 'yii\debug\Module';
 
     // $config['bootstrap'][] = 'gii';
     // $config['modules']['gii'] = 'yii\gii\Module';
-}
+// }
 
 return $config;
