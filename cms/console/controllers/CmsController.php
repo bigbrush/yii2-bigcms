@@ -49,11 +49,11 @@ class CmsController extends MigrateController
     /**
      * @var string the database host.
      */
-    public $host = 'localhost';
+    public $host;
     /**
      * @var string the database name.
      */
-    public $name = 'bigtester';
+    public $name;
     /**
      * @var string the username for the database.
      */
