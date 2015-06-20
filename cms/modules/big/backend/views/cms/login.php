@@ -12,12 +12,11 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\big\core\User */
 
-$title = Yii::t('cms', 'Login');
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = Yii::t('cms', 'Login');
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1><?= $title ?></h1>
+        <h1><?= $this->title ?></h1>
         <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($model, 'username') ?>
             <?= $form->field($model, 'password')->passwordInput() ?>

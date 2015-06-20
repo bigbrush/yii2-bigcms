@@ -114,7 +114,7 @@ class MenuController extends Controller
             $id = $this->getActiveMenuId();
         }
         $dataProvider = new ArrayDataProvider([
-            'allModels' => Yii::$app->big->menuManager->getMenuItems($id),
+            'allModels' => Yii::$app->big->menuManager->getItems($id),
         ]);
         return $dataProvider;
     }
@@ -161,7 +161,7 @@ class MenuController extends Controller
         }
         if ($model->menu_id) {
             $parents = [$menu->id => $menus[$model->menu_id]->title];
-            $parents = $parents + ArrayHelper::map($manager->getMenuItems($model->menu_id), 'id', function($data){
+            $parents = $parents + ArrayHelper::map($manager->getItems($model->menu_id), 'id', function($data){
                 return str_repeat('-', $data->depth) . ' ' . $data->title ;
             });
             // remove current menu item from available parents

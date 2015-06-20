@@ -41,17 +41,16 @@ $this->registerJs('
 
 ');
 
-Yii::$app->toolbar->add()->add(Yii::t('cms', 'Pages'), ['page/index'], 'file');
+Yii::$app->toolbar->add();
 
-$title = Yii::t('cms', 'Categories');
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = Yii::t('cms', 'Categories');
 ?>
 <div class="row">
     <div class="col-md-12">
         <div id="alert">
         </div>
 
-        <h1><?= $title ?></h1>
+        <h1><?= $this->title ?></h1>
         <div id="grid">
             <?= $this->render('_grid', ['dataProvider' => $dataProvider]) ?>
         </div>

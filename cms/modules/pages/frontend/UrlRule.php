@@ -37,11 +37,12 @@ class UrlRule extends Object implements UrlRuleInterface
     public function createUrl($manager, $route, $params)
     {
         if ($route === 'pages/page/show') {
-            $category = Yii::$app->big->categoryManager->getCategory($params['catid']);
+            $category = Yii::$app->big->categoryManager->getItem($params['catid']);
             $menuManager = Yii::$app->big->menuManager;
-            $search = Route::raw($category, Route::TYPE_CATEGORY);
-            if ($menu = $menuManager->search('route', $search)) {
-                $prepend = $menu->alias . '/';
+            $route = Route::raw($category, Route::TYPE_CATEGORY);
+            // check if a menu has been created for a category matching the requested page
+            if ($menu = $menuManager->search('route', $route)) {
+                $prepend = $menu->getQuery() . '/';
             } else {
                 $prepend = $this->id . '/';
             }
@@ -63,18 +64,22 @@ class UrlRule extends Object implements UrlRuleInterface
         $pathInfo = $request->getPathInfo();
         if (strpos($pathInfo, '/') !== false) {
             $segments = explode('/', $pathInfo);
-            $id = false;
+            $identifier = false;
             // a page without a menu
             if ($segments[0] === $this->id) {
-                list($id, $alias) = explode(':', $segments[1]);
+                $identifier = $segments[1];
             } else {
+                // last segment is our identifier, we need the segment right before that
+                // to check if it matches a menu pointing to a pages category
+                $alias = $segments[count($segments) - 2];
                 // a page with a category as menu
-                $menu = Yii::$app->big->menuManager->search('alias', $segments[0], true);
+                $menu = Yii::$app->big->menuManager->search('alias', $alias);
                 if ($menu && strpos($menu->route, 'pages/category/pages') === 0) {
-                    list($id, $alias) = explode(':', $segments[1]);
+                    $identifier = array_pop($segments);
                 }
             }
-            if ($id) {
+            if ($identifier !== false) {
+                $id = substr($identifier, 0, strpos($identifier, ':'));
                 return ['pages/page/show', ['id' => $id]];
             }
         }

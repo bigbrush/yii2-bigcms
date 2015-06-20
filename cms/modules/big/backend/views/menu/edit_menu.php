@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 
 $type = Yii::t('cms', 'menu');
 $title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = $title;
 ?>
 <div class="row">
     <div class="col-md-12">

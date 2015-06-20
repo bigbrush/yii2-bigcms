@@ -58,7 +58,7 @@ class CategoryController extends Controller
     {
         $manager = Yii::$app->big->categoryManager;
         return new ArrayDataProvider([
-            'allModels' => $manager->getCategories(),
+            'allModels' => $manager->getItems('pages'),
         ]);
     }
 
@@ -81,12 +81,9 @@ class CategoryController extends Controller
                 return $this->redirect(['index']);
             }
         }
-        $parents = ['Root'];
-        foreach ($manager->getCategories() as $category) {
-            if ($category->id != $model->id) {
-                $parents[$category->id] = str_repeat('- ', $category->depth) . $category->title;
-            }
-        }
+        // $parents = ['- ' . Yii::t('cms', 'Root') . ' -'] + $manager->getDropDownList('pages');
+        $root = '- ' . Yii::t('cms', 'Root') . ' -';
+        $parents = $manager->getDropDownList('pages', $root);
         if ($parent = $manager->getParent($model)) {
             $model->parent_id = $parent->id;
         }

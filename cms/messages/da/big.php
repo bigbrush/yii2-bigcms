@@ -22,11 +22,6 @@ return [
     'Thrashed' => 'Smidt ud',
     
     /**
-     * Managers
-     */
-    '- Use default template -' => '- Brug standard skabelon -',
-    
-    /**
      * Widgets
      */
     'Available blocks' => 'Mulige blokke',

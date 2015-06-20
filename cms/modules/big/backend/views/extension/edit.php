@@ -12,7 +12,7 @@ use bigbrush\big\widgets\editor\Editor;
 
 $type = Yii::t('cms', 'extension');
 $title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Install {0}', $type);
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = $title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
     

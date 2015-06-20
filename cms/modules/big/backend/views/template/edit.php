@@ -10,7 +10,7 @@ use bigbrush\big\widgets\templateeditor\TemplateEditor;
 
 $type = Yii::t('cms', 'template');
 $title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = $title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
     

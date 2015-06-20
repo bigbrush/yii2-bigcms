@@ -9,17 +9,25 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use bigbrush\cms\widgets\DeleteButton;
 
-Yii::$app->toolbar->add()->add(Yii::t('cms', 'Categories'), ['category/index'], 'bars');
+Yii::$app->toolbar->add();
 
-$title = Yii::t('cms', 'Pages');
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = Yii::t('cms', 'Pages');
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1><?= $title ?></h1>
+        <h1><?= $this->title ?></h1>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-8">
+                <?= Html::beginForm([''], 'get') ?>
+                <?= Html::label(Yii::t('cms', 'Filter by category'), 'id', ['class' => 'control-label']) ?>
+                <?= Html::dropDownList('id', $activeCategory, $categories, ['class' => 'form-control', 'onchange' => 'this.form.submit()']) ?>
+                <?= Html::endForm() ?>
+            </div>
+        </div>
+
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            'tableOptions' => ['class' => 'table table-hover'],
             'columns' => [
                 [
                     'header' => Yii::t('cms', 'Title'),

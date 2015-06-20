@@ -11,7 +11,7 @@ use bigbrush\cms\widgets\Editor;
 
 $type = Yii::t('cms', 'category');
 $title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = $title;
 ?>
 
 <?php $form = ActiveForm::begin(); ?>

@@ -24,50 +24,50 @@ $toolbar->addButton(ButtonDropDown::widget([
     ],
 ]));
 
-$title = Yii::t('cms', 'Extensions');
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = Yii::t('cms', 'Extensions');
 ?>
 <div class="row">
     <div class="col-md-12">
-    	<h1><?= $title ?></h1>
-    	<?= GridView::widget([
-    	    'dataProvider' => $dataProvider,
-            'tableOptions' => ['class' => 'table table-hover'],
-            'columns' => [
-                [
-                    'header' => Yii::t('cms', 'Name'),
-                    'format' => 'raw',
-                    'value' => function($data) {
-                        return Html::a($data->name, ['edit', 'id' => $data->id]);
-                    }
+        <h1><?= $this->title ?></h1>
+        <div class="table-responsive">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    [
+                        'header' => Yii::t('cms', 'Name'),
+                        'format' => 'raw',
+                        'value' => function($data) {
+                            return Html::a($data->name, ['edit', 'id' => $data->id]);
+                        }
+                    ],
+                    [
+                        'header' => Yii::t('cms', 'Type'),
+                        'options' => ['width' => '15%'],
+                        'value' => function($data) {
+                            return Html::encode($data->getTypeText());
+                        }
+                    ],
+                    [
+                        'header' => Yii::t('cms', 'State'),
+                        'options' => ['width' => '5%'],
+                        'value' => function($data) {
+                            return Html::encode($data->getStateText());
+                        }
+                    ],
+                    [
+                        'header' => Yii::t('cms', 'Delete'),
+                        'format' => 'raw',
+                        'options' => ['width' => '5%'],
+                        'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
+                        'value' => function($data) {
+                            return DeleteButton::widget([
+                                'model' => $data,
+                                'options' => ['class' => 'btn-xs'],
+                            ]);
+                        },
+                    ],
                 ],
-                [
-                    'header' => Yii::t('cms', 'Type'),
-                    'options' => ['width' => '15%'],
-                    'value' => function($data) {
-                        return Html::encode($data->getTypeText());
-                    }
-                ],
-                [
-                    'header' => Yii::t('cms', 'State'),
-                    'options' => ['width' => '5%'],
-                    'value' => function($data) {
-                        return Html::encode($data->getStateText());
-                    }
-                ],
-                [
-                    'header' => Yii::t('cms', 'Delete'),
-                    'format' => 'raw',
-                    'options' => ['width' => '5%'],
-                    'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
-                    'value' => function($data) {
-                        return DeleteButton::widget([
-                            'model' => $data,
-                            'options' => ['class' => 'btn-xs'],
-                        ]);
-                    },
-                ],
-            ],
-    	]) ?>
+            ]) ?>
+        </div>
     </div>
 </div>

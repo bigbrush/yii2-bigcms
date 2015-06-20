@@ -17,7 +17,7 @@ $this->registerJs('$("#btn-select-content").click(function(e){
 
 $type = Yii::t('cms', 'menu item');
 $title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Create {0}', $type);
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = $title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
     <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>

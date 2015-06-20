@@ -23,6 +23,11 @@ class PageFinder
      */
     public static function onSearch($event)
     {
+        // enable url creation from backend to frontend
+        Yii::$app->cms->getUrlManager()->setRules([
+            Yii::createObject('bigbrush\cms\modules\pages\frontend\UrlRule'),
+        ]);
+
         $query = Page::find()->select(['id', 'title', 'category_id', 'alias', 'content', 'created_at'])->orderBy('title')->asArray();
         // adjust query if $event->value is not empty. Then a search for a specific value is being made.
         if (!empty($event->value)) {
@@ -42,13 +47,13 @@ class PageFinder
 
         // pages categories
         $query = Yii::$app->big->categoryManager->getModel()->find()->select(['id', 'title', 'alias', 'content', 'created_at', 'depth'])
-                 ->orderBy('created_at')->asArray()->andWhere('lft > 1');
+                 ->orderBy('created_at')->asArray();
         // adjust query if $event->value is not empty. Then a search for a specific value is being made.
         if (!empty($event->value)) {
             $query->orWhere(['like', 'title', $event->value]);
             $query->orWhere(['like', 'content', $event->value]);
         }
-        $items = $query->all();
+        $items = $query->andWhere('lft > 1')->all();
         foreach ($items as $item) {
             $event->addItem([
                 'title' => str_repeat('- ', $item['depth'] - 1) . $item['title'],

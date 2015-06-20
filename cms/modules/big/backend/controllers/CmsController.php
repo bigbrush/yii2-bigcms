@@ -9,7 +9,9 @@ namespace bigbrush\cms\modules\big\backend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use bigbrush\cms\widgets\AdminMenu;
 use bigbrush\cms\models\LoginForm;
+use bigbrush\big\widgets\bigsearch\BigSearch;
 
 /**
  * CmsController
@@ -32,7 +34,7 @@ class CmsController extends Controller
      * Renders a login page when a user is not logged in.
      * The frontpage is rendered when a user is logged in.
      *
-     * @return string
+     * @return string the rendering result.
      */
     public function actionIndex()
     {
@@ -49,6 +51,20 @@ class CmsController extends Controller
             return $this->render('index');
         }
     }
+
+    /**
+     * Searches the Cms.
+     *
+     * @param string $q the query string to search for.
+     * @return string the rendering result.
+     */
+    public function actionSearch($q)
+    {
+        return $this->render('search', [
+            'searchValue' => $q,
+            'results' => BigSearch::search($q),
+        ]);
+    }
     
     /**
      * Remembers whether the menu is collapsed.
@@ -57,7 +73,7 @@ class CmsController extends Controller
      */
     public function actionCollapseMenu($collapsed)
     {
-        Yii::$app->cms->getAdminMenu()->setIsCollapsed($collapsed);
+        AdminMenu::setIsCollapsed($collapsed);
     }
     
     /**

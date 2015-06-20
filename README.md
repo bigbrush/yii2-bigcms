@@ -131,3 +131,4 @@ BIG CMS appreciates the ability to integrate the following libraries:
   - [Font awesome](http://fortawesome.github.io/Font-Awesome/)
   - [HTML5 Sortable](https://github.com/voidberg/html5sortable)
   - [Startbootstrap simple sidebar](https://github.com/IronSummitMedia/startbootstrap-simple-sidebar)
+  - [Pixabay TinyMCE skin](https://pixabay.com/en/blog/posts/a-modern-custom-theme-for-tinymce-4-40/)

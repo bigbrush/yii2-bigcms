@@ -97,7 +97,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'email'], 'filter', 'filter' => 'trim'],
             
             // username
-            ['username', 'unique', 'targetClass' => 'cms\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => 'bigbrush\cms\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 3, 'max' => 255],
 
             // name
@@ -108,7 +108,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             // email
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => 'cms\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => 'bigbrush\cms\models\User', 'message' => 'This email address has already been taken.'],
 
             // password
             ['password', 'required', 'when' => function ($model) {

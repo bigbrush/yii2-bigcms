@@ -11,7 +11,7 @@ use Yii;
 use yii\base\Object;
 use yii\base\BootstrapInterface;
 use yii\helpers\Url;
-use bigbrush\cms\components\AdminMenu;
+use bigbrush\cms\widgets\AdminMenu;
 
 /**
  * Cms
@@ -78,21 +78,6 @@ class Cms extends Object implements BootstrapInterface
     }
 
     /**
-     * Returns the admin menu.
-     *
-     * @return cms\components\AdminMenu an admin menu instance.
-     */
-    public function getAdminMenu()
-    {
-        if (!isset($this->components['adminMenu'])) {
-            $this->components['adminMenu'] = Yii::createObject([
-                'class' => AdminMenu::className(),
-            ]);
-        }
-        return $this->components['adminMenu'];
-    }
-
-    /**
      * Returns the toolbar.
      * NOTE: NOT FULLY IMPLEMENTED - ONLY USED BY Big module in BlockController::actionEdit() in the view.
      *
@@ -101,6 +86,22 @@ class Cms extends Object implements BootstrapInterface
     public function getToolbar()
     {
         return Yii::$app->toolbar;
+        // if (!isset($this->components['adminMenu'])) {
+        //     $this->components['adminMenu'] = Yii::createObject([
+        //         'class' => AdminMenu::className(),
+        //     ]);
+        // }
+        // return $this->components['adminMenu'];
+    }
+
+    /**
+     * Returns the Cms url manager.
+     *
+     * @return bigbrush\cms\components\UrlManger the url manager.
+     */
+    public function getUrlManager()
+    {
+        return Yii::$app->big->urlManager;
     }
 
     /**

@@ -12,6 +12,7 @@ use yii\base\InvalidCallException;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\View;
+use yii\helpers\Url;
 use bigbrush\cms\modules\pages\models\Page;
 
 /**
@@ -19,18 +20,32 @@ use bigbrush\cms\modules\pages\models\Page;
  */
 class PageController extends Controller
 {
+    const ACTIVE_CATEGORY_ID = '__pages_category_id';
+
+
     /**
      * Lists all available pages
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($id = null)
     {
+        $query = Page::find()->with(['category']);
+        if ($id === null) {
+            $id = static::getActiveCategoryId();
+        }
+        static::setActiveCategoryId($id);
+        if ($id) {
+            $query->byCategory($id);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => Page::find()->with(['category']),
+            'query' => $query,
         ]);
+        $categories = Yii::$app->big->categoryManager->getDropDownList('pages', Yii::t('cms', 'Select category'));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'categories' => $categories,
+            'activeCategory' => $id,
         ]);
     }
 
@@ -44,10 +59,7 @@ class PageController extends Controller
     public function actionEdit($id = 0)
     {
         $model = new Page();
-        $categories = [];
-        foreach (Yii::$app->big->categoryManager->getCategories() as $category) {
-            $categories[$category->id] = str_repeat('- ', $category->depth - 1) . $category->title;
-        }
+        $categories = Yii::$app->big->categoryManager->getDropDownList('pages');
         if ($id) {
             $model = Page::find()->where(['id' => $id])->with(['author', 'editor'])->one();
         }
@@ -60,7 +72,7 @@ class PageController extends Controller
                 return $this->redirect(['index']);
             }
         }
-        $templates = Yii::$app->big->templateManager->getDropDownList();
+        $templates = Yii::$app->big->templateManager->getDropDownList(Yii::t('cms', '- Use default template -'));
         return $this->render('edit', [
             'model' => $model,
             'templates' => $templates,
@@ -93,5 +105,25 @@ class PageController extends Controller
             ]));
         }
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Returns an id of the active category.
+     *
+     * @return string
+     */
+    public static function getActiveCategoryId()
+    {
+        return Yii::$app->getSession()->get(self::ACTIVE_CATEGORY_ID, 0);
+    }
+
+    /**
+     * Sets an id of the active category.
+     *
+     * @param string
+     */
+    public static function setActiveCategoryId($id)
+    {
+        Yii::$app->getSession()->set(self::ACTIVE_CATEGORY_ID, $id);
     }
 }

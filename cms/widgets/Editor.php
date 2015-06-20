@@ -8,7 +8,6 @@
 namespace bigbrush\cms\widgets;
 
 use Yii;
-use yii\base\Object;
 use yii\web\JsExpression;
 use bigbrush\big\widgets\editor\Editor as BigEditor;
 
@@ -26,6 +25,19 @@ use bigbrush\big\widgets\editor\Editor as BigEditor;
 class Editor extends BigEditor
 {
     /**
+     * @var string defines the skin_url to use.
+     * @see http://www.tinymce.com/wiki.php/Configuration:skin
+     */
+    public $skin = 'light';
+    /**
+     * @var string defines the skin_url to use.
+     * If this property is not set the asset bundle [[EditorSkinAsset]] is used as skin url.
+     * @see http://www.tinymce.com/wiki.php/Configuration:skin_url
+     */
+    public $skinUrl;
+
+
+    /**
      * Initializes this widget.
      */
     public function init()
@@ -39,7 +51,7 @@ class Editor extends BigEditor
                 font-size: 18px;
             }
         ');
-        $this->clientOptions = array_merge(static::clientOptions(), $this->clientOptions);
+        $this->clientOptions = array_merge($this->clientOptions(), $this->clientOptions);
     }
     
     /**
@@ -49,24 +61,30 @@ class Editor extends BigEditor
      *
      * @return array default editor configuration.
      */
-    public static function clientOptions()
+    public function clientOptions()
     {
+        if ($this->skinUrl === null) {
+            $bundle = EditorSkinAsset::register($this->getView());
+            $this->skinUrl = $bundle->baseUrl;
+        }
     	return [
-                'plugins' => 'contextmenu advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table contextmenu paste',
-                'toolbar' => 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                'setup' => new JsExpression('function(editor) {
-                    editor.addMenuItem("insertblock", {
-                        text: "' . Yii::t('cms', 'Block') . '",
-                        icon: "insertblock",
-                        id: "block-button",
-                        context: "insert",
-                        prependToContext: true,
-                        onclick: function() {
-                            editor.insertContent("<div>{block ' . Yii::t('cms', 'INSERT_TITLE') . '}</div><p>&nbsp;</p>");
-                        }
-                    });
-                }')
-            ];
+            'skin_url' => $this->skinUrl . '/' . $this->skin,
+            'skin' => 'light',
+            'plugins' => 'contextmenu advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table contextmenu paste',
+            'toolbar' => 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            'setup' => new JsExpression('function(editor) {
+                editor.addMenuItem("insertblock", {
+                    text: "' . Yii::t('cms', 'Block') . '",
+                    icon: "insertblock",
+                    id: "block-button",
+                    context: "insert",
+                    prependToContext: true,
+                    onclick: function() {
+                        editor.insertContent("<div>{block ' . Yii::t('cms', 'INSERT_BLOCK_TITLE') . '}</div><p>&nbsp;</p>");
+                    }
+                });
+            }')
+        ];
     }
 
     /**
@@ -107,7 +125,10 @@ class Editor extends BigEditor
             // update mapper with found blocks
             foreach ($models as $model) {
                 $key = array_search($model->title, $mapper);
-                $mapper[$key] = $manager->createBlock($model->namespace, $model);
+                $mapper[$key] = $manager->createObject([
+                    'class' => $model->namespace,
+                    'model' => $model,
+                ]);
             }
 
             // replace block include statements

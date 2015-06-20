@@ -23,12 +23,11 @@ $toolbar->addButton(ButtonDropDown::widget([
     ],
 ]));
 
-$title = Yii::t('cms', 'Blocks');
-$this->title = Yii::$app->id . ' | ' . $title;
+$this->title = Yii::t('cms', 'Blocks');
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h1><?= $title ?></h1>
+        <h1><?= $this->title ?></h1>
     </div>
 </div>
 

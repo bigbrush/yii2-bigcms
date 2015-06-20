@@ -30,7 +30,7 @@ class ExtensionController extends Controller
             $type = array_keys($types)[0];
         }
         $dataProvider = new ArrayDataProvider([
-            'allModels' => $manager->getExtensions($type),
+            'allModels' => $manager->getItems($type),
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,

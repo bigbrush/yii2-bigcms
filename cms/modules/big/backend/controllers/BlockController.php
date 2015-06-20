@@ -25,7 +25,7 @@ class BlockController extends Controller
     public function actionIndex()
     {
         $manager = Yii::$app->big->blockManager;
-        $blocks = $manager->getBlocks();
+        $blocks = $manager->getItems();
         $installedBlocks = $manager->getInstalledBlocks(true); // only active
         return $this->render('index', [
             'blocks' => $blocks,
@@ -73,7 +73,7 @@ class BlockController extends Controller
      */
     public function actionEdit($id)
     {
-        $block = Yii::$app->big->blockManager->getBlock($id);
+        $block = Yii::$app->big->blockManager->getItem($id);
         $model = $block->model;
         $post = Yii::$app->getRequest()->post();
         if ($model->load($post)) {
