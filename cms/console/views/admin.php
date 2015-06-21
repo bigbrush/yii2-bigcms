@@ -35,9 +35,6 @@ $config = [
         ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
-            'urlManager' => ['enableUrlRule' => false],
-            'menuManager' => ['autoLoad' => false],
-            'parser' => false,
             'frontendTheme' => '@app/themes/web',
             'searchHandlers' => [
                 ['bigbrush\cms\modules\pages\components\PageFinder', 'onSearch'],
@@ -55,8 +52,8 @@ $config = [
         ],
         'view' => [
             'theme' => [
-                'basePath' => '@app/themes/admin',
-                'baseUrl' => '@web/themes/admin',
+                'basePath' => '@app/themes/adminlte',
+                'baseUrl' => '@web/themes/adminlte',
             ],
         ],
         'user' => [

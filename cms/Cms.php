@@ -11,7 +11,7 @@ use Yii;
 use yii\base\Object;
 use yii\base\BootstrapInterface;
 use yii\helpers\Url;
-use bigbrush\cms\widgets\AdminMenu;
+use bigbrush\cms\components\UrlManagerBehavior;
 
 /**
  * Cms
@@ -29,12 +29,8 @@ class Cms extends Object implements BootstrapInterface
     const VERSION = '0.0.4';
 
     /**
-     * @var array list of components used in the CMS.
-     */
-    public $components = [];
-    /**
      * @var string the application scope.
-     * This is to set correct base url for the editor and file manager in [[bootstrap()]] method.
+     * Used to set correct base url for the editor and file manager in [[bootstrap()]] method.
      * Defaults to [[SCOPE_FRONTEND]].
      */
     private $_scope;
@@ -59,14 +55,15 @@ class Cms extends Object implements BootstrapInterface
         
         // register a default scope if not set
         if ($this->_scope === null) {
-            $this->setScope($this->getDefaultScope());
+            $this->setScope(static::SCOPE_FRONTEND);
         }
 
-        $scope = $this->getScope();
+        // attach behavior to the application url manager
+        Yii::$app->getUrlManager()->attachBehavior('cmsUrlManagerBehavior', UrlManagerBehavior::className());
 
         // set a new default base url in editor and file manager if scope is "backend"
         // this way the widgets can be used without setting the base url each time. The base url can still be overridden 
-        if ($scope === self::SCOPE_BACKEND) {
+        if ($this->getIsBackend()) {
             $baseUrl = Url::to('@web/../');
             Yii::$container->set('bigbrush\cms\widgets\Editor', [
                 'baseUrl' => $baseUrl,
@@ -86,12 +83,6 @@ class Cms extends Object implements BootstrapInterface
     public function getToolbar()
     {
         return Yii::$app->toolbar;
-        // if (!isset($this->components['adminMenu'])) {
-        //     $this->components['adminMenu'] = Yii::createObject([
-        //         'class' => AdminMenu::className(),
-        //     ]);
-        // }
-        // return $this->components['adminMenu'];
     }
 
     /**
@@ -129,13 +120,23 @@ class Cms extends Object implements BootstrapInterface
     }
 
     /**
-     * Returns the default scope of the Cms.
+     * Returns a boolean indicating whether the current scope is frontend.
      *
-     * @return string id of the default scope.
+     * @return boolean true if current scope is frontend false if not.
      */
-    public function getDefaultScope()
+    public function getIsFrontend()
     {
-        return static::SCOPE_FRONTEND;
+        return $this->getScope() === static::SCOPE_FRONTEND;
+    }
+
+    /**
+     * Returns a boolean indicating whether the current scope is backend.
+     *
+     * @return boolean true if current scope is backend false if not.
+     */
+    public function getIsBackend()
+    {
+        return $this->getScope() === static::SCOPE_BACKEND;
     }
 
     /**

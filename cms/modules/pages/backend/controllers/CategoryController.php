@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         return [
             'move' => [
-                'class' => 'bigbrush\big\core\NestedSetAction',
+                'class' => 'bigbrush\big\core\NestedSetMoveAction',
                 'model' => Yii::$app->big->categoryManager->getModel(),
                 'updateContent' => function() {
                     return $this->renderPartial('_grid', ['dataProvider' => $this->getDataProvider()]);

@@ -33,7 +33,16 @@ $config = [
         ],
         'big' => [
             'class' => 'bigbrush\big\core\Big',
-            'menuManager' => ['setApplicationDefaultRoute' => true],
+            'setApplicationDefaultRoute' => true,
+            'enableDynamicContent' => true,
+            'managers' => [
+                'urlManager' => [
+                    'enableUrlRule' => true,
+                ],
+                'menuManager' => [
+                    'autoload' => true,
+                ],
+            ],
         ],
         'request' => [
             'cookieValidationKey' => 'Tm0TqcYJYJLX9PTIPNyYjEFzUbX-wMoB',

@@ -35,7 +35,7 @@ class MenuController extends Controller
     {
         return [
             'move' => [
-                'class' => 'bigbrush\big\core\NestedSetAction',
+                'class' => 'bigbrush\big\core\NestedSetMoveAction',
                 'model' => Yii::$app->big->menuManager->getModel(),
                 'updateContent' => function() {
                     return $this->renderPartial('_grid', ['dataProvider' => $this->getDataProvider()]);

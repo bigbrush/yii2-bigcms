@@ -20,7 +20,7 @@ $this->title = Yii::t('cms', 'Search results');
 
 <?php
 $counter = 1;
-$urlManager = Yii::$app->cms->urlManager;
+$urlManager = Yii::$app->getUrlManager();
 foreach ($results as $section => $items) : ?>
 <div class="row">
     <div class="col-md-12">
@@ -43,7 +43,7 @@ foreach ($results as $section => $items) : ?>
                         $isHttp = strpos($route, 'http://') === 0;
                         if (!$isHttp && strpos($route, 'www') === false) {
                             $route = $urlManager->parseInternalUrl($route);
-                            $route = $urlManager->createFrontendUrl($route);
+                            $route = $urlManager->createUrlFrontend($route);
                         } elseif (!$isHttp) {
                             $route = 'http://' . $route;
                         }
