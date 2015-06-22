@@ -1,5 +1,2 @@
 # composer vendor dir
 /vendor
-
-# adminlte theme - temporary
-themes/adminlte
