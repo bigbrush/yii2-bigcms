@@ -18,14 +18,14 @@ $this->title = $title;
     
     <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
 
-    <h1><?= $title ?></h1>
     
     <div class="row">
         <div class="col-md-9">
+            <h1><?= $title ?></h1>
         
             <div class="row">
                 <div class="col-md-12">
-                    <?= $form->field($model, 'title') ?>
+                    <?= $form->field($model, 'title', ['inputOptions' => ['class'  =>'form-control input-lg']]) ?>
                 </div>
             </div>
 
@@ -42,7 +42,7 @@ $this->title = $title;
 
         </div>
         <div class="col-md-3">
-            <h3><?= Yii::t('cms', 'Page SEO') ?></h3>
+            <h3><?= Yii::t('cms', 'Category SEO') ?></h3>
             <?= $form->field($model, 'meta_title') ?>
             <?= $form->field($model, 'meta_description')->textArea() ?>
             <?= $form->field($model, 'alias') ?>

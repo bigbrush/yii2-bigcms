@@ -43,7 +43,12 @@ class Cms extends Object implements BootstrapInterface
      * @param yii\base\Application $app the application currently running.
      */
     public function bootstrap($app)
-    {
+    {        
+        // register a default scope if not set
+        if ($this->_scope === null) {
+            $this->setScope(static::SCOPE_FRONTEND);
+        }
+
         // enable translations
         $config = [
             'class' => 'yii\i18n\PhpMessageSource',
@@ -52,17 +57,13 @@ class Cms extends Object implements BootstrapInterface
         Yii::$app->i18n->translations['cms*'] = $config;
         // override translations registered by Big
         Yii::$app->big->registerTranslations($config);
-        
-        // register a default scope if not set
-        if ($this->_scope === null) {
-            $this->setScope(static::SCOPE_FRONTEND);
-        }
 
         // attach behavior to the application url manager
         Yii::$app->getUrlManager()->attachBehavior('cmsUrlManagerBehavior', UrlManagerBehavior::className());
 
-        // set a new default base url in editor and file manager if scope is "backend"
-        // this way the widgets can be used without setting the base url each time. The base url can still be overridden 
+        // if scope is "backend" set default base url in editor and file manager
+        // this way the widgets can be used without configuring them each time
+        // The properties can still be overridden when using the widgets
         if ($this->getIsBackend()) {
             $baseUrl = Url::to('@web/../');
             Yii::$container->set('bigbrush\cms\widgets\Editor', [
@@ -92,7 +93,7 @@ class Cms extends Object implements BootstrapInterface
      */
     public function getUrlManager()
     {
-        return Yii::$app->big->urlManager;
+        return Yii::$app->big->getUrlManager();
     }
 
     /**

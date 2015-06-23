@@ -8,7 +8,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-$stateOptions = $model->getStateOptions();
 Yii::$app->toolbar->add();
 
 $this->title = Yii::t('cms', 'Users');
@@ -17,7 +16,7 @@ $this->title = Yii::t('cms', 'Users');
     <div class="col-md-12">
         <h1><?= $this->title ?></h1>
         <div class="table-responsive">
-            <?php echo GridView::widget([
+            <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     [
@@ -44,7 +43,7 @@ $this->title = Yii::t('cms', 'Users');
                     [
                         'header' => Yii::t('cms', 'State'),
                         'options' => ['width' => '5%'],
-                        'value' => function($data) use ($stateOptions) {
+                        'value' => function($data) {
                             return Html::encode($data->getStateText());
                         }
                     ],

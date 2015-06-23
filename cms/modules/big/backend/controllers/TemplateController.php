@@ -41,7 +41,7 @@ class TemplateController extends Controller
     {
         $model = TemplateEditor::getModel($id);
         if (TemplateEditor::save($model)) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Template saved'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Template saved.'));
             if (Yii::$app->toolbar->stayAfterSave()) {
                 return $this->redirect(['edit', 'id' => $model->id]);
             } else {
@@ -67,12 +67,14 @@ class TemplateController extends Controller
         }
 
         $model = TemplateEditor::getModel($id);
-        if ($model->delete()) {
+        if ($model->is_default) {
+            Yii::$app->getSession()->setFlash('info', Yii::t('cms', 'Cannot delete the default template.'));
+        } elseif ($model->delete()) {
             Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Template deleted.'));
         } else {
             Yii::$app->getSession()->setFlash('error',  Yii::t('cms', 'Template "{title}" could not be deleted.', [
                 'title' => $model->title
-        	]));
+            ]));
         }
 
         return $this->redirect(['index']);

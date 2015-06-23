@@ -8,9 +8,11 @@
 namespace bigbrush\cms\modules\big\backend\controllers;
 
 use Yii;
+use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\InvalidCallException;
 use yii\web\MethodNotAllowedHttpException;
+use bigbrush\cms\Cms;
 
 /**
  * BlockController
@@ -22,13 +24,13 @@ class BlockController extends Controller
      *
      * @return string the rendering result.
      */
-    public function actionIndex()
+    public function actionIndex($scope = Cms::SCOPE_FRONTEND)
     {
         $manager = Yii::$app->big->blockManager;
-        $blocks = $manager->getItems();
+        $dataProvider = new ArrayDataProvider(['allModels' => $manager->getItems()]);
         $installedBlocks = $manager->getInstalledBlocks(true); // only active
         return $this->render('index', [
-            'blocks' => $blocks,
+            'dataProvider' => $dataProvider,
             'installedBlocks' => $installedBlocks,
         ]);
     }
@@ -86,7 +88,7 @@ class BlockController extends Controller
                 }
             }
         } elseif (!empty($post)) {
-            throw new MethodNotAllowedHttpException('Form not saved because "Block" was not set in $_POST');
+            throw new MethodNotAllowedHttpException('Invalid form. "Block" must be set in $_POST');
         }
 
         if ($block->getEditRaw()) {
@@ -114,7 +116,7 @@ class BlockController extends Controller
             throw new InvalidCallException("Invalid form submitted. Block with id: '$id' not deleted.");
         }
 
-        $block = Yii::$app->big->blockManager->getBlock($id);
+        $block = Yii::$app->big->blockManager->getItem($id);
         $model = $block->model;
         if ($model->delete()) {
             Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Block deleted.'));

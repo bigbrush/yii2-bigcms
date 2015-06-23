@@ -21,15 +21,12 @@ $this->title = $title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
     <?php Yii::$app->toolbar->save()->saveStay()->back(); ?>
-    <div class="row">
-        <div class="col-md-12">
-            <h1><?= $title ?></h1>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-md-9">
-            <?= $form->field($model, 'title') ?>
+            <h1><?= $title ?></h1>
+            
+            <?= $form->field($model, 'title', ['inputOptions' => ['class'  =>'form-control input-lg']]) ?>
             <?= $form->field($model, 'route', [
                 'template' => '
                     {label}

@@ -5,6 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\bootstrap\ButtonDropDown;
 use bigbrush\cms\widgets\DeleteButton;
@@ -28,31 +29,38 @@ $this->title = Yii::t('cms', 'Blocks');
 <div class="row">
     <div class="col-md-12">
         <h1><?= $this->title ?></h1>
-    </div>
-</div>
-
-<div id="blocks-wrapper">
-    <?php
-    $chunks = array_chunk($blocks, 4);
-    
-    foreach ($chunks as $blocks) : ?>
-    <div class="row">
-        
-        <?php foreach ($blocks as $block) : ?>
-        <div class="col-md-3">
-            <div class="square">
-                <div class="content">
-                    <?= DeleteButton::widget([
-                        'model' => $block->model,
-                        'buttonClass' => 'btn-default delete-btn',
-                    ]); ?>
-
-                    <?= Html::a($block->title, ['edit', 'id' => $block->model->id]) ?>
-                </div>
-            </div>
+        <div class="table-responsive">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    [
+                        'header' => Yii::t('cms', 'Title'),
+                        'format' => 'raw',
+                        'value' => function($data) {
+                            return Html::a(Html::encode($data->title), ['edit', 'id' => $data->blockId]);
+                        }
+                    ],
+                    [
+                        'header' => Yii::t('cms', 'State'),
+                        'options' => ['width' => '5%'],
+                        'value' => function($data) {
+                            return Html::encode($data->model->getStateText());
+                        }
+                    ],
+                    [
+                        'header' => Yii::t('cms', 'Delete'),
+                        'format' => 'raw',
+                        'options' => ['width' => '1%'],
+                        'contentOptions' => ['style' => 'text-align:center; vertical-align:middle;'],
+                        'value' => function($data) {
+                            return DeleteButton::widget([
+                                'model' => $data->model,
+                                'options' => ['class' => 'btn-xs'],
+                            ]);
+                        },
+                    ],
+                ],
+            ]); ?>
         </div>
-        <?php endforeach; ?>
-    
     </div>
-    <?php endforeach; ?>
 </div>

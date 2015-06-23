@@ -20,7 +20,14 @@ class ThemeAsset extends AssetBundle
         '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
         'css/AdminLTE.min.css',
         'css/skins/skin-blue.min.css',
+        'css/theme.css',
     ];
+    // public $publishOptions = [
+    //     'forceCopy' => true,
+    //     'only' => [
+    //         'css/theme.css'
+    //     ]
+    // ];
     public $js = [
         'js/app.min.js',
     ];

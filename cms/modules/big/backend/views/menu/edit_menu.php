@@ -17,7 +17,7 @@ $this->title = $title;
         <?php $form = ActiveForm::begin(); ?>
             <?php Yii::$app->toolbar->save()->saveStay()->back('Back', ['menus']); ?>
             <h1><?= $title ?></h1>
-            <?= $form->field($model, 'title') ?>
+            <?= $form->field($model, 'title', ['inputOptions' => ['class'  =>'form-control input-lg']]) ?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
