@@ -15,12 +15,8 @@ use yii\widgets\Menu;
  */
 class AdminMenu extends Menu
 {
-    const ADMIN_MENU_STATE_VAR = '__cms_menu_collapsed__';
-
-    /**
-     * @var boolean whether to use icons in the menu.
-     */
-    public $useIcons = true;
+    const SESSION_VAR_COLLAPSED = '__cms_menu_collapsed__';
+    const MAIN_MENU_ID = 1;
 
 
     /**
@@ -29,11 +25,22 @@ class AdminMenu extends Menu
     public function init()
     {
         parent::init();
-        $this->items = $this->getItems($this->useIcons);
+        if (empty($this->items)) {
+            $this->items = $this->getItems();
+        }
         $this->encodeLabels = false;
         $this->activateParents = true;
         $this->submenuTemplate = "\n<ul class=\"treeview-menu\">\n{items}\n</ul>\n";
         $this->options = ['class' => 'sidebar-menu'];
+    }
+
+    public function run()
+    {
+        $route = Yii::$app->controller->getRoute();
+        $route = substr($route, 0, strrpos($route, '/'));
+        // var_dump($this->route);
+        // var_dump($this->params);
+        return parent::run();
     }
 
     /**
@@ -42,14 +49,64 @@ class AdminMenu extends Menu
      * @param boolean $useIcons indicates whether to show an icon before each menu item.
      * @return array configuration for menu items.
      */
-    public function getItems($useIcons = true)
+    public function getItems()
     {
-        $items = $this->getTree();
-        if ($useIcons) {
-            return $this->adjustLabels($items);
+        if (Yii::$app->getUser()->getIsGuest()) {
+            $items = [
+                ['label' => Yii::t('cms', 'Welcome'), 'url' => ['/'], 'icon' => 'home', 'active' => true]
+            ];
         } else {
-            return $items;
+            $items = Yii::$app->cms->adminMenuManager->getItems(static::MAIN_MENU_ID);
+            $items = $this->createDropDownMenu($items);
         }
+        return $this->adjustLabels($items);
+    }
+
+    /**
+     * Creates a drop down menu ready for [[yii\bootstrap\Nav]] and [[yii\widgets\Menu]].
+     *
+     * @param array list of menus to nest in an array.
+     * @return array nested array ready for a drop down menu.
+     */
+    public function createDropDownMenu(&$menus)
+    {
+        $route = Yii::$app->controller->getRoute();
+        $route = substr($route, 0, strrpos($route, '/'));
+        $items = [];
+        while (list($id, $menu) = each($menus)) {
+            $items[$id] = [
+                'label' => $menu->title,
+                'url' => [$menu->route],
+                'icon' => $menu->params['icon'],
+                'visible' => $menu->isEnabled,
+            ];
+            if ($menu->rgt - $menu->lft != 1) {
+                $items[$id]['items'] = $this->createDropDownMenu($menus);
+            }
+            $next = key($menus);
+            if ($next && $menus[$next]->depth != $menu->depth) {
+                return $items;
+            }
+        }
+        return $items;
+    }
+
+    /**
+     * Checks whether a menu item is active.
+     * This is true when the module/controller part of the current route matches module/controller part of the provided item.
+     *
+     * @param array $item the menu item to be checked
+     * @return boolean whether the menu item is active
+     */
+    public function isItemActive($item)
+    {
+        $route = Yii::$app->controller->getRoute();
+        $route = substr($route, 0, strrpos($route, '/'));
+        $menuRoute = trim($item['url'][0], '/');
+        if (substr($menuRoute, 0, strrpos($menuRoute, '/')) === $route) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -63,12 +120,11 @@ class AdminMenu extends Menu
     {
         $new = [];
         foreach ($items as $item) {
-            if (isset($item['icon'])) {
-                $icon = $item['icon'];
-                unset($item['icon']);
-                $item['label'] = '<i class="fa fa-'.$icon.'"></i> <span>' . $item['label'] . '</span>';
+            $label = Yii::t('cms', $item['label']);
+            if (empty($item['icon'])) {
+                $item['label'] = '<span>' . $label . '</span>';
             } else {
-                $item['label'] = '<span>' . $item['label'] . '</span>';
+                $item['label'] = '<i class="fa fa-' . $item['icon'] . '"></i> <span>' . $label . '</span>';
             }
             if (isset($item['items'])) {
                 $item['label'] .= ' <i class="fa fa-angle-left pull-right"></i>';
@@ -77,45 +133,6 @@ class AdminMenu extends Menu
             $new[] = $item;
         }
         return $new;
-    }
-
-    /**
-     * Returns the menu tree.
-     *
-     * @return array the menu tree.
-     */
-    public function getTree()
-    {
-        if (Yii::$app->getUser()->getIsGuest()) {
-            return [
-                ['label' => Yii::t('cms', 'Welcome'), 'url' => ['/'], 'icon' => 'home', 'active' => true]
-            ];
-        } else {
-            return [
-                ['label' => Yii::t('cms', 'Home'), 'url' => ['/'], 'icon' => 'home'],
-                ['label' => Yii::t('cms', 'Content'), 'url' => '#', 'icon' => 'paw',
-                    'items' => [
-                        ['label' => Yii::t('cms', 'Pages'), 'url' => ['/pages/page/index'], 'icon' => 'file'],
-                        ['label' => 'Categories', 'url' => ['/pages/category/index'], 'icon' => 'bars'],
-                    ]
-                ],
-                ['label' => Yii::t('cms', 'Navigation'), 'url' => '#', 'icon' => 'compass',
-                    'items' => [
-                        ['label' => Yii::t('cms', 'Menu items'), 'url' => ['/big/menu/index'], 'icon' => 'tree'],
-                        ['label' => Yii::t('cms', 'Menus'), 'url' => ['/big/menu/menus'], 'icon' => 'bars'],
-                    ]
-                ],
-                ['label' => Yii::t('cms', 'Blocks'), 'url' => ['/big/block/index'], 'icon' => 'square'],
-                ['label' => Yii::t('cms', 'File manager'), 'url' => ['/big/media/show'], 'icon' => 'picture-o'],
-                ['label' => Yii::t('cms', 'Templates'), 'url' => ['/big/template/index'], 'icon' => 'simplybuilt'],
-                ['label' => Yii::t('cms', 'System'), 'url' => '#', 'icon' => 'gears',
-                    'items' => [
-                        ['label' => Yii::t('cms', 'Users'), 'url' => ['/big/user/index'], 'icon' => 'users'],
-                        ['label' => Yii::t('cms', 'Extensions'), 'url' => ['/big/extension/index'], 'icon' => 'plug'],
-                    ]
-                ],
-            ];
-        }
     }
     
     /**
@@ -126,7 +143,7 @@ class AdminMenu extends Menu
      */
     public static function setIsCollapsed($collapsed)
     {
-        Yii::$app->getSession()->set(static::ADMIN_MENU_STATE_VAR, $collapsed);
+        Yii::$app->getSession()->set(static::SESSION_VAR_COLLAPSED, $collapsed);
     }
     
     /**
@@ -136,6 +153,6 @@ class AdminMenu extends Menu
      */
     public static function getIsCollapsed()
     {
-        return Yii::$app->getSession()->get(static::ADMIN_MENU_STATE_VAR) === '1';
+        return Yii::$app->getSession()->get(static::SESSION_VAR_COLLAPSED) === '1';
     }
 }

@@ -35,6 +35,8 @@ class Cms extends Object implements BootstrapInterface
      */
     private $_scope;
 
+    private $_adminMenuManger;
+
 
     /**
      * Bootstraps the Cms component.
@@ -94,6 +96,19 @@ class Cms extends Object implements BootstrapInterface
     public function getUrlManager()
     {
         return Yii::$app->big->getUrlManager();
+    }
+
+    /**
+     * Returns the manager for the admin menu.
+     *
+     * @return bigbrush\cms\components\AdminMenuManager the admin menu manager.
+     */
+    public function getAdminMenuManager()
+    {
+        if ($this->_adminMenuManger === null) {
+            $this->_adminMenuManger = Yii::createObject(['class' => 'bigbrush\cms\components\AdminMenuManager']);
+        }
+        return $this->_adminMenuManger;
     }
 
     /**
