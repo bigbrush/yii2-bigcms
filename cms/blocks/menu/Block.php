@@ -35,7 +35,6 @@ class Block extends \bigbrush\big\core\Block
     public function run()
     {
         $menus = Yii::$app->big->menuManager->getItems($this->model->menu_id);
-        reset($menus);
         $items = $this->createDropDownMenu($menus);
         if ($this->getIsNavbar()) {
             $navbarOptions = ['options' => $this->getNavbarOptions()];

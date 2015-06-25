@@ -68,6 +68,7 @@ class AdminMenu extends Menu
      */
     public function afterFind()
     {
+        parent::afterFind();
         $params = Json::decode($this->params);
         $this->icon = $params['icon'];
     }

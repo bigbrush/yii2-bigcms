@@ -14,6 +14,10 @@ class m150530_182223_init extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
+        // create the admin_menu table as a copy of menu table. Only structure is copied
+        $sql = $this->db->quoteSql('CREATE TABLE {{%admin_menu}} LIKE {{%menu}};');
+        $this->execute($sql);
+
         // page table
         $this->createTable('{{%page}}', [
             'id' => Schema::TYPE_PK,
@@ -97,6 +101,7 @@ class m150530_182223_init extends Migration
             'meta_title' => '',
             'meta_description' => '',
             'meta_keywords' => '',
+            'params' => '',
         ]);
         $this->insert('{{%category}}', [
             'id' => 2,
@@ -114,6 +119,7 @@ class m150530_182223_init extends Migration
             'meta_title' => '',
             'meta_description' => '',
             'meta_keywords' => '',
+            'params' => '',
         ]);
 
         // insert home page into page table
@@ -150,6 +156,7 @@ class m150530_182223_init extends Migration
             'meta_title' => '',
             'meta_description' => '',
             'meta_keywords' => '',
+            'params' => '',
         ]);
         $this->insert('{{%menu}}', [
             'id' => 2,
@@ -165,6 +172,7 @@ class m150530_182223_init extends Migration
             'meta_title' => '',
             'meta_description' => '',
             'meta_keywords' => '',
+            'params' => '',
         ]);
         
         // insert a default admin into user table

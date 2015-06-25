@@ -63,6 +63,13 @@ $this->title = $model->id ? Yii::t('cms', 'Edit {0}', $type) : Yii::t('cms', 'Cr
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'icon') ?>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong><?= Yii::t('cms', 'Font awsesome icon') ?></strong>
+                            <?= Yii::t('cms', 'Enter the icon name (briefcase, star, eye, etc.)') ?> <br>
+                            <?= Html::a(Yii::t('cms', 'List of available icons'), 'http://fortawesome.github.io/Font-Awesome/icons/', ['target' => '_blank']) ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

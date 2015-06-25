@@ -34,15 +34,6 @@ class AdminMenu extends Menu
         $this->options = ['class' => 'sidebar-menu'];
     }
 
-    public function run()
-    {
-        $route = Yii::$app->controller->getRoute();
-        $route = substr($route, 0, strrpos($route, '/'));
-        // var_dump($this->route);
-        // var_dump($this->params);
-        return parent::run();
-    }
-
     /**
      * Returns menu items for the admin menu.
      *
@@ -70,15 +61,13 @@ class AdminMenu extends Menu
      */
     public function createDropDownMenu(&$menus)
     {
-        $route = Yii::$app->controller->getRoute();
-        $route = substr($route, 0, strrpos($route, '/'));
         $items = [];
         while (list($id, $menu) = each($menus)) {
             $items[$id] = [
                 'label' => $menu->title,
                 'url' => [$menu->route],
                 'icon' => $menu->params['icon'],
-                'visible' => $menu->isEnabled,
+                'visible' => $menu->getIsEnabled(),
             ];
             if ($menu->rgt - $menu->lft != 1) {
                 $items[$id]['items'] = $this->createDropDownMenu($menus);
@@ -89,24 +78,6 @@ class AdminMenu extends Menu
             }
         }
         return $items;
-    }
-
-    /**
-     * Checks whether a menu item is active.
-     * This is true when the module/controller part of the current route matches module/controller part of the provided item.
-     *
-     * @param array $item the menu item to be checked
-     * @return boolean whether the menu item is active
-     */
-    public function isItemActive($item)
-    {
-        $route = Yii::$app->controller->getRoute();
-        $route = substr($route, 0, strrpos($route, '/'));
-        $menuRoute = trim($item['url'][0], '/');
-        if (substr($menuRoute, 0, strrpos($menuRoute, '/')) === $route) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -133,6 +104,24 @@ class AdminMenu extends Menu
             $new[] = $item;
         }
         return $new;
+    }
+
+    /**
+     * Checks whether a menu item is active.
+     * This is true when the module/controller part of the current route matches module/controller part of the provided item.
+     *
+     * @param array $item the menu item to be checked
+     * @return boolean whether the menu item is active
+     */
+    protected function isItemActive($item)
+    {
+        $route = Yii::$app->controller->getRoute();
+        $route = substr($route, 0, strrpos($route, '/'));
+        $menuRoute = trim($item['url'][0], '/');
+        if (substr($menuRoute, 0, strrpos($menuRoute, '/')) === $route) {
+            return true;
+        }
+        return false;
     }
     
     /**

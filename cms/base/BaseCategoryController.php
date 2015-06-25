@@ -17,18 +17,24 @@ use yii\web\Controller;
 abstract class BaseCategoryController extends Controller
 {
     /**
-     * Returns the manager of this controller.
-     *
-     * @return bigbrush\big\core\CategoryManager the manager used in controller.
-     */
-    abstract public function getManager();
-
-    /**
-     * Defines the name for categories being loaded.
+     * Returns an id used to load a category tree.
+     * If no tree exists for the returned id one will automatically be created.
      * 
-     * @return string name of the category tree.
+     * An example of the method body:
+     * ~~~php
+     * return $this->module->id;
+     * ~~~
+     * 
+     * Please note that if the categories are used in a block the active module could be different than
+     * the module of this controller. In this case you need to provide the tree id directly.
+     * For instance:
+     * ~~~php
+     * $categories = Yii::$app->big->categoryManager->getItems('YOUR_MODULE_ID');
+     * ~~~
+     * 
+     * @return string id of a category tree.
      */
-    abstract public function getName();
+    abstract public function getTreeId();
 
     /**
      * Returns a list of predefined actions for this controller.
@@ -52,6 +58,16 @@ abstract class BaseCategoryController extends Controller
     }
 
     /**
+     * Returns the manager of this controller.
+     *
+     * @return bigbrush\big\core\CategoryManager the manager used in controller.
+     */
+    public function getManager()
+    {
+        return Yii::$app->big->categoryManager;
+    }
+
+    /**
      * Lists all available categories.
      *
      * @return string the rendering result.
@@ -71,7 +87,7 @@ abstract class BaseCategoryController extends Controller
     public function getDataProvider()
     {
         return new ArrayDataProvider([
-            'allModels' => $this->getManager()->getItems($this->getName()),
+            'allModels' => $this->getManager()->getItems($this->getTreeId()),
         ]);
     }
 
@@ -86,7 +102,7 @@ abstract class BaseCategoryController extends Controller
     {
         $manager = $this->getManager();
         $model = $manager->getModel($id);
-        if ($manager->saveModel($this->getName(), $model)) {
+        if ($manager->saveModel($this->getTreeId(), $model)) {
             Yii::$app->getSession()->setFlash('success', Yii::t('cms', 'Category saved'));
             if (Yii::$app->toolbar->stayAfterSave()) {
                 return $this->redirect(['edit', 'id' => $model->id]);
@@ -95,7 +111,7 @@ abstract class BaseCategoryController extends Controller
             }
         }
         $unselected = '- ' . Yii::t('cms', 'Root') . ' -';
-        $parents = $manager->getDropDownList($this->getName(), $unselected);
+        $parents = $manager->getDropDownList($this->getTreeId(), $unselected);
         if ($parent = $manager->getParent($model)) {
             $model->parent_id = $parent->id;
         }

@@ -5,11 +5,25 @@ BIG CMS for Yii 2
 
 **STILL UNDER DEVELOPMENT**
 
-BIG CMS is a ready to use Yii 2 web application split into frontend and backend. It is prepared for shared hosts but built with a flexibility that makes it suitable as a starting-kit.
+Big Cms is a ready to use Yii 2 web application with frontend and backend.
 
-BIG CMS is based on Yii 2 modules and a concept of *Blocks*. You can create your own blocks (quite easily) and integrate them into BIG CMS. By default BIG CMS comes with 4 blocks.
+It also provides a solid foundation for building complex Yii2 sites. It's easy to extend and doesn't impose any rules. Big Cms is as much a toolset as it is a Cms. It's created for making better products faster.
 
-BIG CMS is built with [Big Framework](https://github.com/bigbrush/yii2-big).
+Big Cms is based on Yii 2 modules and a concept of *Blocks*. You can create your own blocks (quite easily) and integrate them into Big Cms. By default Big Cms comes with 4 blocks. Big Cms is compatible with any Yii 2 module 
+
+Big Cms is built with a flexibility that makes it suitable as a starting-kit but also prepared for shared hosts.
+
+Big Cms is built with [Big Framework](https://github.com/bigbrush/yii2-big).
+
+
+Demo <span id="bigcms-demo"></span>
+-----------------------------------
+Frontend: http://demo.bigbrush-agency.com
+Backend: http://demo.bigbrush-agency.com/admin/
+
+`Login`
+Username: bigadmin
+Password: bigadmin
 
 
 Installing via Composer <span id="installing-via-composer"></span>
@@ -23,7 +37,7 @@ cd bigcms
 yii cms/install
 ~~~
 
-Then follow the on screen instruction which helps to specify your database login credentials.
+Then follow the on screen instructions which helps you specify database login credentials.
 
 After the installion has finished go to http://YOURSITE.COM/admin/ and login with:
   - Username: bigadmin
@@ -34,20 +48,19 @@ After the installion has finished go to http://YOURSITE.COM/admin/ and login wit
 
 Features <span id="bigcms-features"></span>
 -----------------------------------
-  - SEO optimized content and menu system
+  - Flexible
+  - Admin theme based on AdminLTE
+  - SEO optimized
   - Dynamic Yii 2 themes (include blocks in your theme or layout file)
-  - Ready for shared hosts
-  - Frontend and backend access
   - Menu system with nested menu items based on [Yii2 Nested Sets](https://github.com/creocoder/yii2-nested-sets)
   - WYSIWYG editor based on [TinyMCE 4](http://www.tinymce.com)
   - File manager based on [elFinder](http://elfinder.org)
   - Extension manager to install custom blocks
-  - Template system that enables you to structure pages individually
-  - Flexible and ready as a development platform
-  - User registration
+  - Template system. Manage blocks with drag 'n drop
+  - CMS components (pages, categories, menus, blocks, file manager)
+  - User registration (basic can be replaced by any Yii2 module)
   - Development features provided by [Big Framework](https://github.com/bigbrush/yii2-big)
-  - Ready to use admin theme
-  - Menu component used in the backend
+  - Ready for shared hosts
   - Toolbar component used in the backend
   - 4 widgets
     - Alert (copied from Yii 2 advanced template)
@@ -130,5 +143,5 @@ Built with
 BIG CMS appreciates the ability to integrate the following libraries:
   - [Font awesome](http://fortawesome.github.io/Font-Awesome/)
   - [HTML5 Sortable](https://github.com/voidberg/html5sortable)
-  - [Startbootstrap simple sidebar](https://github.com/IronSummitMedia/startbootstrap-simple-sidebar)
+  - [AdminLTE](https://github.com/almasaeed2010/AdminLTE)
   - [Pixabay TinyMCE skin](https://pixabay.com/en/blog/posts/a-modern-custom-theme-for-tinymce-4-40/)

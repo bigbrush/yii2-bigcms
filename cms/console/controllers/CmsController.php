@@ -101,7 +101,7 @@ class CmsController extends MigrateController
 
     /**
      * Initializes this controller by setting a default database connection. Required because the db
-     * instance is checked in [[yii\console\controllers\MigrateController::beforeAction()]].
+     * instance is checked in [[MigrateController::beforeAction()]].
      * The database connection is updated in [[actionInstall()]] after the "db" config file has been created.
      */
     public function init()
@@ -145,9 +145,14 @@ class CmsController extends MigrateController
     }
 
     /**
-     * Provides information about Big Cms.
+     * Provides helpful information about installing Big Cms.
+     * 
+     * Use as follows:
+     * ~~~
+     * yii cms/help
+     * ~~~
      */
-    public function actionInfo()
+    public function actionHelp()
     {
         $version = Cms::VERSION;
         $this->stdout("Big Cms v{$version}.\n", Console::FG_YELLOW);
