@@ -18,7 +18,8 @@ $user = Yii::$app->getUser();
 $isLoggedIn = !$user->getIsGuest();
 
 $this->registerJs('
-    $(".sidebar-toggle").click(function() {
+    $(".sidebar-toggle").click(function(e) {
+        e.preventDefault();
         if ($("body").hasClass("sidebar-collapse")) {
             $.get("'.Url::to(['/big/cms/collapse-menu', 'collapsed' => 1]).'");
         } else {

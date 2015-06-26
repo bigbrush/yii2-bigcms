@@ -22,7 +22,7 @@ class Module extends \yii\base\Module
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'except' => ['cms/index'],
+                'except' => ['cms/index', 'cms/collapse-menu'],
                 'rules' => [
                     [
                         'allow' => true,
