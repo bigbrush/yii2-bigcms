@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "434453594f143312fc531bc031f43c4d",
+    "hash": "b2a2473f3f36afa127e2518118437b60",
     "packages": [
         {
             "name": "bigbrush/yii2-big",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-big.git",
-                "reference": "7c00ec808e7bb943feaa29a287e26b9ee401cd5e"
+                "reference": "c11fe4b5188ceb127f7515ebcc278c53ec61062e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/7c00ec808e7bb943feaa29a287e26b9ee401cd5e",
-                "reference": "7c00ec808e7bb943feaa29a287e26b9ee401cd5e",
+                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/c11fe4b5188ceb127f7515ebcc278c53ec61062e",
+                "reference": "c11fe4b5188ceb127f7515ebcc278c53ec61062e",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,48 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-06-24 22:02:20"
+            "time": "2015-06-26 14:52:15"
+        },
+        {
+            "name": "bigbrush/yii2-cmf",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigbrush/yii2-cmf.git",
+                "reference": "e76a088ef259afa17cb6625f4bf322543efc9474"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/e76a088ef259afa17cb6625f4bf322543efc9474",
+                "reference": "e76a088ef259afa17cb6625f4bf322543efc9474",
+                "shasum": ""
+            },
+            "require": {
+                "bigbrush/yii2-big": "dev-master",
+                "yiisoft/yii2-swiftmailer": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "bigbrush\\cms\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "BIG Brush Agency ApS",
+                    "email": "mj@bigbrush-agency.com"
+                }
+            ],
+            "description": "CMF for Yii 2",
+            "keywords": [
+                "cmf",
+                "yii2"
+            ],
+            "time": "2015-06-26 15:16:35"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -480,16 +521,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "4.1.10",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "503d6fe1e69bd9830d39689b6e32a6c7ebffb861"
+                "reference": "c3b162e1df371a637ad2f4d1f9858d1a2ce4be24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/503d6fe1e69bd9830d39689b6e32a6c7ebffb861",
-                "reference": "503d6fe1e69bd9830d39689b6e32a6c7ebffb861",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/c3b162e1df371a637ad2f4d1f9858d1a2ce4be24",
+                "reference": "c3b162e1df371a637ad2f4d1f9858d1a2ce4be24",
                 "shasum": ""
             },
             "type": "component",
@@ -522,7 +563,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2015-05-05 12:07:24"
+            "time": "2015-06-25 12:40:57"
         },
         {
             "name": "yiisoft/yii2",
@@ -814,7 +855,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "bigbrush/yii2-big": 20
+        "bigbrush/yii2-big": 20,
+        "bigbrush/yii2-cmf": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
