@@ -7,7 +7,7 @@
 
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\bootstrap\ButtonDropDown;
+use yii\bootstrap\ButtonDropdown;
 use bigbrush\cms\widgets\DeleteButton;
 
 $dropdown = [];
@@ -15,7 +15,7 @@ foreach ($types as $type => $name) {
     $dropdown[] = ['label' => $name, 'url' => ['install', 'type' => $type]];
 }
 $toolbar = Yii::$app->toolbar;
-$toolbar->addButton(ButtonDropDown::widget([
+$toolbar->addButton(ButtonDropdown::widget([
     'label' => $toolbar->createText('plug', Yii::t('cms', 'Install {0}', Yii::t('cms', 'extension'))),
     'options' => ['class' => 'btn btn-default'],
     'encodeLabel' => false,

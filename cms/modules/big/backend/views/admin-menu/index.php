@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap\Button;
 use yii\bootstrap\ButtonGroup;
-use yii\bootstrap\ButtonDropDown;
+use yii\bootstrap\ButtonDropdown;
 use bigbrush\cms\widgets\DeleteButton;
 
 Yii::$app->toolbar->add()->add(Yii::t('cms', 'Menus'), ['menus'], 'bars');
@@ -24,7 +24,7 @@ $this->title = Yii::t('cms', 'Menu items');
         
         <h1><?= $this->title ?></h1>
         
-        <?= ButtonDropDown::widget([
+        <?= ButtonDropdown::widget([
             'label' => Yii::t('cms', 'Select menu'),
             'options' => ['class' => 'btn btn-default', 'style' => 'margin-bottom: 10px;'],
             'dropdown' => [

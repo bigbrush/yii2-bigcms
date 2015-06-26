@@ -7,7 +7,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\ButtonDropDown;
+use yii\bootstrap\ButtonDropdown;
 use yii\bootstrap\Alert;
 
 $this->registerJs('
@@ -54,7 +54,7 @@ $this->title = Yii::t('cms', 'Menu items');
         
         <h1><?= $this->title ?></h1>
         
-        <?= ButtonDropDown::widget([
+        <?= ButtonDropdown::widget([
             'label' => Yii::t('cms', 'Select menu'),
             'options' => ['class' => 'btn btn-default', 'style' => 'margin-bottom: 10px;'],
             'dropdown' => [

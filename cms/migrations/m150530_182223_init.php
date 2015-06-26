@@ -55,7 +55,7 @@ class m150530_182223_init extends Migration
             'id' => 1,
             'name' => 'Pages categories',
             'type' => 'block',
-            'namespace' => 'cms\blocks\pagescategories\Block',
+            'namespace' => 'bigbrush\cms\blocks\pagescategories\Block',
             'description' => '',
             'state' => 1,
         ]);
@@ -63,7 +63,7 @@ class m150530_182223_init extends Migration
             'id' => 2,
             'name' => 'Contact',
             'type' => 'block',
-            'namespace' => 'cms\blocks\contact\Block',
+            'namespace' => 'bigbrush\cms\blocks\contact\Block',
             'description' => '',
             'state' => 1,
         ]);
@@ -71,7 +71,7 @@ class m150530_182223_init extends Migration
             'id' => 3,
             'name' => 'Menu',
             'type' => 'block',
-            'namespace' => 'cms\blocks\menu\Block',
+            'namespace' => 'bigbrush\cms\blocks\menu\Block',
             'description' => '',
             'state' => 1,
         ]);
@@ -79,7 +79,7 @@ class m150530_182223_init extends Migration
             'id' => 4,
             'name' => 'Text',
             'type' => 'block',
-            'namespace' => 'cms\blocks\text\Block',
+            'namespace' => 'bigbrush\cms\blocks\text\Block',
             'description' => '',
             'state' => 1,
         ]);
