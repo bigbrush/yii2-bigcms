@@ -1,5 +1,2 @@
 # composer vendor dir
 /vendor
-
-# bootstrap config file
-common/config/bootstrap.php

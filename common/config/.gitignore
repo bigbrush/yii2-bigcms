@@ -2,5 +2,4 @@
 *
 # Except this file and console config file
 !.gitignore
-!bootstrap.php
 !console.php
