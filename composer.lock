@@ -56,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-cmf.git",
-                "reference": "e76a088ef259afa17cb6625f4bf322543efc9474"
+                "reference": "66bdd23d75aed0a2697420b4fcfeb6f850ec9167"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/e76a088ef259afa17cb6625f4bf322543efc9474",
-                "reference": "e76a088ef259afa17cb6625f4bf322543efc9474",
+                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/66bdd23d75aed0a2697420b4fcfeb6f850ec9167",
+                "reference": "66bdd23d75aed0a2697420b4fcfeb6f850ec9167",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +89,7 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-06-26 15:16:35"
+            "time": "2015-06-27 10:49:17"
         },
         {
             "name": "bower-asset/bootstrap",
