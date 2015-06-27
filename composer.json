@@ -11,9 +11,7 @@
         }
     ],
     "require": {
-        "bigbrush/yii2-big": "dev-master",
-        "bigbrush/yii2-cmf": "dev-master",
-        "yiisoft/yii2-swiftmailer": "*"
+        "bigbrush/yii2-cmf": "dev-master"
     },
     "extra": {
         "asset-installer-paths": {
