@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b2a2473f3f36afa127e2518118437b60",
+    "hash": "40c633e4102d047ed75e6fab2e2677a1",
     "packages": [
         {
             "name": "bigbrush/yii2-big",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-big.git",
-                "reference": "c11fe4b5188ceb127f7515ebcc278c53ec61062e"
+                "reference": "77916f227dd458f99c733f8ac5fcedeb99002d41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/c11fe4b5188ceb127f7515ebcc278c53ec61062e",
-                "reference": "c11fe4b5188ceb127f7515ebcc278c53ec61062e",
+                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/77916f227dd458f99c733f8ac5fcedeb99002d41",
+                "reference": "77916f227dd458f99c733f8ac5fcedeb99002d41",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-06-26 14:52:15"
+            "time": "2015-08-10 14:26:35"
         },
         {
             "name": "bigbrush/yii2-cmf",
@@ -56,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-cmf.git",
-                "reference": "66bdd23d75aed0a2697420b4fcfeb6f850ec9167"
+                "reference": "ad00a1261d82020348cd95e1f7a02e1ab4a414d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/66bdd23d75aed0a2697420b4fcfeb6f850ec9167",
-                "reference": "66bdd23d75aed0a2697420b4fcfeb6f850ec9167",
+                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/ad00a1261d82020348cd95e1f7a02e1ab4a414d4",
+                "reference": "ad00a1261d82020348cd95e1f7a02e1ab4a414d4",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +89,7 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-06-27 10:49:17"
+            "time": "2015-08-11 09:24:38"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -521,16 +521,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "4.2.0",
+            "version": "4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "c3b162e1df371a637ad2f4d1f9858d1a2ce4be24"
+                "reference": "1dac1eba2f84f52710b30c68ae2f571f739d01a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/c3b162e1df371a637ad2f4d1f9858d1a2ce4be24",
-                "reference": "c3b162e1df371a637ad2f4d1f9858d1a2ce4be24",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/1dac1eba2f84f52710b30c68ae2f571f739d01a2",
+                "reference": "1dac1eba2f84f52710b30c68ae2f571f739d01a2",
                 "shasum": ""
             },
             "type": "component",
@@ -563,20 +563,20 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2015-06-25 12:40:57"
+            "time": "2015-07-30 06:56:12"
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.4",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86"
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/726867caee3f23aa7a6975c801e64b6021e14f86",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
                 "shasum": ""
             },
             "require": {
@@ -651,7 +651,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-05-10 20:09:47"
+            "time": "2015-08-05 22:00:30"
         },
         {
             "name": "yiisoft/yii2-bootstrap",

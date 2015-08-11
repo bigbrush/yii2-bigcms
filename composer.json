@@ -11,6 +11,7 @@
         }
     ],
     "require": {
+        "bigbrush/yii2-big": "dev-master",
         "bigbrush/yii2-cmf": "dev-master"
     },
     "extra": {
