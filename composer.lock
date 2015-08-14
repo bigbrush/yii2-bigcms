@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-big.git",
-                "reference": "77916f227dd458f99c733f8ac5fcedeb99002d41"
+                "reference": "251dac9d18555e23e01073e51d37fd473ec8691a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/77916f227dd458f99c733f8ac5fcedeb99002d41",
-                "reference": "77916f227dd458f99c733f8ac5fcedeb99002d41",
+                "url": "https://api.github.com/repos/bigbrush/yii2-big/zipball/251dac9d18555e23e01073e51d37fd473ec8691a",
+                "reference": "251dac9d18555e23e01073e51d37fd473ec8691a",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-08-10 14:26:35"
+            "time": "2015-08-14 16:20:35"
         },
         {
             "name": "bigbrush/yii2-cmf",
@@ -56,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-cmf.git",
-                "reference": "ad00a1261d82020348cd95e1f7a02e1ab4a414d4"
+                "reference": "fb8c2917014d62f91abc7c2a381dbbcb8e0ad9c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/ad00a1261d82020348cd95e1f7a02e1ab4a414d4",
-                "reference": "ad00a1261d82020348cd95e1f7a02e1ab4a414d4",
+                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/fb8c2917014d62f91abc7c2a381dbbcb8e0ad9c3",
+                "reference": "fb8c2917014d62f91abc7c2a381dbbcb8e0ad9c3",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +89,7 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-08-11 09:24:38"
+            "time": "2015-08-13 11:41:49"
         },
         {
             "name": "bower-asset/bootstrap",
