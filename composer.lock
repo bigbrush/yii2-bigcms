@@ -56,12 +56,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bigbrush/yii2-cmf.git",
-                "reference": "eb4d8177eba57b72f49a95e4e6c738b69600921a"
+                "reference": "8dc80e73d4cd5dad22ee1067be1fc5bbf591f453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/eb4d8177eba57b72f49a95e4e6c738b69600921a",
-                "reference": "eb4d8177eba57b72f49a95e4e6c738b69600921a",
+                "url": "https://api.github.com/repos/bigbrush/yii2-cmf/zipball/8dc80e73d4cd5dad22ee1067be1fc5bbf591f453",
+                "reference": "8dc80e73d4cd5dad22ee1067be1fc5bbf591f453",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +89,7 @@
                 "cmf",
                 "yii2"
             ],
-            "time": "2015-08-19 15:44:04"
+            "time": "2015-08-21 07:36:35"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -521,16 +521,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "4.2.3",
+            "version": "4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "1dac1eba2f84f52710b30c68ae2f571f739d01a2"
+                "reference": "aafc1144b1561d6c8485f81f9d63495b5db575c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/1dac1eba2f84f52710b30c68ae2f571f739d01a2",
-                "reference": "1dac1eba2f84f52710b30c68ae2f571f739d01a2",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/aafc1144b1561d6c8485f81f9d63495b5db575c8",
+                "reference": "aafc1144b1561d6c8485f81f9d63495b5db575c8",
                 "shasum": ""
             },
             "type": "component",
@@ -563,7 +563,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2015-07-30 06:56:12"
+            "time": "2015-08-17 08:22:32"
         },
         {
             "name": "yiisoft/yii2",
