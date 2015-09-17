@@ -168,9 +168,9 @@ $this->registerJs('
       <!-- Main Footer -->
       <footer class="main-footer">
         <!-- To the right -->
-        <div class="pull-right hidden-xs">
+        <!-- <div class="pull-right hidden-xs">
           <?= Html::a(Yii::t('cms', 'Read the docs'), 'http://www.bigcms.bigbrush-agency.com/', ['target' => '_blank']) ?>
-        </div>
+        </div> -->
         <!-- Default to the left -->
         <strong>Copyright &copy; <?= date('Y') ?> <a href="http://www.bigbrush-agency.com" target="_blank">BIG Brush Agency ApS</a>.</strong> All rights reserved.
       </footer>
