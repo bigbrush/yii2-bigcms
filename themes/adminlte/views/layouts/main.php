@@ -85,14 +85,14 @@ $this->registerJs('
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
-                  <?= Html::img($bundle->baseUrl . '/img/user2-160x160.jpg', ['class' => 'user-image', 'alt' => 'User image']) ?>
+                  <?= Html::img(Url::to('@web/../') . $user->identity->avatar, ['class' => 'user-image', 'alt' => 'User image']) ?>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs"><?= $user->identity->name ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
-                    <?= Html::img($bundle->baseUrl . '/img/user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User image']) ?>
+                    <?= Html::img(Url::to('@web/../') . $user->identity->avatar, ['class' => 'img-circle', 'alt' => 'User image']) ?>
                     <p>
                       <?= $user->identity->name ?>
                       <small><?= Yii::t('cms', 'Member since') . ' ' . Yii::$app->getFormatter()->asDate($user->identity->created_at) ?> </small>
@@ -125,7 +125,7 @@ $this->registerJs('
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-              <?= Html::img($bundle->baseUrl . '/img/user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User image']) ?>
+              <?= Html::img(Url::to('@web/../') . $user->identity->avatar, ['class' => 'img-circle', 'alt' => 'User image']) ?>
             </div>
             <div class="pull-left info">
               <p><?= $user->identity->name ?></p>
