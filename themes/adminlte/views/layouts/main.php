@@ -7,7 +7,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use bigbrush\cms\components\Toolbar;
 use bigbrush\cms\widgets\Alert;
 use bigbrush\cms\widgets\AdminMenu;
 use app\themes\adminlte\ThemeAsset;

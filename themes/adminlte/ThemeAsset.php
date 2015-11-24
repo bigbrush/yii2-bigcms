@@ -14,7 +14,7 @@ use yii\web\AssetBundle;
  */
 class ThemeAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/adminlte/assets';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
     public $css = [
         '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
         '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
