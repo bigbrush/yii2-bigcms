@@ -9,9 +9,11 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use bigbrush\cms\widgets\Alert;
 use bigbrush\cms\widgets\AdminMenu;
+use app\themes\adminlte\AdminLteAsset;
 use app\themes\adminlte\ThemeAsset;
 
-$bundle = ThemeAsset::register($this);
+AdminLteAsset::register($this);
+ThemeAsset::register($this);
 
 $user = Yii::$app->getUser();
 $isLoggedIn = !$user->getIsGuest();

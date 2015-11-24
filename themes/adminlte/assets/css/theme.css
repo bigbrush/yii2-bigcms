@@ -1,0 +1,44 @@
+/**
+ * @link http://www.bigbrush-agency.com/
+ * @copyright Copyright (c) 2015 Big Brush Agency ApS
+ * @license http://www.bigbrush-agency.com/license/
+ */
+.template-editor .panel-heading {
+    font-size: 16px;
+    color: #737373;
+}
+.template-editor .assigned-blocks .panel-heading {
+    text-align: center;
+}
+.template-editor ul.connected {
+    margin-bottom: 0;
+    padding: 10px;
+    list-style-type: none;
+}
+.template-editor ul.connected li {
+    cursor: move;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.template-editor ul.connected li:before {
+    content: "\f047";
+    font-family: FontAwesome;
+    font-size: 12px;
+    padding-right: 7px;
+}
+.template-editor ul.connected li.sortable-placeholder:before {
+    content: "";
+}
+.template-editor ul.connected li.sortable-dragging {
+	background-color: #f5f5f5;
+	border: 1px solid #ddd;
+}
+
+.tree-spacer {
+   padding-left: 8px;
+}
+.tree-indent {
+    color: #D5D5D5;
+    font-size: 11px;
+    padding-right: 3px;
+}
