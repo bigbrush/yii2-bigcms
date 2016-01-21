@@ -22,9 +22,9 @@ $this->registerJs('
     $(".sidebar-toggle").click(function(e) {
         e.preventDefault();
         if ($("body").hasClass("sidebar-collapse")) {
-            $.get("'.Url::to(['/big/cms/collapse-menu', 'collapsed' => 1]).'");
-        } else {
             $.get("'.Url::to(['/big/cms/collapse-menu', 'collapsed' => 0]).'");
+        } else {
+            $.get("'.Url::to(['/big/cms/collapse-menu', 'collapsed' => 1]).'");
         }
     });
 ');
