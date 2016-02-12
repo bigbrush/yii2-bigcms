@@ -17,6 +17,7 @@ class ThemeAsset extends AssetBundle
     public $sourcePath = '@app/themes/web';
     public $publishOptions = ['forceCopy' => YII_ENV_DEV];
     public $css = [
+        '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
         'css/theme.css',
     ];
     public $js = [
