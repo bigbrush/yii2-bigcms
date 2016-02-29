@@ -6,7 +6,7 @@
  */
 
 use yii\helpers\Html;
-use app\themes\web\assets\ThemeAsset;
+use app\themes\web\ThemeAsset;
 use bigbrush\cms\widgets\Alert;
 
 ThemeAsset::register($this);
@@ -24,8 +24,10 @@ ThemeAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<?php if (Yii::$app->big->isPositionActive('mainmenu')) : ?>
 <big:block position="mainmenu" />
+
+<?php if (Yii::$app->big->isPositionActive('frontpage-gallery')) : ?>
+	<big:block position="frontpage-gallery" />
 <?php endif; ?>
 
 <div class="container">
@@ -33,11 +35,9 @@ ThemeAsset::register($this);
 	<?= $content ?>
 </div>
 
-<?php if (Yii::$app->big->isPositionActive('footer')) : ?>
 <footer>
     <big:block position="footer" />
 </footer>
-<?php endif; ?>
 
 <?php $this->endBody() ?>
 </body>

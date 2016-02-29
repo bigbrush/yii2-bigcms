@@ -5,7 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-namespace app\themes\web\assets;
+namespace app\themes\web;
 
 use yii\web\AssetBundle;
 
@@ -14,7 +14,7 @@ use yii\web\AssetBundle;
  */
 class ThemeAsset extends AssetBundle
 {
-    public $sourcePath = '@app/themes/web';
+    public $sourcePath = '@app/themes/web/assets';
     public $publishOptions = ['forceCopy' => YII_ENV_DEV];
     public $css = [
         '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
