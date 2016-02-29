@@ -5,15 +5,18 @@ BIG CMS for Yii 2
 
 **STILL UNDER DEVELOPMENT**
 
-Big Cms is a ready to use Yii 2 web application with frontend and backend.
+Big Cms is a ready to use Yii 2 web application with frontend and backend. It provides a solid foundation for building complex
+Yii2 sites because it's easy to extend and doesn't impose any rules. Big Cms is as much a toolset as a Cms and it's created
+to make better products faster.
 
-It also provides a solid foundation for building complex Yii2 sites. It's easy to extend and doesn't impose any rules. Big Cms is as much a toolset as it is a Cms. It's created for making better products faster.
-
-Big Cms is based on Yii 2 modules and a concept of *Blocks*. You can create your own blocks (quite easily) and integrate them into Big Cms. By default Big Cms comes with 4 blocks. Big Cms is compatible with any Yii 2 module 
+Big Cms is based on Yii 2 modules and a concept of `Blocks`. It's easy to create your own blocks and integrate them with Big Cms.
+Big Cms is designed to compatible with any Yii2 module/extension mainly because no specific classes needs to be extended.
 
 Big Cms is built with a flexibility that makes it suitable as a starting-kit but also prepared for shared hosts.
 
-Big Cms is built with [Big Framework](https://github.com/bigbrush/yii2-big).
+  - [Installing Big Cms](http://www.bigbrush-agency.com/api/guide/guide-installing-big-cms.html)
+  - [Read the guide](http://www.bigbrush-agency.com/api/guide/)
+  - [API docs](http://www.bigbrush-agency.com/api/big/)
 
 
 Demo <span id="bigcms-demo"></span>
@@ -22,123 +25,49 @@ Frontend: http://demo.bigbrush-agency.com
 
 Backend: http://demo.bigbrush-agency.com/admin/
 
-`Login`
+**Login**
+
 ~~~
 Username: bigadmin
 Password: bigadmin
 ~~~
 
 
-Installing via Composer <span id="installing-via-composer"></span>
------------------------------------
-If you do not already have Composer installed, you may do so by following the instructions at [Yii Docs](https://github.com/yiisoft/yii2/blob/master/docs/guide/start-installation.md#installing-via-composer-).
-
-With Composer installed, you can install Big Cms by running the following commands under a Web-accessible folder:
-~~~
-composer create-project --prefer-dist --stability=dev bigbrush/yii2-bigcms bigcms
-cd bigcms
-yii cms/install
-~~~
-
-Then follow the on screen instructions which helps you specify database login credentials.
-
-After the installion has finished go to http://YOURSITE.COM/admin/ and login with:
-  - Username: bigadmin
-  - Password: bigadmin
-
-**REMEMBER TO CHANGE PASSWORD WHEN USING IN PRODUCTION**
-
-
 Features <span id="bigcms-features"></span>
 -----------------------------------
-  - Flexible
-  - Admin theme based on AdminLTE
+  - Can be customized and extended to suit your needs
+  - Dynamic Yii2 themes
   - SEO optimized
-  - Dynamic Yii 2 themes (include blocks in your theme or layout file)
-  - Menu system with nested menu items based on [Yii2 Nested Sets](https://github.com/creocoder/yii2-nested-sets)
-  - WYSIWYG editor based on [TinyMCE 4](http://www.tinymce.com)
-  - File manager based on [elFinder](http://elfinder.org)
-  - Extension manager to install custom blocks
-  - Template system. Manage blocks with drag 'n drop
-  - CMS components (pages, categories, menus, blocks, file manager)
-  - User registration (basic can be replaced by any Yii2 module)
-  - Development features provided by [Big Framework](https://github.com/bigbrush/yii2-big)
-  - Ready for shared hosts
-  - Toolbar component used in the backend
-  - 4 widgets
-    - Alert (copied from Yii 2 advanced template)
-    - DeleteButton (used in the backend as a UI element for deleting content)
-    - Popover (base class the DeleteButton)
-    - RadioButtonGroup (yes/no buttons based on bootstrap)
-  - Fully integrated with bootstrap 3
-  - Doesn't impose any rules
+  - Automatically activated url rules
+  - Covers basic needs for modern applications (backend, nested menus, nested categories, galleries, dynamic themes)
+  - Backend based on AdminLTE theme
+  - File manager
+  - WYSIWYG editor
+  - SEO optimized pages with galleries
+  - [And alot more](http://bigbrush-agency.com/api/guide/)
 
 
-Modules <span id="bigcms-modules"></span>
+Dynamic themes <span id="bigcms-templates"></span>
 -----------------------------------
-**Pages**
-The "Pages" module provides SEO optimized page content integrated with the menu system. Links and media can be inserted into a page and meta tags can be set in the backend. It provides the following features:
+Yii2 themes are used to style pages individually by assigning blocks to positions. This is done by adding `include statement`s
+to layout files. An `include statement` specifies a position in a theme where one or more blocks will be inserted by Big Cms.
+In the backend of Big Cms blocks are added to position by drag 'n drop.
+
+Read the [guide on dynamic themes](http://www.bigbrush-agency.com/api/guide/guide-themes.html) for more information.
+
+
+Pages module <span id="bigcms-modules"></span>
+-----------------------------------
+The `Pages` module provides SEO optimized content which is fully integrated with Big Cms. Links and media can be inserted into
+a page and up to 6 images can be selected and displayed as a gallery.
+
+It provides the following features:
 
   - SEO optimized pages
-  - Edit pages with a TinyMCE editor
-  - Add BIG CMS links and media to pages
-  - Upload and handle media while editing a page
-  - Assign an individual template to each page
-
-**Users**
-The "Users" module provides user management for Big Cms.
-
-  - Create and edit users
-  - Backend login
-
-
-Templates <span id="bigcms-templates"></span>
------------------------------------
-Templates are used to style pages individually by assigning blocks to positions. The template will be parsed when Yii handles the request.
-
-  - Assign created blocks to template positions
-  - Multiple templates with different blocks
-  - Drag 'n drop feature
-
-**Enabling templates in a Yii 2 theme**
-To enable templates in your theme place a file called "positions.php" in the root directory. When you edit a template this file is being loaded for available positions in the active theme.
-
-The file should look like the following:
-
-~~~php
-return [
-    'POSITION-ID' => 'POSITION NAME',
-    'gallery' => 'Gallery',
-    'mainmenu' => 'Main menu',
-    ...
-];
-~~~
-
-Then in the layout file of your theme you add an include statement like the following:
-~~~html
-<big:block position="mainmenu" />
-~~~
-
-And that's all there is to enabling templates and blocks.
-
-
-Blocks <span id="bigcms-blocks"></span>
------------------------------------
-A block can be assigned to a template position and will then be rendered when Yii handles the request. After Big Cms has been installed 4 blocks will be available: 
-
-**Menu block**
-  - Displays a single menu
-  - Select bootstrap styles from a drop down list.
-  
-**Text block**
-  - Displays content created with a TinyMCE editor
-
-**Contact block**
-  - Displays a contact form
-  - Can be configured to display certain fields.
-
-**Pages categories block**
-  - Lists pages from a single category
+  - Edit pages with a WYSIWYG (TinyMCE 4) editor
+  - Upload and handle files while editing a page
+  - Blocks can be added with placeholders
+  - Assign a dynamic theme to each page
 
 
 Built with
