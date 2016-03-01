@@ -7,6 +7,7 @@
 
 namespace app\themes\parallax;
 
+use Yii;
 use yii\web\AssetBundle;
 
 /**
@@ -28,4 +29,17 @@ class ThemeAsset extends AssetBundle
     public $depends = [
         'yii\web\JqueryAsset',
     ];
+
+
+    /**
+     * Ensures the bootstrap css files are not loaded.
+     */
+    public function init()
+    {
+        parent::init();
+        // resetting BootstrapAsset to not load own css files
+        Yii::$app->assetManager->bundles['yii\\bootstrap\\BootstrapAsset'] = [
+            'css' => []
+        ];
+    }
 }

@@ -24,7 +24,13 @@
     height: 100%;
 }
 
-
+/**
+ * Responsive images
+ */
+#content-wrap img{
+  max-width: 100%;
+  height: auto;
+}
 
 nav ul a,
 nav .brand-logo {
@@ -74,4 +80,8 @@ p {
 
 footer.page-footer {
   margin: 0;
+  color: #FFF;
+}
+footer.page-footer a {
+  color: #FFF;
 }

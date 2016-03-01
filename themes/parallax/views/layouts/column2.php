@@ -8,10 +8,10 @@
 <?php $this->beginContent('@app/themes/parallax/views/layouts/main.php'); ?>
 <div class="container">
     <div class="row">
-        <div class="col s9">
+        <div class="col l9 s12">
             <?= $content ?>
         </div>
-        <div class="col s3">
+        <div class="col l3 s12">
             <big:block position="sidebar" />
         </div>
     </div>

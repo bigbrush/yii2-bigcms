@@ -8,7 +8,11 @@
 return [
     'mainmenu' => 'Main menu',
     'sidebar' => 'Sidebar',
-    'frontpage-box1' => 'Frontpage box 1',
-    'frontpage-box2' => 'Frontpage box 2',
-    'footer' => 'Footer',
+    'footer-left' => 'Footer left',
+    'footer-right' => 'Footer right',
+    'frontpage-text1' => 'Frontpage text 1',
+    'frontpage-text2' => 'Frontpage text 2',
+    'frontpage-image1' => 'Frontpage header image',
+    'frontpage-image2' => 'Frontpage image 1',
+    'frontpage-image3' => 'Frontpage image 2',
 ];
