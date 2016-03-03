@@ -5,8 +5,7 @@
  * @license http://www.bigbrush-agency.com/license/
  */
 
-// uncomment the following 2 lines during development
-// defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_DEBUG') or define('YII_DEBUG', false);
 // defined('YII_ENV') or define('YII_ENV', 'dev');
 
 require(__DIR__ . '/../vendor/autoload.php');
