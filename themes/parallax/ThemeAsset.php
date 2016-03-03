@@ -16,7 +16,7 @@ use yii\web\AssetBundle;
 class ThemeAsset extends AssetBundle
 {
     public $sourcePath = '@app/themes/parallax/assets';
-    public $publishOptions = ['forceCopy' => true];
+    public $publishOptions = ['forceCopy' => YII_DEBUG];
     public $css = [
         '//fonts.googleapis.com/icon?family=Material+Icons',
         'css/materialize.css',
@@ -32,7 +32,7 @@ class ThemeAsset extends AssetBundle
 
 
     /**
-     * Ensures the bootstrap css files are not loaded.
+     * Ensures bootstrap css files are not loaded.
      */
     public function init()
     {
