@@ -25,6 +25,21 @@ ThemeAsset::register($this);
 
 <big:block position="mainmenu" />
 
+<div class="container messages">
+    <div class="col l12">
+        <?php
+        $session = Yii::$app->session;
+        foreach ($session->getAllFlashes() as $type => $data) {
+            $data = (array) $data;
+            foreach ($data as $i => $message) {
+                echo $message;
+            }
+            $session->removeFlash($type);
+        }
+        ?>
+    </div>
+</div>
+
 <?= $content ?>
 
 <footer class="page-footer teal">
@@ -39,11 +54,11 @@ ThemeAsset::register($this);
       </div>
     </div>
     <div class="footer-copyright">
-      <div class="container">
-      Read the <a class="brown-text text-lighten-3" href="http://www.bigbrush-agency.com/api/guide">Big Cms guide</a>
-      </div>
+        <div class="container">
+            Read the <a class="brown-text text-lighten-3" href="http://www.bigbrush-agency.com/api/guide">Big Cms guide</a>
+        </div>
     </div>
-  </footer>
+</footer>
 
 <?php $this->endBody() ?>
 </body>

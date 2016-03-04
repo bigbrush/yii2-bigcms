@@ -7,10 +7,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\Menu;
-
-$this->registerJs('
-    $(".dropdown-button").dropdown({ hover: true});
-');
 ?>
 
 <?php foreach ($submenus as $id => $submenu) {
