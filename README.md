@@ -3,8 +3,6 @@ BIG CMS for Yii 2
 
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 
-**STILL UNDER DEVELOPMENT**
-
 Big Cms is a ready to use Yii 2 web application with frontend and backend. It provides a solid foundation for building complex
 Yii2 sites because it's easy to extend and doesn't impose any rules. Big Cms is as much a toolset as a Cms and it's created
 to make better products faster.
