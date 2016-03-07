@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "bigbrush/yii2-cmf": "dev-master"
+        "bigbrush/yii2-cmf": "~1.0.0"
     },
     "extra": {
         "asset-installer-paths": {
