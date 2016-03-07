@@ -14,9 +14,9 @@ Big Cms is designed to compatible with any Yii2 module/extension mainly because 
 
 Big Cms is built with a flexibility that makes it suitable as a starting-kit but also prepared for shared hosts.
 
-  - [Installing Big Cms](http://www.bigbrush-agency.com/api/guide/guide-installing-big-cms.html)
-  - [Read the guide](http://www.bigbrush-agency.com/api/guide/)
-  - [API docs](http://www.bigbrush-agency.com/api/big/)
+  - [Installing Big Cms](http://www.bigbrush-agency.com/guide/guide-installing-big-cms.html)
+  - [Read the guide](http://www.bigbrush-agency.com/guide/guide-README.html)
+  - [API docs](http://www.bigbrush-agency.com/guide/)
 
 
 Demo <span id="bigcms-demo"></span>
@@ -44,7 +44,7 @@ Features <span id="bigcms-features"></span>
   - File manager
   - WYSIWYG editor
   - SEO optimized pages with galleries
-  - [And alot more](http://bigbrush-agency.com/api/guide/)
+  - [And alot more](http://bigbrush-agency.com/guide/)
 
 
 Dynamic themes <span id="bigcms-templates"></span>
@@ -53,7 +53,7 @@ Yii2 themes are used to style pages individually by assigning blocks to position
 to layout files. An `include statement` specifies a position in a theme where one or more blocks will be inserted by Big Cms.
 In the backend of Big Cms blocks are added to position by drag 'n drop.
 
-Read the [guide on dynamic themes](http://www.bigbrush-agency.com/api/guide/guide-themes.html) for more information.
+Read the [guide on dynamic themes](http://www.bigbrush-agency.com/guide/guide-themes.html) for more information.
 
 
 Pages module <span id="bigcms-modules"></span>
